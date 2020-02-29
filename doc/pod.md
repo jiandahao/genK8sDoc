@@ -1,4 +1,5 @@
-# pod Object
+# pod
+ pod Object
 **PATH:**  pod
 
 KIND:     Pod
@@ -8,7 +9,7 @@ DESCRIPTION:
      Pod is a collection of containers that can run on a host. This resource is
      created by clients and scheduled onto hosts.
 
-## apiVersion	\<string\>
+# apiVersion	\<string\>
 **PATH:**  pod.apiVersion
 
      APIVersion defines the versioned schema of this representation of an
@@ -16,7 +17,7 @@ DESCRIPTION:
      value, and may reject unrecognized values. More info:
      https://git.k8s.io/community/contributors/devel/api-conventions.md#resources
 
-## kind	\<string\>
+# kind	\<string\>
 **PATH:**  pod.kind
 
      Kind is a string value representing the REST resource this object
@@ -24,7 +25,7 @@ DESCRIPTION:
      requests to. Cannot be updated. In CamelCase. More info:
      https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
 
-## metadata \<Object\>
+# metadata \<Object\>
 **PATH:**  pod.metadata
 
 KIND:     Pod
@@ -39,7 +40,7 @@ DESCRIPTION:
      ObjectMeta is metadata that all persisted resources must have, which
      includes all objects users must create.
 
-### annotations	\<map[string]string\>
+## annotations	\<map[string]string\>
 **PATH:**  pod.metadata.annotations
 
      Annotations is an unstructured key value map stored with a resource that
@@ -47,7 +48,7 @@ DESCRIPTION:
      are not queryable and should be preserved when modifying objects. More
      info: http://kubernetes.io/docs/user-guide/annotations
 
-### clusterName	\<string\>
+## clusterName	\<string\>
 **PATH:**  pod.metadata.clusterName
 
      The name of the cluster which the object belongs to. This is used to
@@ -55,7 +56,7 @@ DESCRIPTION:
      This field is not set anywhere right now and apiserver is going to ignore
      it if set in create or update request.
 
-### creationTimestamp	\<string\>
+## creationTimestamp	\<string\>
 **PATH:**  pod.metadata.creationTimestamp
 
      CreationTimestamp is a timestamp representing the server time when this
@@ -65,14 +66,14 @@ DESCRIPTION:
      Read-only. Null for lists. More info:
      https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
 
-### deletionGracePeriodSeconds	\<integer\>
+## deletionGracePeriodSeconds	\<integer\>
 **PATH:**  pod.metadata.deletionGracePeriodSeconds
 
      Number of seconds allowed for this object to gracefully terminate before it
      will be removed from the system. Only set when deletionTimestamp is also
      set. May only be shortened. Read-only.
 
-### deletionTimestamp	\<string\>
+## deletionTimestamp	\<string\>
 **PATH:**  pod.metadata.deletionTimestamp
 
      DeletionTimestamp is RFC 3339 date and time at which this resource will be
@@ -95,7 +96,7 @@ DESCRIPTION:
      requested. Read-only. More info:
      https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
 
-### finalizers	\<[]string\>
+## finalizers	\<[]string\>
 **PATH:**  pod.metadata.finalizers
 
      Must be empty before the object is deleted from the registry. Each entry is
@@ -103,7 +104,7 @@ DESCRIPTION:
      the list. If the deletionTimestamp of the object is non-nil, entries in
      this list can only be removed.
 
-### generateName	\<string\>
+## generateName	\<string\>
 **PATH:**  pod.metadata.generateName
 
      GenerateName is an optional prefix, used by the server, to generate a
@@ -120,13 +121,241 @@ DESCRIPTION:
      specified. More info:
      https://git.k8s.io/community/contributors/devel/api-conventions.md#idempotency
 
-### generation	\<integer\>
+## generation	\<integer\>
 **PATH:**  pod.metadata.generation
 
      A sequence number representing a specific generation of the desired state.
      Populated by the system. Read-only.
 
-### initializers	\<Object\>
+## initializers \<Object\>
+**PATH:**  pod.metadata.initializers
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: initializers <Object>
+
+DESCRIPTION:
+     An initializer is a controller which enforces some system invariant at
+     object creation time. This field is a list of initializers that have not
+     yet acted on this object. If nil or empty, this object has been completely
+     initialized. Otherwise, the object is considered uninitialized and is
+     hidden (in list/watch and get calls) from clients that haven't explicitly
+     asked to observe uninitialized objects. When an object is created, the
+     system will populate this list with the current set of initializers. Only
+     privileged users may set or modify this list. Once it is empty, it may not
+     be modified further by any user. DEPRECATED - initializers are an alpha
+     field and will be removed in v1.15.
+
+     Initializers tracks the progress of initialization.
+
+### pending \<[]Object\>
+**PATH:**  pod.metadata.initializers.pending
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: pending <[]Object>
+
+DESCRIPTION:
+     Pending is a list of initializers that must execute in order before this
+     object is visible. When the last pending initializer is removed, and no
+     failing result is set, the initializers struct will be set to nil and the
+     object is considered as initialized and visible to all clients.
+
+     Initializer is information about an initializer that has not yet completed.
+
+### pending	\<[]Object\> -required-
+**PATH:**  pod.metadata.initializers.pending
+
+     Pending is a list of initializers that must execute in order before this
+     object is visible. When the last pending initializer is removed, and no
+     failing result is set, the initializers struct will be set to nil and the
+     object is considered as initialized and visible to all clients.
+
+### result \<Object\>
+**PATH:**  pod.metadata.initializers.result
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: result <Object>
+
+DESCRIPTION:
+     If result is set with the Failure field, the object will be persisted to
+     storage and then deleted, ensuring that other clients can observe the
+     deletion.
+
+     Status is a return value for calls that don't return other objects.
+
+#### apiVersion	\<string\>
+**PATH:**  pod.metadata.initializers.result.apiVersion
+
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal
+     value, and may reject unrecognized values. More info:
+     https://git.k8s.io/community/contributors/devel/api-conventions.md#resources
+
+#### code	\<integer\>
+**PATH:**  pod.metadata.initializers.result.code
+
+     Suggested HTTP return code for this status, 0 if not set.
+
+#### details \<Object\>
+**PATH:**  pod.metadata.initializers.result.details
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: details <Object>
+
+DESCRIPTION:
+     Extended data associated with the reason. Each reason may define its own
+     extended details. This field is optional and the data returned is not
+     guaranteed to conform to any schema except that defined by the reason type.
+
+     StatusDetails is a set of additional properties that MAY be set by the
+     server to provide additional information about a response. The Reason field
+     of a Status object defines what attributes will be set. Clients must ignore
+     fields that do not match the defined type of each attribute, and should
+     assume that any attribute may be empty, invalid, or under defined.
+
+##### causes \<[]Object\>
+**PATH:**  pod.metadata.initializers.result.details.causes
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: causes <[]Object>
+
+DESCRIPTION:
+     The Causes array includes more details associated with the StatusReason
+     failure. Not all StatusReasons may provide detailed causes.
+
+     StatusCause provides more information about an api.Status failure,
+     including cases when multiple errors are encountered.
+
+###### field	\<string\>
+**PATH:**  pod.metadata.initializers.result.details.causes.field
+
+     The field of the resource that has caused this error, as named by its JSON
+     serialization. May include dot and postfix notation for nested attributes.
+     Arrays are zero-indexed. Fields may appear more than once in an array of
+     causes due to fields having multiple errors. Optional. Examples: "name" -
+     the field "name" on the current resource "items[0].name" - the field "name"
+     on the first array entry in "items"
+
+###### message	\<string\>
+**PATH:**  pod.metadata.initializers.result.details.causes.message
+
+     A human-readable description of the cause of the error. This field may be
+     presented as-is to a reader.
+
+##### causes	\<[]Object\>
+**PATH:**  pod.metadata.initializers.result.details.causes
+
+     The Causes array includes more details associated with the StatusReason
+     failure. Not all StatusReasons may provide detailed causes.
+
+##### group	\<string\>
+**PATH:**  pod.metadata.initializers.result.details.group
+
+     The group attribute of the resource associated with the status
+     StatusReason.
+
+##### kind	\<string\>
+**PATH:**  pod.metadata.initializers.result.details.kind
+
+     The kind attribute of the resource associated with the status StatusReason.
+     On some operations may differ from the requested resource Kind. More info:
+     https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+
+##### name	\<string\>
+**PATH:**  pod.metadata.initializers.result.details.name
+
+     The name attribute of the resource associated with the status StatusReason
+     (when there is a single name which can be described).
+
+##### retryAfterSeconds	\<integer\>
+**PATH:**  pod.metadata.initializers.result.details.retryAfterSeconds
+
+     If specified, the time in seconds before the operation should be retried.
+     Some errors may indicate the client must take an alternate action - for
+     those errors this field may indicate how long to wait before taking the
+     alternate action.
+
+#### details	\<Object\>
+**PATH:**  pod.metadata.initializers.result.details
+
+     Extended data associated with the reason. Each reason may define its own
+     extended details. This field is optional and the data returned is not
+     guaranteed to conform to any schema except that defined by the reason type.
+
+#### kind	\<string\>
+**PATH:**  pod.metadata.initializers.result.kind
+
+     Kind is a string value representing the REST resource this object
+     represents. Servers may infer this from the endpoint the client submits
+     requests to. Cannot be updated. In CamelCase. More info:
+     https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+
+#### message	\<string\>
+**PATH:**  pod.metadata.initializers.result.message
+
+     A human-readable description of the status of this operation.
+
+#### metadata \<Object\>
+**PATH:**  pod.metadata.initializers.result.metadata
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: metadata <Object>
+
+DESCRIPTION:
+     Standard list metadata. More info:
+     https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+
+     ListMeta describes metadata that synthetic resources must have, including
+     lists and various status objects. A resource may have only one of
+     {ObjectMeta, ListMeta}.
+
+##### continue	\<string\>
+**PATH:**  pod.metadata.initializers.result.metadata.continue
+
+     continue may be set if the user set a limit on the number of items
+     returned, and indicates that the server has more data available. The value
+     is opaque and may be used to issue another request to the endpoint that
+     served this list to retrieve the next set of available objects. Continuing
+     a consistent list may not be possible if the server configuration has
+     changed or more than a few minutes have passed. The resourceVersion field
+     returned when using this continue value will be identical to the value in
+     the first response, unless you have received this token from an error
+     message.
+
+##### resourceVersion	\<string\>
+**PATH:**  pod.metadata.initializers.result.metadata.resourceVersion
+
+     String that identifies the server's internal version of this object that
+     can be used by clients to determine when objects have changed. Value must
+     be treated as opaque by clients and passed unmodified back to the server.
+     Populated by the system. Read-only. More info:
+     https://git.k8s.io/community/contributors/devel/api-conventions.md#concurrency-control-and-consistency
+
+#### metadata	\<Object\>
+**PATH:**  pod.metadata.initializers.result.metadata
+
+     Standard list metadata. More info:
+     https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+
+#### reason	\<string\>
+**PATH:**  pod.metadata.initializers.result.reason
+
+     A machine-readable description of why this operation is in the "Failure"
+     status. If this value is empty there is no information available. A Reason
+     clarifies an HTTP status code but does not override it.
+
+## initializers	\<Object\>
 **PATH:**  pod.metadata.initializers
 
      An initializer is a controller which enforces some system invariant at
@@ -140,14 +369,57 @@ DESCRIPTION:
      be modified further by any user. DEPRECATED - initializers are an alpha
      field and will be removed in v1.15.
 
-### labels	\<map[string]string\>
+## labels	\<map[string]string\>
 **PATH:**  pod.metadata.labels
 
      Map of string keys and values that can be used to organize and categorize
      (scope and select) objects. May match selectors of replication controllers
      and services. More info: http://kubernetes.io/docs/user-guide/labels
 
-### managedFields	\<[]Object\>
+## managedFields \<[]Object\>
+**PATH:**  pod.metadata.managedFields
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: managedFields <[]Object>
+
+DESCRIPTION:
+     ManagedFields maps workflow-id and version to the set of fields that are
+     managed by that workflow. This is mostly for internal housekeeping, and
+     users typically shouldn't need to set or understand this field. A workflow
+     can be the user's name, a controller's name, or the name of a specific
+     apply path like "ci-cd". The set of fields is always in the version that
+     the workflow used when modifying the object. This field is alpha and can be
+     changed or removed without notice.
+
+     ManagedFieldsEntry is a workflow-id, a FieldSet and the group version of
+     the resource that the fieldset applies to.
+
+### apiVersion	\<string\>
+**PATH:**  pod.metadata.managedFields.apiVersion
+
+     APIVersion defines the version of this resource that this field set applies
+     to. The format is "group/version" just like the top-level APIVersion field.
+     It is necessary to track the version of a field set because it cannot be
+     automatically converted.
+
+   fields	<map[string]>
+     Fields identifies a set of fields.
+
+### manager	\<string\>
+**PATH:**  pod.metadata.managedFields.manager
+
+     Manager is an identifier of the workflow managing these fields.
+
+### operation	\<string\>
+**PATH:**  pod.metadata.managedFields.operation
+
+     Operation is the type of operation which lead to this ManagedFieldsEntry
+     being created. The only valid values for this field are 'Apply' and
+     'Update'.
+
+## managedFields	\<[]Object\>
 **PATH:**  pod.metadata.managedFields
 
      ManagedFields maps workflow-id and version to the set of fields that are
@@ -158,7 +430,7 @@ DESCRIPTION:
      the workflow used when modifying the object. This field is alpha and can be
      changed or removed without notice.
 
-### name	\<string\>
+## name	\<string\>
 **PATH:**  pod.metadata.name
 
      Name must be unique within a namespace. Is required when creating
@@ -167,7 +439,7 @@ DESCRIPTION:
      for creation idempotence and configuration definition. Cannot be updated.
      More info: http://kubernetes.io/docs/user-guide/identifiers#names
 
-### namespace	\<string\>
+## namespace	\<string\>
 **PATH:**  pod.metadata.namespace
 
      Namespace defines the space within each name must be unique. An empty
@@ -177,7 +449,57 @@ DESCRIPTION:
      be a DNS_LABEL. Cannot be updated. More info:
      http://kubernetes.io/docs/user-guide/namespaces
 
-### ownerReferences	\<[]Object\>
+## ownerReferences \<[]Object\>
+**PATH:**  pod.metadata.ownerReferences
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: ownerReferences <[]Object>
+
+DESCRIPTION:
+     List of objects depended by this object. If ALL objects in the list have
+     been deleted, this object will be garbage collected. If this object is
+     managed by a controller, then an entry in this list will point to this
+     controller, with the controller field set to true. There cannot be more
+     than one managing controller.
+
+     OwnerReference contains enough information to let you identify an owning
+     object. An owning object must be in the same namespace as the dependent, or
+     be cluster-scoped, so there is no namespace field.
+
+### apiVersion	\<string\> -required-
+**PATH:**  pod.metadata.ownerReferences.apiVersion
+
+     API version of the referent.
+
+### blockOwnerDeletion	\<boolean\>
+**PATH:**  pod.metadata.ownerReferences.blockOwnerDeletion
+
+     If true, AND if the owner has the "foregroundDeletion" finalizer, then the
+     owner cannot be deleted from the key-value store until this reference is
+     removed. Defaults to false. To set this field, a user needs "delete"
+     permission of the owner, otherwise 422 (Unprocessable Entity) will be
+     returned.
+
+### controller	\<boolean\>
+**PATH:**  pod.metadata.ownerReferences.controller
+
+     If true, this reference points to the managing controller.
+
+### kind	\<string\> -required-
+**PATH:**  pod.metadata.ownerReferences.kind
+
+     Kind of the referent. More info:
+     https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+
+### name	\<string\> -required-
+**PATH:**  pod.metadata.ownerReferences.name
+
+     Name of the referent. More info:
+     http://kubernetes.io/docs/user-guide/identifiers#names
+
+## ownerReferences	\<[]Object\>
 **PATH:**  pod.metadata.ownerReferences
 
      List of objects depended by this object. If ALL objects in the list have
@@ -186,7 +508,7 @@ DESCRIPTION:
      controller, with the controller field set to true. There cannot be more
      than one managing controller.
 
-### resourceVersion	\<string\>
+## resourceVersion	\<string\>
 **PATH:**  pod.metadata.resourceVersion
 
      An opaque value that represents the internal version of this object that
@@ -198,19 +520,19 @@ DESCRIPTION:
      Read-only. Value must be treated as opaque by clients and . More info:
      https://git.k8s.io/community/contributors/devel/api-conventions.md#concurrency-control-and-consistency
 
-### selfLink	\<string\>
+## selfLink	\<string\>
 **PATH:**  pod.metadata.selfLink
 
      SelfLink is a URL representing this object. Populated by the system.
      Read-only.
 
-## metadata	\<Object\>
+# metadata	\<Object\>
 **PATH:**  pod.metadata
 
      Standard object's metadata. More info:
      https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
 
-## spec \<Object\>
+# spec \<Object\>
 **PATH:**  pod.spec
 
 KIND:     Pod
@@ -224,36 +546,1954 @@ DESCRIPTION:
 
      PodSpec is a description of a pod.
 
-### activeDeadlineSeconds	\<integer\>
+## activeDeadlineSeconds	\<integer\>
 **PATH:**  pod.spec.activeDeadlineSeconds
 
      Optional duration in seconds the pod may be active on the node relative to
      StartTime before the system will actively try to mark it failed and kill
      associated containers. Value must be a positive integer.
 
-### affinity	\<Object\>
+## affinity \<Object\>
+**PATH:**  pod.spec.affinity
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: affinity <Object>
+
+DESCRIPTION:
+     If specified, the pod's scheduling constraints
+
+     Affinity is a group of affinity scheduling rules.
+
+### nodeAffinity \<Object\>
+**PATH:**  pod.spec.affinity.nodeAffinity
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: nodeAffinity <Object>
+
+DESCRIPTION:
+     Describes node affinity scheduling rules for the pod.
+
+     Node affinity is a group of node affinity scheduling rules.
+
+#### preferredDuringSchedulingIgnoredDuringExecution \<[]Object\>
+**PATH:**  pod.spec.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: preferredDuringSchedulingIgnoredDuringExecution <[]Object>
+
+DESCRIPTION:
+     The scheduler will prefer to schedule pods to nodes that satisfy the
+     affinity expressions specified by this field, but it may choose a node that
+     violates one or more of the expressions. The node that is most preferred is
+     the one with the greatest sum of weights, i.e. for each node that meets all
+     of the scheduling requirements (resource request, requiredDuringScheduling
+     affinity expressions, etc.), compute a sum by iterating through the
+     elements of this field and adding "weight" to the sum if the node matches
+     the corresponding matchExpressions; the node(s) with the highest sum are
+     the most preferred.
+
+     An empty preferred scheduling term matches all objects with implicit weight
+     0 (i.e. it's a no-op). A null preferred scheduling term matches no objects
+     (i.e. is also a no-op).
+
+##### preference \<Object\>
+**PATH:**  pod.spec.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution.preference
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: preference <Object>
+
+DESCRIPTION:
+     A node selector term, associated with the corresponding weight.
+
+     A null or empty node selector term matches no objects. The requirements of
+     them are ANDed. The TopologySelectorTerm type implements a subset of the
+     NodeSelectorTerm.
+
+###### matchExpressions \<[]Object\>
+**PATH:**  pod.spec.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution.preference.matchExpressions
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: matchExpressions <[]Object>
+
+DESCRIPTION:
+     A list of node selector requirements by node's labels.
+
+     A node selector requirement is a selector that contains values, a key, and
+     an operator that relates the key and values.
+
+- key	\<string\> -required-
+**PATH:**  pod.spec.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution.preference.matchExpressions.key
+
+     The label key that the selector applies to.
+
+- operator	\<string\> -required-
+**PATH:**  pod.spec.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution.preference.matchExpressions.operator
+
+     Represents a key's relationship to a set of values. Valid operators are In,
+     NotIn, Exists, DoesNotExist. Gt, and Lt.
+
+###### matchExpressions	\<[]Object\>
+**PATH:**  pod.spec.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution.preference.matchExpressions
+
+     A list of node selector requirements by node's labels.
+
+###### matchFields \<[]Object\>
+**PATH:**  pod.spec.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution.preference.matchFields
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: matchFields <[]Object>
+
+DESCRIPTION:
+     A list of node selector requirements by node's fields.
+
+     A node selector requirement is a selector that contains values, a key, and
+     an operator that relates the key and values.
+
+- key	\<string\> -required-
+**PATH:**  pod.spec.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution.preference.matchFields.key
+
+     The label key that the selector applies to.
+
+- operator	\<string\> -required-
+**PATH:**  pod.spec.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution.preference.matchFields.operator
+
+     Represents a key's relationship to a set of values. Valid operators are In,
+     NotIn, Exists, DoesNotExist. Gt, and Lt.
+
+##### preference	\<Object\> -required-
+**PATH:**  pod.spec.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution.preference
+
+     A node selector term, associated with the corresponding weight.
+
+#### preferredDuringSchedulingIgnoredDuringExecution	\<[]Object\>
+**PATH:**  pod.spec.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution
+
+     The scheduler will prefer to schedule pods to nodes that satisfy the
+     affinity expressions specified by this field, but it may choose a node that
+     violates one or more of the expressions. The node that is most preferred is
+     the one with the greatest sum of weights, i.e. for each node that meets all
+     of the scheduling requirements (resource request, requiredDuringScheduling
+     affinity expressions, etc.), compute a sum by iterating through the
+     elements of this field and adding "weight" to the sum if the node matches
+     the corresponding matchExpressions; the node(s) with the highest sum are
+     the most preferred.
+
+#### requiredDuringSchedulingIgnoredDuringExecution \<Object\>
+**PATH:**  pod.spec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: requiredDuringSchedulingIgnoredDuringExecution <Object>
+
+DESCRIPTION:
+     If the affinity requirements specified by this field are not met at
+     scheduling time, the pod will not be scheduled onto the node. If the
+     affinity requirements specified by this field cease to be met at some point
+     during pod execution (e.g. due to an update), the system may or may not try
+     to eventually evict the pod from its node.
+
+     A node selector represents the union of the results of one or more label
+     queries over a set of nodes; that is, it represents the OR of the selectors
+     represented by the node selector terms.
+
+##### nodeSelectorTerms \<[]Object\>
+**PATH:**  pod.spec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: nodeSelectorTerms <[]Object>
+
+DESCRIPTION:
+     Required. A list of node selector terms. The terms are ORed.
+
+     A null or empty node selector term matches no objects. The requirements of
+     them are ANDed. The TopologySelectorTerm type implements a subset of the
+     NodeSelectorTerm.
+
+###### matchExpressions \<[]Object\>
+**PATH:**  pod.spec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms.matchExpressions
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: matchExpressions <[]Object>
+
+DESCRIPTION:
+     A list of node selector requirements by node's labels.
+
+     A node selector requirement is a selector that contains values, a key, and
+     an operator that relates the key and values.
+
+- key	\<string\> -required-
+**PATH:**  pod.spec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms.matchExpressions.key
+
+     The label key that the selector applies to.
+
+- operator	\<string\> -required-
+**PATH:**  pod.spec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms.matchExpressions.operator
+
+     Represents a key's relationship to a set of values. Valid operators are In,
+     NotIn, Exists, DoesNotExist. Gt, and Lt.
+
+###### matchExpressions	\<[]Object\>
+**PATH:**  pod.spec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms.matchExpressions
+
+     A list of node selector requirements by node's labels.
+
+###### matchFields \<[]Object\>
+**PATH:**  pod.spec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms.matchFields
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: matchFields <[]Object>
+
+DESCRIPTION:
+     A list of node selector requirements by node's fields.
+
+     A node selector requirement is a selector that contains values, a key, and
+     an operator that relates the key and values.
+
+- key	\<string\> -required-
+**PATH:**  pod.spec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms.matchFields.key
+
+     The label key that the selector applies to.
+
+- operator	\<string\> -required-
+**PATH:**  pod.spec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms.matchFields.operator
+
+     Represents a key's relationship to a set of values. Valid operators are In,
+     NotIn, Exists, DoesNotExist. Gt, and Lt.
+
+### nodeAffinity	\<Object\>
+**PATH:**  pod.spec.affinity.nodeAffinity
+
+     Describes node affinity scheduling rules for the pod.
+
+### podAffinity \<Object\>
+**PATH:**  pod.spec.affinity.podAffinity
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: podAffinity <Object>
+
+DESCRIPTION:
+     Describes pod affinity scheduling rules (e.g. co-locate this pod in the
+     same node, zone, etc. as some other pod(s)).
+
+     Pod affinity is a group of inter pod affinity scheduling rules.
+
+#### preferredDuringSchedulingIgnoredDuringExecution \<[]Object\>
+**PATH:**  pod.spec.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: preferredDuringSchedulingIgnoredDuringExecution <[]Object>
+
+DESCRIPTION:
+     The scheduler will prefer to schedule pods to nodes that satisfy the
+     affinity expressions specified by this field, but it may choose a node that
+     violates one or more of the expressions. The node that is most preferred is
+     the one with the greatest sum of weights, i.e. for each node that meets all
+     of the scheduling requirements (resource request, requiredDuringScheduling
+     affinity expressions, etc.), compute a sum by iterating through the
+     elements of this field and adding "weight" to the sum if the node has pods
+     which matches the corresponding podAffinityTerm; the node(s) with the
+     highest sum are the most preferred.
+
+     The weights of all of the matched WeightedPodAffinityTerm fields are added
+     per-node to find the most preferred node(s)
+
+##### podAffinityTerm \<Object\>
+**PATH:**  pod.spec.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: podAffinityTerm <Object>
+
+DESCRIPTION:
+     Required. A pod affinity term, associated with the corresponding weight.
+
+     Defines a set of pods (namely those matching the labelSelector relative to
+     the given namespace(s)) that this pod should be co-located (affinity) or
+     not co-located (anti-affinity) with, where co-located is defined as running
+     on a node whose value of the label with key <topologyKey> matches that of
+     any node on which a pod of the set of pods is running
+
+###### labelSelector \<Object\>
+**PATH:**  pod.spec.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.labelSelector
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: labelSelector <Object>
+
+DESCRIPTION:
+     A label query over a set of resources, in this case pods.
+
+     A label selector is a label query over a set of resources. The result of
+     matchLabels and matchExpressions are ANDed. An empty label selector matches
+     all objects. A null label selector matches no objects.
+
+- matchExpressions \<[]Object\>
+**PATH:**  pod.spec.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.labelSelector.matchExpressions
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: matchExpressions <[]Object>
+
+DESCRIPTION:
+     matchExpressions is a list of label selector requirements. The requirements
+     are ANDed.
+
+     A label selector requirement is a selector that contains values, a key, and
+     an operator that relates the key and values.
+
+- key	\<string\> -required-
+**PATH:**  pod.spec.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.labelSelector.matchExpressions.key
+
+     key is the label key that the selector applies to.
+
+- operator	\<string\> -required-
+**PATH:**  pod.spec.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.labelSelector.matchExpressions.operator
+
+     operator represents a key's relationship to a set of values. Valid
+     operators are In, NotIn, Exists and DoesNotExist.
+
+- matchExpressions	\<[]Object\>
+**PATH:**  pod.spec.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.labelSelector.matchExpressions
+
+     matchExpressions is a list of label selector requirements. The requirements
+     are ANDed.
+
+###### labelSelector	\<Object\>
+**PATH:**  pod.spec.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.labelSelector
+
+     A label query over a set of resources, in this case pods.
+
+###### namespaces	\<[]string\>
+**PATH:**  pod.spec.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.namespaces
+
+     namespaces specifies which namespaces the labelSelector applies to (matches
+     against); null or empty list means "this pod's namespace"
+
+##### podAffinityTerm	\<Object\> -required-
+**PATH:**  pod.spec.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm
+
+     Required. A pod affinity term, associated with the corresponding weight.
+
+#### preferredDuringSchedulingIgnoredDuringExecution	\<[]Object\>
+**PATH:**  pod.spec.affinity.podAffinity.preferredDuringSchedulingIgnoredDuringExecution
+
+     The scheduler will prefer to schedule pods to nodes that satisfy the
+     affinity expressions specified by this field, but it may choose a node that
+     violates one or more of the expressions. The node that is most preferred is
+     the one with the greatest sum of weights, i.e. for each node that meets all
+     of the scheduling requirements (resource request, requiredDuringScheduling
+     affinity expressions, etc.), compute a sum by iterating through the
+     elements of this field and adding "weight" to the sum if the node has pods
+     which matches the corresponding podAffinityTerm; the node(s) with the
+     highest sum are the most preferred.
+
+#### requiredDuringSchedulingIgnoredDuringExecution \<[]Object\>
+**PATH:**  pod.spec.affinity.podAffinity.requiredDuringSchedulingIgnoredDuringExecution
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: requiredDuringSchedulingIgnoredDuringExecution <[]Object>
+
+DESCRIPTION:
+     If the affinity requirements specified by this field are not met at
+     scheduling time, the pod will not be scheduled onto the node. If the
+     affinity requirements specified by this field cease to be met at some point
+     during pod execution (e.g. due to a pod label update), the system may or
+     may not try to eventually evict the pod from its node. When there are
+     multiple elements, the lists of nodes corresponding to each podAffinityTerm
+     are intersected, i.e. all terms must be satisfied.
+
+     Defines a set of pods (namely those matching the labelSelector relative to
+     the given namespace(s)) that this pod should be co-located (affinity) or
+     not co-located (anti-affinity) with, where co-located is defined as running
+     on a node whose value of the label with key <topologyKey> matches that of
+     any node on which a pod of the set of pods is running
+
+##### labelSelector \<Object\>
+**PATH:**  pod.spec.affinity.podAffinity.requiredDuringSchedulingIgnoredDuringExecution.labelSelector
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: labelSelector <Object>
+
+DESCRIPTION:
+     A label query over a set of resources, in this case pods.
+
+     A label selector is a label query over a set of resources. The result of
+     matchLabels and matchExpressions are ANDed. An empty label selector matches
+     all objects. A null label selector matches no objects.
+
+###### matchExpressions \<[]Object\>
+**PATH:**  pod.spec.affinity.podAffinity.requiredDuringSchedulingIgnoredDuringExecution.labelSelector.matchExpressions
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: matchExpressions <[]Object>
+
+DESCRIPTION:
+     matchExpressions is a list of label selector requirements. The requirements
+     are ANDed.
+
+     A label selector requirement is a selector that contains values, a key, and
+     an operator that relates the key and values.
+
+- key	\<string\> -required-
+**PATH:**  pod.spec.affinity.podAffinity.requiredDuringSchedulingIgnoredDuringExecution.labelSelector.matchExpressions.key
+
+     key is the label key that the selector applies to.
+
+- operator	\<string\> -required-
+**PATH:**  pod.spec.affinity.podAffinity.requiredDuringSchedulingIgnoredDuringExecution.labelSelector.matchExpressions.operator
+
+     operator represents a key's relationship to a set of values. Valid
+     operators are In, NotIn, Exists and DoesNotExist.
+
+###### matchExpressions	\<[]Object\>
+**PATH:**  pod.spec.affinity.podAffinity.requiredDuringSchedulingIgnoredDuringExecution.labelSelector.matchExpressions
+
+     matchExpressions is a list of label selector requirements. The requirements
+     are ANDed.
+
+##### labelSelector	\<Object\>
+**PATH:**  pod.spec.affinity.podAffinity.requiredDuringSchedulingIgnoredDuringExecution.labelSelector
+
+     A label query over a set of resources, in this case pods.
+
+##### namespaces	\<[]string\>
+**PATH:**  pod.spec.affinity.podAffinity.requiredDuringSchedulingIgnoredDuringExecution.namespaces
+
+     namespaces specifies which namespaces the labelSelector applies to (matches
+     against); null or empty list means "this pod's namespace"
+
+### podAffinity	\<Object\>
+**PATH:**  pod.spec.affinity.podAffinity
+
+     Describes pod affinity scheduling rules (e.g. co-locate this pod in the
+     same node, zone, etc. as some other pod(s)).
+
+### podAntiAffinity \<Object\>
+**PATH:**  pod.spec.affinity.podAntiAffinity
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: podAntiAffinity <Object>
+
+DESCRIPTION:
+     Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod
+     in the same node, zone, etc. as some other pod(s)).
+
+     Pod anti affinity is a group of inter pod anti affinity scheduling rules.
+
+#### preferredDuringSchedulingIgnoredDuringExecution \<[]Object\>
+**PATH:**  pod.spec.affinity.podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: preferredDuringSchedulingIgnoredDuringExecution <[]Object>
+
+DESCRIPTION:
+     The scheduler will prefer to schedule pods to nodes that satisfy the
+     anti-affinity expressions specified by this field, but it may choose a node
+     that violates one or more of the expressions. The node that is most
+     preferred is the one with the greatest sum of weights, i.e. for each node
+     that meets all of the scheduling requirements (resource request,
+     requiredDuringScheduling anti-affinity expressions, etc.), compute a sum by
+     iterating through the elements of this field and adding "weight" to the sum
+     if the node has pods which matches the corresponding podAffinityTerm; the
+     node(s) with the highest sum are the most preferred.
+
+     The weights of all of the matched WeightedPodAffinityTerm fields are added
+     per-node to find the most preferred node(s)
+
+##### podAffinityTerm \<Object\>
+**PATH:**  pod.spec.affinity.podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: podAffinityTerm <Object>
+
+DESCRIPTION:
+     Required. A pod affinity term, associated with the corresponding weight.
+
+     Defines a set of pods (namely those matching the labelSelector relative to
+     the given namespace(s)) that this pod should be co-located (affinity) or
+     not co-located (anti-affinity) with, where co-located is defined as running
+     on a node whose value of the label with key <topologyKey> matches that of
+     any node on which a pod of the set of pods is running
+
+###### labelSelector \<Object\>
+**PATH:**  pod.spec.affinity.podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.labelSelector
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: labelSelector <Object>
+
+DESCRIPTION:
+     A label query over a set of resources, in this case pods.
+
+     A label selector is a label query over a set of resources. The result of
+     matchLabels and matchExpressions are ANDed. An empty label selector matches
+     all objects. A null label selector matches no objects.
+
+- matchExpressions \<[]Object\>
+**PATH:**  pod.spec.affinity.podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.labelSelector.matchExpressions
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: matchExpressions <[]Object>
+
+DESCRIPTION:
+     matchExpressions is a list of label selector requirements. The requirements
+     are ANDed.
+
+     A label selector requirement is a selector that contains values, a key, and
+     an operator that relates the key and values.
+
+- key	\<string\> -required-
+**PATH:**  pod.spec.affinity.podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.labelSelector.matchExpressions.key
+
+     key is the label key that the selector applies to.
+
+- operator	\<string\> -required-
+**PATH:**  pod.spec.affinity.podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.labelSelector.matchExpressions.operator
+
+     operator represents a key's relationship to a set of values. Valid
+     operators are In, NotIn, Exists and DoesNotExist.
+
+- matchExpressions	\<[]Object\>
+**PATH:**  pod.spec.affinity.podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.labelSelector.matchExpressions
+
+     matchExpressions is a list of label selector requirements. The requirements
+     are ANDed.
+
+###### labelSelector	\<Object\>
+**PATH:**  pod.spec.affinity.podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.labelSelector
+
+     A label query over a set of resources, in this case pods.
+
+###### namespaces	\<[]string\>
+**PATH:**  pod.spec.affinity.podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm.namespaces
+
+     namespaces specifies which namespaces the labelSelector applies to (matches
+     against); null or empty list means "this pod's namespace"
+
+##### podAffinityTerm	\<Object\> -required-
+**PATH:**  pod.spec.affinity.podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution.podAffinityTerm
+
+     Required. A pod affinity term, associated with the corresponding weight.
+
+#### preferredDuringSchedulingIgnoredDuringExecution	\<[]Object\>
+**PATH:**  pod.spec.affinity.podAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution
+
+     The scheduler will prefer to schedule pods to nodes that satisfy the
+     anti-affinity expressions specified by this field, but it may choose a node
+     that violates one or more of the expressions. The node that is most
+     preferred is the one with the greatest sum of weights, i.e. for each node
+     that meets all of the scheduling requirements (resource request,
+     requiredDuringScheduling anti-affinity expressions, etc.), compute a sum by
+     iterating through the elements of this field and adding "weight" to the sum
+     if the node has pods which matches the corresponding podAffinityTerm; the
+     node(s) with the highest sum are the most preferred.
+
+#### requiredDuringSchedulingIgnoredDuringExecution \<[]Object\>
+**PATH:**  pod.spec.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: requiredDuringSchedulingIgnoredDuringExecution <[]Object>
+
+DESCRIPTION:
+     If the anti-affinity requirements specified by this field are not met at
+     scheduling time, the pod will not be scheduled onto the node. If the
+     anti-affinity requirements specified by this field cease to be met at some
+     point during pod execution (e.g. due to a pod label update), the system may
+     or may not try to eventually evict the pod from its node. When there are
+     multiple elements, the lists of nodes corresponding to each podAffinityTerm
+     are intersected, i.e. all terms must be satisfied.
+
+     Defines a set of pods (namely those matching the labelSelector relative to
+     the given namespace(s)) that this pod should be co-located (affinity) or
+     not co-located (anti-affinity) with, where co-located is defined as running
+     on a node whose value of the label with key <topologyKey> matches that of
+     any node on which a pod of the set of pods is running
+
+##### labelSelector \<Object\>
+**PATH:**  pod.spec.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution.labelSelector
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: labelSelector <Object>
+
+DESCRIPTION:
+     A label query over a set of resources, in this case pods.
+
+     A label selector is a label query over a set of resources. The result of
+     matchLabels and matchExpressions are ANDed. An empty label selector matches
+     all objects. A null label selector matches no objects.
+
+###### matchExpressions \<[]Object\>
+**PATH:**  pod.spec.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution.labelSelector.matchExpressions
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: matchExpressions <[]Object>
+
+DESCRIPTION:
+     matchExpressions is a list of label selector requirements. The requirements
+     are ANDed.
+
+     A label selector requirement is a selector that contains values, a key, and
+     an operator that relates the key and values.
+
+- key	\<string\> -required-
+**PATH:**  pod.spec.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution.labelSelector.matchExpressions.key
+
+     key is the label key that the selector applies to.
+
+- operator	\<string\> -required-
+**PATH:**  pod.spec.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution.labelSelector.matchExpressions.operator
+
+     operator represents a key's relationship to a set of values. Valid
+     operators are In, NotIn, Exists and DoesNotExist.
+
+###### matchExpressions	\<[]Object\>
+**PATH:**  pod.spec.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution.labelSelector.matchExpressions
+
+     matchExpressions is a list of label selector requirements. The requirements
+     are ANDed.
+
+##### labelSelector	\<Object\>
+**PATH:**  pod.spec.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution.labelSelector
+
+     A label query over a set of resources, in this case pods.
+
+##### namespaces	\<[]string\>
+**PATH:**  pod.spec.affinity.podAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution.namespaces
+
+     namespaces specifies which namespaces the labelSelector applies to (matches
+     against); null or empty list means "this pod's namespace"
+
+## affinity	\<Object\>
 **PATH:**  pod.spec.affinity
 
      If specified, the pod's scheduling constraints
 
-### automountServiceAccountToken	\<boolean\>
+## automountServiceAccountToken	\<boolean\>
 **PATH:**  pod.spec.automountServiceAccountToken
 
      AutomountServiceAccountToken indicates whether a service account token
      should be automatically mounted.
 
-   containers	<[]Object> -required-
+## containers \<[]Object\>
+**PATH:**  pod.spec.containers
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: containers <[]Object>
+
+DESCRIPTION:
      List of containers belonging to the pod. Containers cannot currently be
      added or removed. There must be at least one container in a Pod. Cannot be
      updated.
 
-### dnsConfig	\<Object\>
+     A single application container that you want to run within a pod.
+
+### args	\<[]string\>
+**PATH:**  pod.spec.containers.args
+
+     Arguments to the entrypoint. The docker image's CMD is used if this is not
+     provided. Variable references $(VAR_NAME) are expanded using the
+     container's environment. If a variable cannot be resolved, the reference in
+     the input string will be unchanged. The $(VAR_NAME) syntax can be escaped
+     with a double $$, ie: $$(VAR_NAME). Escaped references will never be
+     expanded, regardless of whether the variable exists or not. Cannot be
+     updated. More info:
+     https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
+
+### command	\<[]string\>
+**PATH:**  pod.spec.containers.command
+
+     Entrypoint array. Not executed within a shell. The docker image's
+     ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME)
+     are expanded using the container's environment. If a variable cannot be
+     resolved, the reference in the input string will be unchanged. The
+     $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME).
+     Escaped references will never be expanded, regardless of whether the
+     variable exists or not. Cannot be updated. More info:
+     https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
+
+### env \<[]Object\>
+**PATH:**  pod.spec.containers.env
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: env <[]Object>
+
+DESCRIPTION:
+     List of environment variables to set in the container. Cannot be updated.
+
+     EnvVar represents an environment variable present in a Container.
+
+#### name	\<string\> -required-
+**PATH:**  pod.spec.containers.env.name
+
+     Name of the environment variable. Must be a C_IDENTIFIER.
+
+#### value	\<string\>
+**PATH:**  pod.spec.containers.env.value
+
+     Variable references $(VAR_NAME) are expanded using the previous defined
+     environment variables in the container and any service environment
+     variables. If a variable cannot be resolved, the reference in the input
+     string will be unchanged. The $(VAR_NAME) syntax can be escaped with a
+     double $$, ie: $$(VAR_NAME). Escaped references will never be expanded,
+     regardless of whether the variable exists or not. Defaults to "".
+
+#### valueFrom \<Object\>
+**PATH:**  pod.spec.containers.env.valueFrom
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: valueFrom <Object>
+
+DESCRIPTION:
+     Source for the environment variable's value. Cannot be used if value is not
+     empty.
+
+     EnvVarSource represents a source for the value of an EnvVar.
+
+##### configMapKeyRef \<Object\>
+**PATH:**  pod.spec.containers.env.valueFrom.configMapKeyRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: configMapKeyRef <Object>
+
+DESCRIPTION:
+     Selects a key of a ConfigMap.
+
+     Selects a key from a ConfigMap.
+
+###### key	\<string\> -required-
+**PATH:**  pod.spec.containers.env.valueFrom.configMapKeyRef.key
+
+     The key to select.
+
+###### name	\<string\>
+**PATH:**  pod.spec.containers.env.valueFrom.configMapKeyRef.name
+
+     Name of the referent. More info:
+     https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+##### configMapKeyRef	\<Object\>
+**PATH:**  pod.spec.containers.env.valueFrom.configMapKeyRef
+
+     Selects a key of a ConfigMap.
+
+##### fieldRef \<Object\>
+**PATH:**  pod.spec.containers.env.valueFrom.fieldRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: fieldRef <Object>
+
+DESCRIPTION:
+     Selects a field of the pod: supports metadata.name, metadata.namespace,
+     metadata.labels, metadata.annotations, spec.nodeName,
+     spec.serviceAccountName, status.hostIP, status.podIP.
+
+     ObjectFieldSelector selects an APIVersioned field of an object.
+
+###### apiVersion	\<string\>
+**PATH:**  pod.spec.containers.env.valueFrom.fieldRef.apiVersion
+
+     Version of the schema the FieldPath is written in terms of, defaults to
+     "v1".
+
+##### fieldRef	\<Object\>
+**PATH:**  pod.spec.containers.env.valueFrom.fieldRef
+
+     Selects a field of the pod: supports metadata.name, metadata.namespace,
+     metadata.labels, metadata.annotations, spec.nodeName,
+     spec.serviceAccountName, status.hostIP, status.podIP.
+
+##### resourceFieldRef \<Object\>
+**PATH:**  pod.spec.containers.env.valueFrom.resourceFieldRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: resourceFieldRef <Object>
+
+DESCRIPTION:
+     Selects a resource of the container: only resources limits and requests
+     (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu,
+     requests.memory and requests.ephemeral-storage) are currently supported.
+
+     ResourceFieldSelector represents container resources (cpu, memory) and
+     their output format
+
+###### containerName	\<string\>
+**PATH:**  pod.spec.containers.env.valueFrom.resourceFieldRef.containerName
+
+     Container name: required for volumes, optional for env vars
+
+###### divisor	\<string\>
+**PATH:**  pod.spec.containers.env.valueFrom.resourceFieldRef.divisor
+
+     Specifies the output format of the exposed resources, defaults to "1"
+
+##### resourceFieldRef	\<Object\>
+**PATH:**  pod.spec.containers.env.valueFrom.resourceFieldRef
+
+     Selects a resource of the container: only resources limits and requests
+     (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu,
+     requests.memory and requests.ephemeral-storage) are currently supported.
+
+##### secretKeyRef \<Object\>
+**PATH:**  pod.spec.containers.env.valueFrom.secretKeyRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: secretKeyRef <Object>
+
+DESCRIPTION:
+     Selects a key of a secret in the pod's namespace
+
+     SecretKeySelector selects a key of a Secret.
+
+###### key	\<string\> -required-
+**PATH:**  pod.spec.containers.env.valueFrom.secretKeyRef.key
+
+     The key of the secret to select from. Must be a valid secret key.
+
+###### name	\<string\>
+**PATH:**  pod.spec.containers.env.valueFrom.secretKeyRef.name
+
+     Name of the referent. More info:
+     https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+### env	\<[]Object\>
+**PATH:**  pod.spec.containers.env
+
+     List of environment variables to set in the container. Cannot be updated.
+
+### envFrom \<[]Object\>
+**PATH:**  pod.spec.containers.envFrom
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: envFrom <[]Object>
+
+DESCRIPTION:
+     List of sources to populate environment variables in the container. The
+     keys defined within a source must be a C_IDENTIFIER. All invalid keys will
+     be reported as an event when the container is starting. When a key exists
+     in multiple sources, the value associated with the last source will take
+     precedence. Values defined by an Env with a duplicate key will take
+     precedence. Cannot be updated.
+
+     EnvFromSource represents the source of a set of ConfigMaps
+
+#### configMapRef \<Object\>
+**PATH:**  pod.spec.containers.envFrom.configMapRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: configMapRef <Object>
+
+DESCRIPTION:
+     The ConfigMap to select from
+
+     ConfigMapEnvSource selects a ConfigMap to populate the environment
+     variables with. The contents of the target ConfigMap's Data field will
+     represent the key-value pairs as environment variables.
+
+##### name	\<string\>
+**PATH:**  pod.spec.containers.envFrom.configMapRef.name
+
+     Name of the referent. More info:
+     https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+#### configMapRef	\<Object\>
+**PATH:**  pod.spec.containers.envFrom.configMapRef
+
+     The ConfigMap to select from
+
+#### prefix	\<string\>
+**PATH:**  pod.spec.containers.envFrom.prefix
+
+     An optional identifier to prepend to each key in the ConfigMap. Must be a
+     C_IDENTIFIER.
+
+#### secretRef \<Object\>
+**PATH:**  pod.spec.containers.envFrom.secretRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: secretRef <Object>
+
+DESCRIPTION:
+     The Secret to select from
+
+     SecretEnvSource selects a Secret to populate the environment variables
+     with. The contents of the target Secret's Data field will represent the
+     key-value pairs as environment variables.
+
+##### name	\<string\>
+**PATH:**  pod.spec.containers.envFrom.secretRef.name
+
+     Name of the referent. More info:
+     https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+### envFrom	\<[]Object\>
+**PATH:**  pod.spec.containers.envFrom
+
+     List of sources to populate environment variables in the container. The
+     keys defined within a source must be a C_IDENTIFIER. All invalid keys will
+     be reported as an event when the container is starting. When a key exists
+     in multiple sources, the value associated with the last source will take
+     precedence. Values defined by an Env with a duplicate key will take
+     precedence. Cannot be updated.
+
+### image	\<string\>
+**PATH:**  pod.spec.containers.image
+
+     Docker image name. More info:
+     https://kubernetes.io/docs/concepts/containers/images This field is
+     optional to allow higher level config management to default or override
+     container images in workload controllers like Deployments and StatefulSets.
+
+### imagePullPolicy	\<string\>
+**PATH:**  pod.spec.containers.imagePullPolicy
+
+     Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always
+     if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated.
+     More info:
+     https://kubernetes.io/docs/concepts/containers/images#updating-images
+
+### lifecycle \<Object\>
+**PATH:**  pod.spec.containers.lifecycle
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: lifecycle <Object>
+
+DESCRIPTION:
+     Actions that the management system should take in response to container
+     lifecycle events. Cannot be updated.
+
+     Lifecycle describes actions that the management system should take in
+     response to container lifecycle events. For the PostStart and PreStop
+     lifecycle handlers, management of the container blocks until the action is
+     complete, unless the container process fails, in which case the handler is
+     aborted.
+
+#### postStart \<Object\>
+**PATH:**  pod.spec.containers.lifecycle.postStart
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: postStart <Object>
+
+DESCRIPTION:
+     PostStart is called immediately after a container is created. If the
+     handler fails, the container is terminated and restarted according to its
+     restart policy. Other management of the container blocks until the hook
+     completes. More info:
+     https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
+
+     Handler defines a specific action that should be taken
+
+##### exec \<Object\>
+**PATH:**  pod.spec.containers.lifecycle.postStart.exec
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: exec <Object>
+
+DESCRIPTION:
+     One and only one of the following should be specified. Exec specifies the
+     action to take.
+
+     ExecAction describes a "run in container" action.
+
+##### exec	\<Object\>
+**PATH:**  pod.spec.containers.lifecycle.postStart.exec
+
+     One and only one of the following should be specified. Exec specifies the
+     action to take.
+
+##### httpGet \<Object\>
+**PATH:**  pod.spec.containers.lifecycle.postStart.httpGet
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: httpGet <Object>
+
+DESCRIPTION:
+     HTTPGet specifies the http request to perform.
+
+     HTTPGetAction describes an action based on HTTP Get requests.
+
+###### host	\<string\>
+**PATH:**  pod.spec.containers.lifecycle.postStart.httpGet.host
+
+     Host name to connect to, defaults to the pod IP. You probably want to set
+     "Host" in httpHeaders instead.
+
+###### httpHeaders \<[]Object\>
+**PATH:**  pod.spec.containers.lifecycle.postStart.httpGet.httpHeaders
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: httpHeaders <[]Object>
+
+DESCRIPTION:
+     Custom headers to set in the request. HTTP allows repeated headers.
+
+     HTTPHeader describes a custom header to be used in HTTP probes
+
+- name	\<string\> -required-
+**PATH:**  pod.spec.containers.lifecycle.postStart.httpGet.httpHeaders.name
+
+     The header field name
+
+###### httpHeaders	\<[]Object\>
+**PATH:**  pod.spec.containers.lifecycle.postStart.httpGet.httpHeaders
+
+     Custom headers to set in the request. HTTP allows repeated headers.
+
+###### path	\<string\>
+**PATH:**  pod.spec.containers.lifecycle.postStart.httpGet.path
+
+     Path to access on the HTTP server.
+
+###### port	\<string\> -required-
+**PATH:**  pod.spec.containers.lifecycle.postStart.httpGet.port
+
+     Name or number of the port to access on the container. Number must be in
+     the range 1 to 65535. Name must be an IANA_SVC_NAME.
+
+##### httpGet	\<Object\>
+**PATH:**  pod.spec.containers.lifecycle.postStart.httpGet
+
+     HTTPGet specifies the http request to perform.
+
+##### tcpSocket \<Object\>
+**PATH:**  pod.spec.containers.lifecycle.postStart.tcpSocket
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: tcpSocket <Object>
+
+DESCRIPTION:
+     TCPSocket specifies an action involving a TCP port. TCP hooks not yet
+     supported
+
+     TCPSocketAction describes an action based on opening a socket
+
+###### host	\<string\>
+**PATH:**  pod.spec.containers.lifecycle.postStart.tcpSocket.host
+
+     Optional: Host name to connect to, defaults to the pod IP.
+
+#### postStart	\<Object\>
+**PATH:**  pod.spec.containers.lifecycle.postStart
+
+     PostStart is called immediately after a container is created. If the
+     handler fails, the container is terminated and restarted according to its
+     restart policy. Other management of the container blocks until the hook
+     completes. More info:
+     https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
+
+#### preStop \<Object\>
+**PATH:**  pod.spec.containers.lifecycle.preStop
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: preStop <Object>
+
+DESCRIPTION:
+     PreStop is called immediately before a container is terminated due to an
+     API request or management event such as liveness probe failure, preemption,
+     resource contention, etc. The handler is not called if the container
+     crashes or exits. The reason for termination is passed to the handler. The
+     Pod's termination grace period countdown begins before the PreStop hooked
+     is executed. Regardless of the outcome of the handler, the container will
+     eventually terminate within the Pod's termination grace period. Other
+     management of the container blocks until the hook completes or until the
+     termination grace period is reached. More info:
+     https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
+
+     Handler defines a specific action that should be taken
+
+##### exec \<Object\>
+**PATH:**  pod.spec.containers.lifecycle.preStop.exec
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: exec <Object>
+
+DESCRIPTION:
+     One and only one of the following should be specified. Exec specifies the
+     action to take.
+
+     ExecAction describes a "run in container" action.
+
+##### exec	\<Object\>
+**PATH:**  pod.spec.containers.lifecycle.preStop.exec
+
+     One and only one of the following should be specified. Exec specifies the
+     action to take.
+
+##### httpGet \<Object\>
+**PATH:**  pod.spec.containers.lifecycle.preStop.httpGet
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: httpGet <Object>
+
+DESCRIPTION:
+     HTTPGet specifies the http request to perform.
+
+     HTTPGetAction describes an action based on HTTP Get requests.
+
+###### host	\<string\>
+**PATH:**  pod.spec.containers.lifecycle.preStop.httpGet.host
+
+     Host name to connect to, defaults to the pod IP. You probably want to set
+     "Host" in httpHeaders instead.
+
+###### httpHeaders \<[]Object\>
+**PATH:**  pod.spec.containers.lifecycle.preStop.httpGet.httpHeaders
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: httpHeaders <[]Object>
+
+DESCRIPTION:
+     Custom headers to set in the request. HTTP allows repeated headers.
+
+     HTTPHeader describes a custom header to be used in HTTP probes
+
+- name	\<string\> -required-
+**PATH:**  pod.spec.containers.lifecycle.preStop.httpGet.httpHeaders.name
+
+     The header field name
+
+###### httpHeaders	\<[]Object\>
+**PATH:**  pod.spec.containers.lifecycle.preStop.httpGet.httpHeaders
+
+     Custom headers to set in the request. HTTP allows repeated headers.
+
+###### path	\<string\>
+**PATH:**  pod.spec.containers.lifecycle.preStop.httpGet.path
+
+     Path to access on the HTTP server.
+
+###### port	\<string\> -required-
+**PATH:**  pod.spec.containers.lifecycle.preStop.httpGet.port
+
+     Name or number of the port to access on the container. Number must be in
+     the range 1 to 65535. Name must be an IANA_SVC_NAME.
+
+##### httpGet	\<Object\>
+**PATH:**  pod.spec.containers.lifecycle.preStop.httpGet
+
+     HTTPGet specifies the http request to perform.
+
+##### tcpSocket \<Object\>
+**PATH:**  pod.spec.containers.lifecycle.preStop.tcpSocket
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: tcpSocket <Object>
+
+DESCRIPTION:
+     TCPSocket specifies an action involving a TCP port. TCP hooks not yet
+     supported
+
+     TCPSocketAction describes an action based on opening a socket
+
+###### host	\<string\>
+**PATH:**  pod.spec.containers.lifecycle.preStop.tcpSocket.host
+
+     Optional: Host name to connect to, defaults to the pod IP.
+
+### lifecycle	\<Object\>
+**PATH:**  pod.spec.containers.lifecycle
+
+     Actions that the management system should take in response to container
+     lifecycle events. Cannot be updated.
+
+### livenessProbe \<Object\>
+**PATH:**  pod.spec.containers.livenessProbe
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: livenessProbe <Object>
+
+DESCRIPTION:
+     Periodic probe of container liveness. Container will be restarted if the
+     probe fails. Cannot be updated. More info:
+     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+
+     Probe describes a health check to be performed against a container to
+     determine whether it is alive or ready to receive traffic.
+
+#### exec \<Object\>
+**PATH:**  pod.spec.containers.livenessProbe.exec
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: exec <Object>
+
+DESCRIPTION:
+     One and only one of the following should be specified. Exec specifies the
+     action to take.
+
+     ExecAction describes a "run in container" action.
+
+#### exec	\<Object\>
+**PATH:**  pod.spec.containers.livenessProbe.exec
+
+     One and only one of the following should be specified. Exec specifies the
+     action to take.
+
+#### failureThreshold	\<integer\>
+**PATH:**  pod.spec.containers.livenessProbe.failureThreshold
+
+     Minimum consecutive failures for the probe to be considered failed after
+     having succeeded. Defaults to 3. Minimum value is 1.
+
+#### httpGet \<Object\>
+**PATH:**  pod.spec.containers.livenessProbe.httpGet
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: httpGet <Object>
+
+DESCRIPTION:
+     HTTPGet specifies the http request to perform.
+
+     HTTPGetAction describes an action based on HTTP Get requests.
+
+##### host	\<string\>
+**PATH:**  pod.spec.containers.livenessProbe.httpGet.host
+
+     Host name to connect to, defaults to the pod IP. You probably want to set
+     "Host" in httpHeaders instead.
+
+##### httpHeaders \<[]Object\>
+**PATH:**  pod.spec.containers.livenessProbe.httpGet.httpHeaders
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: httpHeaders <[]Object>
+
+DESCRIPTION:
+     Custom headers to set in the request. HTTP allows repeated headers.
+
+     HTTPHeader describes a custom header to be used in HTTP probes
+
+###### name	\<string\> -required-
+**PATH:**  pod.spec.containers.livenessProbe.httpGet.httpHeaders.name
+
+     The header field name
+
+##### httpHeaders	\<[]Object\>
+**PATH:**  pod.spec.containers.livenessProbe.httpGet.httpHeaders
+
+     Custom headers to set in the request. HTTP allows repeated headers.
+
+##### path	\<string\>
+**PATH:**  pod.spec.containers.livenessProbe.httpGet.path
+
+     Path to access on the HTTP server.
+
+##### port	\<string\> -required-
+**PATH:**  pod.spec.containers.livenessProbe.httpGet.port
+
+     Name or number of the port to access on the container. Number must be in
+     the range 1 to 65535. Name must be an IANA_SVC_NAME.
+
+#### httpGet	\<Object\>
+**PATH:**  pod.spec.containers.livenessProbe.httpGet
+
+     HTTPGet specifies the http request to perform.
+
+#### initialDelaySeconds	\<integer\>
+**PATH:**  pod.spec.containers.livenessProbe.initialDelaySeconds
+
+     Number of seconds after the container has started before liveness probes
+     are initiated. More info:
+     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+
+#### periodSeconds	\<integer\>
+**PATH:**  pod.spec.containers.livenessProbe.periodSeconds
+
+     How often (in seconds) to perform the probe. Default to 10 seconds. Minimum
+     value is 1.
+
+#### successThreshold	\<integer\>
+**PATH:**  pod.spec.containers.livenessProbe.successThreshold
+
+     Minimum consecutive successes for the probe to be considered successful
+     after having failed. Defaults to 1. Must be 1 for liveness. Minimum value
+     is 1.
+
+#### tcpSocket \<Object\>
+**PATH:**  pod.spec.containers.livenessProbe.tcpSocket
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: tcpSocket <Object>
+
+DESCRIPTION:
+     TCPSocket specifies an action involving a TCP port. TCP hooks not yet
+     supported
+
+     TCPSocketAction describes an action based on opening a socket
+
+##### host	\<string\>
+**PATH:**  pod.spec.containers.livenessProbe.tcpSocket.host
+
+     Optional: Host name to connect to, defaults to the pod IP.
+
+#### tcpSocket	\<Object\>
+**PATH:**  pod.spec.containers.livenessProbe.tcpSocket
+
+     TCPSocket specifies an action involving a TCP port. TCP hooks not yet
+     supported
+
+### livenessProbe	\<Object\>
+**PATH:**  pod.spec.containers.livenessProbe
+
+     Periodic probe of container liveness. Container will be restarted if the
+     probe fails. Cannot be updated. More info:
+     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+
+### name	\<string\> -required-
+**PATH:**  pod.spec.containers.name
+
+     Name of the container specified as a DNS_LABEL. Each container in a pod
+     must have a unique name (DNS_LABEL). Cannot be updated.
+
+### ports \<[]Object\>
+**PATH:**  pod.spec.containers.ports
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: ports <[]Object>
+
+DESCRIPTION:
+     List of ports to expose from the container. Exposing a port here gives the
+     system additional information about the network connections a container
+     uses, but is primarily informational. Not specifying a port here DOES NOT
+     prevent that port from being exposed. Any port which is listening on the
+     default "0.0.0.0" address inside a container will be accessible from the
+     network. Cannot be updated.
+
+     ContainerPort represents a network port in a single container.
+
+#### containerPort	\<integer\> -required-
+**PATH:**  pod.spec.containers.ports.containerPort
+
+     Number of port to expose on the pod's IP address. This must be a valid port
+     number, 0 < x < 65536.
+
+#### hostIP	\<string\>
+**PATH:**  pod.spec.containers.ports.hostIP
+
+     What host IP to bind the external port to.
+
+#### hostPort	\<integer\>
+**PATH:**  pod.spec.containers.ports.hostPort
+
+     Number of port to expose on the host. If specified, this must be a valid
+     port number, 0 < x < 65536. If HostNetwork is specified, this must match
+     ContainerPort. Most containers do not need this.
+
+#### name	\<string\>
+**PATH:**  pod.spec.containers.ports.name
+
+     If specified, this must be an IANA_SVC_NAME and unique within the pod. Each
+     named port in a pod must have a unique name. Name for the port that can be
+     referred to by services.
+
+### ports	\<[]Object\>
+**PATH:**  pod.spec.containers.ports
+
+     List of ports to expose from the container. Exposing a port here gives the
+     system additional information about the network connections a container
+     uses, but is primarily informational. Not specifying a port here DOES NOT
+     prevent that port from being exposed. Any port which is listening on the
+     default "0.0.0.0" address inside a container will be accessible from the
+     network. Cannot be updated.
+
+### readinessProbe \<Object\>
+**PATH:**  pod.spec.containers.readinessProbe
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: readinessProbe <Object>
+
+DESCRIPTION:
+     Periodic probe of container service readiness. Container will be removed
+     from service endpoints if the probe fails. Cannot be updated. More info:
+     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+
+     Probe describes a health check to be performed against a container to
+     determine whether it is alive or ready to receive traffic.
+
+#### exec \<Object\>
+**PATH:**  pod.spec.containers.readinessProbe.exec
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: exec <Object>
+
+DESCRIPTION:
+     One and only one of the following should be specified. Exec specifies the
+     action to take.
+
+     ExecAction describes a "run in container" action.
+
+#### exec	\<Object\>
+**PATH:**  pod.spec.containers.readinessProbe.exec
+
+     One and only one of the following should be specified. Exec specifies the
+     action to take.
+
+#### failureThreshold	\<integer\>
+**PATH:**  pod.spec.containers.readinessProbe.failureThreshold
+
+     Minimum consecutive failures for the probe to be considered failed after
+     having succeeded. Defaults to 3. Minimum value is 1.
+
+#### httpGet \<Object\>
+**PATH:**  pod.spec.containers.readinessProbe.httpGet
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: httpGet <Object>
+
+DESCRIPTION:
+     HTTPGet specifies the http request to perform.
+
+     HTTPGetAction describes an action based on HTTP Get requests.
+
+##### host	\<string\>
+**PATH:**  pod.spec.containers.readinessProbe.httpGet.host
+
+     Host name to connect to, defaults to the pod IP. You probably want to set
+     "Host" in httpHeaders instead.
+
+##### httpHeaders \<[]Object\>
+**PATH:**  pod.spec.containers.readinessProbe.httpGet.httpHeaders
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: httpHeaders <[]Object>
+
+DESCRIPTION:
+     Custom headers to set in the request. HTTP allows repeated headers.
+
+     HTTPHeader describes a custom header to be used in HTTP probes
+
+###### name	\<string\> -required-
+**PATH:**  pod.spec.containers.readinessProbe.httpGet.httpHeaders.name
+
+     The header field name
+
+##### httpHeaders	\<[]Object\>
+**PATH:**  pod.spec.containers.readinessProbe.httpGet.httpHeaders
+
+     Custom headers to set in the request. HTTP allows repeated headers.
+
+##### path	\<string\>
+**PATH:**  pod.spec.containers.readinessProbe.httpGet.path
+
+     Path to access on the HTTP server.
+
+##### port	\<string\> -required-
+**PATH:**  pod.spec.containers.readinessProbe.httpGet.port
+
+     Name or number of the port to access on the container. Number must be in
+     the range 1 to 65535. Name must be an IANA_SVC_NAME.
+
+#### httpGet	\<Object\>
+**PATH:**  pod.spec.containers.readinessProbe.httpGet
+
+     HTTPGet specifies the http request to perform.
+
+#### initialDelaySeconds	\<integer\>
+**PATH:**  pod.spec.containers.readinessProbe.initialDelaySeconds
+
+     Number of seconds after the container has started before liveness probes
+     are initiated. More info:
+     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+
+#### periodSeconds	\<integer\>
+**PATH:**  pod.spec.containers.readinessProbe.periodSeconds
+
+     How often (in seconds) to perform the probe. Default to 10 seconds. Minimum
+     value is 1.
+
+#### successThreshold	\<integer\>
+**PATH:**  pod.spec.containers.readinessProbe.successThreshold
+
+     Minimum consecutive successes for the probe to be considered successful
+     after having failed. Defaults to 1. Must be 1 for liveness. Minimum value
+     is 1.
+
+#### tcpSocket \<Object\>
+**PATH:**  pod.spec.containers.readinessProbe.tcpSocket
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: tcpSocket <Object>
+
+DESCRIPTION:
+     TCPSocket specifies an action involving a TCP port. TCP hooks not yet
+     supported
+
+     TCPSocketAction describes an action based on opening a socket
+
+##### host	\<string\>
+**PATH:**  pod.spec.containers.readinessProbe.tcpSocket.host
+
+     Optional: Host name to connect to, defaults to the pod IP.
+
+#### tcpSocket	\<Object\>
+**PATH:**  pod.spec.containers.readinessProbe.tcpSocket
+
+     TCPSocket specifies an action involving a TCP port. TCP hooks not yet
+     supported
+
+### readinessProbe	\<Object\>
+**PATH:**  pod.spec.containers.readinessProbe
+
+     Periodic probe of container service readiness. Container will be removed
+     from service endpoints if the probe fails. Cannot be updated. More info:
+     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+
+### resources \<Object\>
+**PATH:**  pod.spec.containers.resources
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: resources <Object>
+
+DESCRIPTION:
+     Compute Resources required by this container. Cannot be updated. More info:
+     https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+
+     ResourceRequirements describes the compute resource requirements.
+
+#### limits	\<map[string]string\>
+**PATH:**  pod.spec.containers.resources.limits
+
+     Limits describes the maximum amount of compute resources allowed. More
+     info:
+     https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+
+### resources	\<Object\>
+**PATH:**  pod.spec.containers.resources
+
+     Compute Resources required by this container. Cannot be updated. More info:
+     https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+
+### securityContext \<Object\>
+**PATH:**  pod.spec.containers.securityContext
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: securityContext <Object>
+
+DESCRIPTION:
+     Security options the pod should run with. More info:
+     https://kubernetes.io/docs/concepts/policy/security-context/ More info:
+     https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+
+     SecurityContext holds security configuration that will be applied to a
+     container. Some fields are present in both SecurityContext and
+     PodSecurityContext. When both are set, the values in SecurityContext take
+     precedence.
+
+#### allowPrivilegeEscalation	\<boolean\>
+**PATH:**  pod.spec.containers.securityContext.allowPrivilegeEscalation
+
+     AllowPrivilegeEscalation controls whether a process can gain more
+     privileges than its parent process. This bool directly controls if the
+     no_new_privs flag will be set on the container process.
+     AllowPrivilegeEscalation is true always when the container is: 1) run as
+     Privileged 2) has CAP_SYS_ADMIN
+
+#### capabilities \<Object\>
+**PATH:**  pod.spec.containers.securityContext.capabilities
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: capabilities <Object>
+
+DESCRIPTION:
+     The capabilities to add/drop when running containers. Defaults to the
+     default set of capabilities granted by the container runtime.
+
+     Adds and removes POSIX capabilities from running containers.
+
+##### add	\<[]string\>
+**PATH:**  pod.spec.containers.securityContext.capabilities.add
+
+     Added capabilities
+
+#### capabilities	\<Object\>
+**PATH:**  pod.spec.containers.securityContext.capabilities
+
+     The capabilities to add/drop when running containers. Defaults to the
+     default set of capabilities granted by the container runtime.
+
+#### privileged	\<boolean\>
+**PATH:**  pod.spec.containers.securityContext.privileged
+
+     Run container in privileged mode. Processes in privileged containers are
+     essentially equivalent to root on the host. Defaults to false.
+
+#### procMount	\<string\>
+**PATH:**  pod.spec.containers.securityContext.procMount
+
+     procMount denotes the type of proc mount to use for the containers. The
+     default is DefaultProcMount which uses the container runtime defaults for
+     readonly paths and masked paths. This requires the ProcMountType feature
+     flag to be enabled.
+
+#### readOnlyRootFilesystem	\<boolean\>
+**PATH:**  pod.spec.containers.securityContext.readOnlyRootFilesystem
+
+     Whether this container has a read-only root filesystem. Default is false.
+
+#### runAsGroup	\<integer\>
+**PATH:**  pod.spec.containers.securityContext.runAsGroup
+
+     The GID to run the entrypoint of the container process. Uses runtime
+     default if unset. May also be set in PodSecurityContext. If set in both
+     SecurityContext and PodSecurityContext, the value specified in
+     SecurityContext takes precedence.
+
+#### runAsNonRoot	\<boolean\>
+**PATH:**  pod.spec.containers.securityContext.runAsNonRoot
+
+     Indicates that the container must run as a non-root user. If true, the
+     Kubelet will validate the image at runtime to ensure that it does not run
+     as UID 0 (root) and fail to start the container if it does. If unset or
+     false, no such validation will be performed. May also be set in
+     PodSecurityContext. If set in both SecurityContext and PodSecurityContext,
+     the value specified in SecurityContext takes precedence.
+
+#### runAsUser	\<integer\>
+**PATH:**  pod.spec.containers.securityContext.runAsUser
+
+     The UID to run the entrypoint of the container process. Defaults to user
+     specified in image metadata if unspecified. May also be set in
+     PodSecurityContext. If set in both SecurityContext and PodSecurityContext,
+     the value specified in SecurityContext takes precedence.
+
+#### seLinuxOptions \<Object\>
+**PATH:**  pod.spec.containers.securityContext.seLinuxOptions
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: seLinuxOptions <Object>
+
+DESCRIPTION:
+     The SELinux context to be applied to the container. If unspecified, the
+     container runtime will allocate a random SELinux context for each
+     container. May also be set in PodSecurityContext. If set in both
+     SecurityContext and PodSecurityContext, the value specified in
+     SecurityContext takes precedence.
+
+     SELinuxOptions are the labels to be applied to the container
+
+##### level	\<string\>
+**PATH:**  pod.spec.containers.securityContext.seLinuxOptions.level
+
+     Level is SELinux level label that applies to the container.
+
+##### role	\<string\>
+**PATH:**  pod.spec.containers.securityContext.seLinuxOptions.role
+
+     Role is a SELinux role label that applies to the container.
+
+##### type	\<string\>
+**PATH:**  pod.spec.containers.securityContext.seLinuxOptions.type
+
+     Type is a SELinux type label that applies to the container.
+
+### securityContext	\<Object\>
+**PATH:**  pod.spec.containers.securityContext
+
+     Security options the pod should run with. More info:
+     https://kubernetes.io/docs/concepts/policy/security-context/ More info:
+     https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+
+### stdin	\<boolean\>
+**PATH:**  pod.spec.containers.stdin
+
+     Whether this container should allocate a buffer for stdin in the container
+     runtime. If this is not set, reads from stdin in the container will always
+     result in EOF. Default is false.
+
+### stdinOnce	\<boolean\>
+**PATH:**  pod.spec.containers.stdinOnce
+
+     Whether the container runtime should close the stdin channel after it has
+     been opened by a single attach. When stdin is true the stdin stream will
+     remain open across multiple attach sessions. If stdinOnce is set to true,
+     stdin is opened on container start, is empty until the first client
+     attaches to stdin, and then remains open and accepts data until the client
+     disconnects, at which time stdin is closed and remains closed until the
+     container is restarted. If this flag is false, a container processes that
+     reads from stdin will never receive an EOF. Default is false
+
+### terminationMessagePath	\<string\>
+**PATH:**  pod.spec.containers.terminationMessagePath
+
+     Optional: Path at which the file to which the container's termination
+     message will be written is mounted into the container's filesystem. Message
+     written is intended to be brief final status, such as an assertion failure
+     message. Will be truncated by the node if greater than 4096 bytes. The
+     total message length across all containers will be limited to 12kb.
+     Defaults to /dev/termination-log. Cannot be updated.
+
+### terminationMessagePolicy	\<string\>
+**PATH:**  pod.spec.containers.terminationMessagePolicy
+
+     Indicate how the termination message should be populated. File will use the
+     contents of terminationMessagePath to populate the container status message
+     on both success and failure. FallbackToLogsOnError will use the last chunk
+     of container log output if the termination message file is empty and the
+     container exited with an error. The log output is limited to 2048 bytes or
+     80 lines, whichever is smaller. Defaults to File. Cannot be updated.
+
+### tty	\<boolean\>
+**PATH:**  pod.spec.containers.tty
+
+     Whether this container should allocate a TTY for itself, also requires
+     'stdin' to be true. Default is false.
+
+### volumeDevices \<[]Object\>
+**PATH:**  pod.spec.containers.volumeDevices
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: volumeDevices <[]Object>
+
+DESCRIPTION:
+     volumeDevices is the list of block devices to be used by the container.
+     This is a beta feature.
+
+     volumeDevice describes a mapping of a raw block device within a container.
+
+#### devicePath	\<string\> -required-
+**PATH:**  pod.spec.containers.volumeDevices.devicePath
+
+     devicePath is the path inside of the container that the device will be
+     mapped to.
+
+### volumeDevices	\<[]Object\>
+**PATH:**  pod.spec.containers.volumeDevices
+
+     volumeDevices is the list of block devices to be used by the container.
+     This is a beta feature.
+
+### volumeMounts \<[]Object\>
+**PATH:**  pod.spec.containers.volumeMounts
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: volumeMounts <[]Object>
+
+DESCRIPTION:
+     Pod volumes to mount into the container's filesystem. Cannot be updated.
+
+     VolumeMount describes a mounting of a Volume within a container.
+
+#### mountPath	\<string\> -required-
+**PATH:**  pod.spec.containers.volumeMounts.mountPath
+
+     Path within the container at which the volume should be mounted. Must not
+     contain ':'.
+
+#### mountPropagation	\<string\>
+**PATH:**  pod.spec.containers.volumeMounts.mountPropagation
+
+     mountPropagation determines how mounts are propagated from the host to
+     container and the other way around. When not set, MountPropagationNone is
+     used. This field is beta in 1.10.
+
+#### name	\<string\> -required-
+**PATH:**  pod.spec.containers.volumeMounts.name
+
+     This must match the Name of a Volume.
+
+#### readOnly	\<boolean\>
+**PATH:**  pod.spec.containers.volumeMounts.readOnly
+
+     Mounted read-only if true, read-write otherwise (false or unspecified).
+     Defaults to false.
+
+#### subPath	\<string\>
+**PATH:**  pod.spec.containers.volumeMounts.subPath
+
+     Path within the volume from which the container's volume should be mounted.
+     Defaults to "" (volume's root).
+
+### volumeMounts	\<[]Object\>
+**PATH:**  pod.spec.containers.volumeMounts
+
+     Pod volumes to mount into the container's filesystem. Cannot be updated.
+
+## containers	\<[]Object\> -required-
+**PATH:**  pod.spec.containers
+
+     List of containers belonging to the pod. Containers cannot currently be
+     added or removed. There must be at least one container in a Pod. Cannot be
+     updated.
+
+## dnsConfig \<Object\>
+**PATH:**  pod.spec.dnsConfig
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: dnsConfig <Object>
+
+DESCRIPTION:
+     Specifies the DNS parameters of a pod. Parameters specified here will be
+     merged to the generated DNS configuration based on DNSPolicy.
+
+     PodDNSConfig defines the DNS parameters of a pod in addition to those
+     generated from DNSPolicy.
+
+### nameservers	\<[]string\>
+**PATH:**  pod.spec.dnsConfig.nameservers
+
+     A list of DNS name server IP addresses. This will be appended to the base
+     nameservers generated from DNSPolicy. Duplicated nameservers will be
+     removed.
+
+### options \<[]Object\>
+**PATH:**  pod.spec.dnsConfig.options
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: options <[]Object>
+
+DESCRIPTION:
+     A list of DNS resolver options. This will be merged with the base options
+     generated from DNSPolicy. Duplicated entries will be removed. Resolution
+     options given in Options will override those that appear in the base
+     DNSPolicy.
+
+     PodDNSConfigOption defines DNS resolver options of a pod.
+
+#### name	\<string\>
+**PATH:**  pod.spec.dnsConfig.options.name
+
+     Required.
+
+### options	\<[]Object\>
+**PATH:**  pod.spec.dnsConfig.options
+
+     A list of DNS resolver options. This will be merged with the base options
+     generated from DNSPolicy. Duplicated entries will be removed. Resolution
+     options given in Options will override those that appear in the base
+     DNSPolicy.
+
+## dnsConfig	\<Object\>
 **PATH:**  pod.spec.dnsConfig
 
      Specifies the DNS parameters of a pod. Parameters specified here will be
      merged to the generated DNS configuration based on DNSPolicy.
 
-### dnsPolicy	\<string\>
+## dnsPolicy	\<string\>
 **PATH:**  pod.spec.dnsPolicy
 
      Set DNS policy for the pod. Defaults to "ClusterFirst". Valid values are
@@ -262,44 +2502,65 @@ DESCRIPTION:
      DNSPolicy. To have DNS options set along with hostNetwork, you have to
      specify DNS policy explicitly to 'ClusterFirstWithHostNet'.
 
-### enableServiceLinks	\<boolean\>
+## enableServiceLinks	\<boolean\>
 **PATH:**  pod.spec.enableServiceLinks
 
      EnableServiceLinks indicates whether information about services should be
      injected into pod's environment variables, matching the syntax of Docker
      links. Optional: Defaults to true.
 
-### hostAliases	\<[]Object\>
+## hostAliases \<[]Object\>
+**PATH:**  pod.spec.hostAliases
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: hostAliases <[]Object>
+
+DESCRIPTION:
+     HostAliases is an optional list of hosts and IPs that will be injected into
+     the pod's hosts file if specified. This is only valid for non-hostNetwork
+     pods.
+
+     HostAlias holds the mapping between IP and hostnames that will be injected
+     as an entry in the pod's hosts file.
+
+### hostnames	\<[]string\>
+**PATH:**  pod.spec.hostAliases.hostnames
+
+     Hostnames for the above IP address.
+
+## hostAliases	\<[]Object\>
 **PATH:**  pod.spec.hostAliases
 
      HostAliases is an optional list of hosts and IPs that will be injected into
      the pod's hosts file if specified. This is only valid for non-hostNetwork
      pods.
 
-### hostIPC	\<boolean\>
+## hostIPC	\<boolean\>
 **PATH:**  pod.spec.hostIPC
 
      Use the host's ipc namespace. Optional: Default to false.
 
-### hostNetwork	\<boolean\>
+## hostNetwork	\<boolean\>
 **PATH:**  pod.spec.hostNetwork
 
      Host networking requested for this pod. Use the host's network namespace.
      If this option is set, the ports that will be used must be specified.
      Default to false.
 
-### hostPID	\<boolean\>
+## hostPID	\<boolean\>
 **PATH:**  pod.spec.hostPID
 
      Use the host's pid namespace. Optional: Default to false.
 
-### hostname	\<string\>
+## hostname	\<string\>
 **PATH:**  pod.spec.hostname
 
      Specifies the hostname of the Pod If not specified, the pod's hostname will
      be set to a system-defined value.
 
-### imagePullSecrets \<[]Object\>
+## imagePullSecrets \<[]Object\>
 **PATH:**  pod.spec.imagePullSecrets
 
 KIND:     Pod
@@ -318,7 +2579,7 @@ DESCRIPTION:
      LocalObjectReference contains enough information to let you locate the
      referenced object inside the same namespace.
 
-### imagePullSecrets	\<[]Object\>
+## imagePullSecrets	\<[]Object\>
 **PATH:**  pod.spec.imagePullSecrets
 
      ImagePullSecrets is an optional list of references to secrets in the same
@@ -328,7 +2589,1224 @@ DESCRIPTION:
      DockerConfig type secrets are honored. More info:
      https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod
 
-### initContainers	\<[]Object\>
+## initContainers \<[]Object\>
+**PATH:**  pod.spec.initContainers
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: initContainers <[]Object>
+
+DESCRIPTION:
+     List of initialization containers belonging to the pod. Init containers are
+     executed in order prior to containers being started. If any init container
+     fails, the pod is considered to have failed and is handled according to its
+     restartPolicy. The name for an init container or normal container must be
+     unique among all containers. Init containers may not have Lifecycle
+     actions, Readiness probes, or Liveness probes. The resourceRequirements of
+     an init container are taken into account during scheduling by finding the
+     highest request/limit for each resource type, and then using the max of of
+     that value or the sum of the normal containers. Limits are applied to init
+     containers in a similar fashion. Init containers cannot currently be added
+     or removed. Cannot be updated. More info:
+     https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+
+     A single application container that you want to run within a pod.
+
+### args	\<[]string\>
+**PATH:**  pod.spec.initContainers.args
+
+     Arguments to the entrypoint. The docker image's CMD is used if this is not
+     provided. Variable references $(VAR_NAME) are expanded using the
+     container's environment. If a variable cannot be resolved, the reference in
+     the input string will be unchanged. The $(VAR_NAME) syntax can be escaped
+     with a double $$, ie: $$(VAR_NAME). Escaped references will never be
+     expanded, regardless of whether the variable exists or not. Cannot be
+     updated. More info:
+     https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
+
+### command	\<[]string\>
+**PATH:**  pod.spec.initContainers.command
+
+     Entrypoint array. Not executed within a shell. The docker image's
+     ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME)
+     are expanded using the container's environment. If a variable cannot be
+     resolved, the reference in the input string will be unchanged. The
+     $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME).
+     Escaped references will never be expanded, regardless of whether the
+     variable exists or not. Cannot be updated. More info:
+     https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
+
+### env \<[]Object\>
+**PATH:**  pod.spec.initContainers.env
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: env <[]Object>
+
+DESCRIPTION:
+     List of environment variables to set in the container. Cannot be updated.
+
+     EnvVar represents an environment variable present in a Container.
+
+#### name	\<string\> -required-
+**PATH:**  pod.spec.initContainers.env.name
+
+     Name of the environment variable. Must be a C_IDENTIFIER.
+
+#### value	\<string\>
+**PATH:**  pod.spec.initContainers.env.value
+
+     Variable references $(VAR_NAME) are expanded using the previous defined
+     environment variables in the container and any service environment
+     variables. If a variable cannot be resolved, the reference in the input
+     string will be unchanged. The $(VAR_NAME) syntax can be escaped with a
+     double $$, ie: $$(VAR_NAME). Escaped references will never be expanded,
+     regardless of whether the variable exists or not. Defaults to "".
+
+#### valueFrom \<Object\>
+**PATH:**  pod.spec.initContainers.env.valueFrom
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: valueFrom <Object>
+
+DESCRIPTION:
+     Source for the environment variable's value. Cannot be used if value is not
+     empty.
+
+     EnvVarSource represents a source for the value of an EnvVar.
+
+##### configMapKeyRef \<Object\>
+**PATH:**  pod.spec.initContainers.env.valueFrom.configMapKeyRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: configMapKeyRef <Object>
+
+DESCRIPTION:
+     Selects a key of a ConfigMap.
+
+     Selects a key from a ConfigMap.
+
+###### key	\<string\> -required-
+**PATH:**  pod.spec.initContainers.env.valueFrom.configMapKeyRef.key
+
+     The key to select.
+
+###### name	\<string\>
+**PATH:**  pod.spec.initContainers.env.valueFrom.configMapKeyRef.name
+
+     Name of the referent. More info:
+     https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+##### configMapKeyRef	\<Object\>
+**PATH:**  pod.spec.initContainers.env.valueFrom.configMapKeyRef
+
+     Selects a key of a ConfigMap.
+
+##### fieldRef \<Object\>
+**PATH:**  pod.spec.initContainers.env.valueFrom.fieldRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: fieldRef <Object>
+
+DESCRIPTION:
+     Selects a field of the pod: supports metadata.name, metadata.namespace,
+     metadata.labels, metadata.annotations, spec.nodeName,
+     spec.serviceAccountName, status.hostIP, status.podIP.
+
+     ObjectFieldSelector selects an APIVersioned field of an object.
+
+###### apiVersion	\<string\>
+**PATH:**  pod.spec.initContainers.env.valueFrom.fieldRef.apiVersion
+
+     Version of the schema the FieldPath is written in terms of, defaults to
+     "v1".
+
+##### fieldRef	\<Object\>
+**PATH:**  pod.spec.initContainers.env.valueFrom.fieldRef
+
+     Selects a field of the pod: supports metadata.name, metadata.namespace,
+     metadata.labels, metadata.annotations, spec.nodeName,
+     spec.serviceAccountName, status.hostIP, status.podIP.
+
+##### resourceFieldRef \<Object\>
+**PATH:**  pod.spec.initContainers.env.valueFrom.resourceFieldRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: resourceFieldRef <Object>
+
+DESCRIPTION:
+     Selects a resource of the container: only resources limits and requests
+     (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu,
+     requests.memory and requests.ephemeral-storage) are currently supported.
+
+     ResourceFieldSelector represents container resources (cpu, memory) and
+     their output format
+
+###### containerName	\<string\>
+**PATH:**  pod.spec.initContainers.env.valueFrom.resourceFieldRef.containerName
+
+     Container name: required for volumes, optional for env vars
+
+###### divisor	\<string\>
+**PATH:**  pod.spec.initContainers.env.valueFrom.resourceFieldRef.divisor
+
+     Specifies the output format of the exposed resources, defaults to "1"
+
+##### resourceFieldRef	\<Object\>
+**PATH:**  pod.spec.initContainers.env.valueFrom.resourceFieldRef
+
+     Selects a resource of the container: only resources limits and requests
+     (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu,
+     requests.memory and requests.ephemeral-storage) are currently supported.
+
+##### secretKeyRef \<Object\>
+**PATH:**  pod.spec.initContainers.env.valueFrom.secretKeyRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: secretKeyRef <Object>
+
+DESCRIPTION:
+     Selects a key of a secret in the pod's namespace
+
+     SecretKeySelector selects a key of a Secret.
+
+###### key	\<string\> -required-
+**PATH:**  pod.spec.initContainers.env.valueFrom.secretKeyRef.key
+
+     The key of the secret to select from. Must be a valid secret key.
+
+###### name	\<string\>
+**PATH:**  pod.spec.initContainers.env.valueFrom.secretKeyRef.name
+
+     Name of the referent. More info:
+     https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+### env	\<[]Object\>
+**PATH:**  pod.spec.initContainers.env
+
+     List of environment variables to set in the container. Cannot be updated.
+
+### envFrom \<[]Object\>
+**PATH:**  pod.spec.initContainers.envFrom
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: envFrom <[]Object>
+
+DESCRIPTION:
+     List of sources to populate environment variables in the container. The
+     keys defined within a source must be a C_IDENTIFIER. All invalid keys will
+     be reported as an event when the container is starting. When a key exists
+     in multiple sources, the value associated with the last source will take
+     precedence. Values defined by an Env with a duplicate key will take
+     precedence. Cannot be updated.
+
+     EnvFromSource represents the source of a set of ConfigMaps
+
+#### configMapRef \<Object\>
+**PATH:**  pod.spec.initContainers.envFrom.configMapRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: configMapRef <Object>
+
+DESCRIPTION:
+     The ConfigMap to select from
+
+     ConfigMapEnvSource selects a ConfigMap to populate the environment
+     variables with. The contents of the target ConfigMap's Data field will
+     represent the key-value pairs as environment variables.
+
+##### name	\<string\>
+**PATH:**  pod.spec.initContainers.envFrom.configMapRef.name
+
+     Name of the referent. More info:
+     https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+#### configMapRef	\<Object\>
+**PATH:**  pod.spec.initContainers.envFrom.configMapRef
+
+     The ConfigMap to select from
+
+#### prefix	\<string\>
+**PATH:**  pod.spec.initContainers.envFrom.prefix
+
+     An optional identifier to prepend to each key in the ConfigMap. Must be a
+     C_IDENTIFIER.
+
+#### secretRef \<Object\>
+**PATH:**  pod.spec.initContainers.envFrom.secretRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: secretRef <Object>
+
+DESCRIPTION:
+     The Secret to select from
+
+     SecretEnvSource selects a Secret to populate the environment variables
+     with. The contents of the target Secret's Data field will represent the
+     key-value pairs as environment variables.
+
+##### name	\<string\>
+**PATH:**  pod.spec.initContainers.envFrom.secretRef.name
+
+     Name of the referent. More info:
+     https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+### envFrom	\<[]Object\>
+**PATH:**  pod.spec.initContainers.envFrom
+
+     List of sources to populate environment variables in the container. The
+     keys defined within a source must be a C_IDENTIFIER. All invalid keys will
+     be reported as an event when the container is starting. When a key exists
+     in multiple sources, the value associated with the last source will take
+     precedence. Values defined by an Env with a duplicate key will take
+     precedence. Cannot be updated.
+
+### image	\<string\>
+**PATH:**  pod.spec.initContainers.image
+
+     Docker image name. More info:
+     https://kubernetes.io/docs/concepts/containers/images This field is
+     optional to allow higher level config management to default or override
+     container images in workload controllers like Deployments and StatefulSets.
+
+### imagePullPolicy	\<string\>
+**PATH:**  pod.spec.initContainers.imagePullPolicy
+
+     Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always
+     if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated.
+     More info:
+     https://kubernetes.io/docs/concepts/containers/images#updating-images
+
+### lifecycle \<Object\>
+**PATH:**  pod.spec.initContainers.lifecycle
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: lifecycle <Object>
+
+DESCRIPTION:
+     Actions that the management system should take in response to container
+     lifecycle events. Cannot be updated.
+
+     Lifecycle describes actions that the management system should take in
+     response to container lifecycle events. For the PostStart and PreStop
+     lifecycle handlers, management of the container blocks until the action is
+     complete, unless the container process fails, in which case the handler is
+     aborted.
+
+#### postStart \<Object\>
+**PATH:**  pod.spec.initContainers.lifecycle.postStart
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: postStart <Object>
+
+DESCRIPTION:
+     PostStart is called immediately after a container is created. If the
+     handler fails, the container is terminated and restarted according to its
+     restart policy. Other management of the container blocks until the hook
+     completes. More info:
+     https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
+
+     Handler defines a specific action that should be taken
+
+##### exec \<Object\>
+**PATH:**  pod.spec.initContainers.lifecycle.postStart.exec
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: exec <Object>
+
+DESCRIPTION:
+     One and only one of the following should be specified. Exec specifies the
+     action to take.
+
+     ExecAction describes a "run in container" action.
+
+##### exec	\<Object\>
+**PATH:**  pod.spec.initContainers.lifecycle.postStart.exec
+
+     One and only one of the following should be specified. Exec specifies the
+     action to take.
+
+##### httpGet \<Object\>
+**PATH:**  pod.spec.initContainers.lifecycle.postStart.httpGet
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: httpGet <Object>
+
+DESCRIPTION:
+     HTTPGet specifies the http request to perform.
+
+     HTTPGetAction describes an action based on HTTP Get requests.
+
+###### host	\<string\>
+**PATH:**  pod.spec.initContainers.lifecycle.postStart.httpGet.host
+
+     Host name to connect to, defaults to the pod IP. You probably want to set
+     "Host" in httpHeaders instead.
+
+###### httpHeaders \<[]Object\>
+**PATH:**  pod.spec.initContainers.lifecycle.postStart.httpGet.httpHeaders
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: httpHeaders <[]Object>
+
+DESCRIPTION:
+     Custom headers to set in the request. HTTP allows repeated headers.
+
+     HTTPHeader describes a custom header to be used in HTTP probes
+
+- name	\<string\> -required-
+**PATH:**  pod.spec.initContainers.lifecycle.postStart.httpGet.httpHeaders.name
+
+     The header field name
+
+###### httpHeaders	\<[]Object\>
+**PATH:**  pod.spec.initContainers.lifecycle.postStart.httpGet.httpHeaders
+
+     Custom headers to set in the request. HTTP allows repeated headers.
+
+###### path	\<string\>
+**PATH:**  pod.spec.initContainers.lifecycle.postStart.httpGet.path
+
+     Path to access on the HTTP server.
+
+###### port	\<string\> -required-
+**PATH:**  pod.spec.initContainers.lifecycle.postStart.httpGet.port
+
+     Name or number of the port to access on the container. Number must be in
+     the range 1 to 65535. Name must be an IANA_SVC_NAME.
+
+##### httpGet	\<Object\>
+**PATH:**  pod.spec.initContainers.lifecycle.postStart.httpGet
+
+     HTTPGet specifies the http request to perform.
+
+##### tcpSocket \<Object\>
+**PATH:**  pod.spec.initContainers.lifecycle.postStart.tcpSocket
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: tcpSocket <Object>
+
+DESCRIPTION:
+     TCPSocket specifies an action involving a TCP port. TCP hooks not yet
+     supported
+
+     TCPSocketAction describes an action based on opening a socket
+
+###### host	\<string\>
+**PATH:**  pod.spec.initContainers.lifecycle.postStart.tcpSocket.host
+
+     Optional: Host name to connect to, defaults to the pod IP.
+
+#### postStart	\<Object\>
+**PATH:**  pod.spec.initContainers.lifecycle.postStart
+
+     PostStart is called immediately after a container is created. If the
+     handler fails, the container is terminated and restarted according to its
+     restart policy. Other management of the container blocks until the hook
+     completes. More info:
+     https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
+
+#### preStop \<Object\>
+**PATH:**  pod.spec.initContainers.lifecycle.preStop
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: preStop <Object>
+
+DESCRIPTION:
+     PreStop is called immediately before a container is terminated due to an
+     API request or management event such as liveness probe failure, preemption,
+     resource contention, etc. The handler is not called if the container
+     crashes or exits. The reason for termination is passed to the handler. The
+     Pod's termination grace period countdown begins before the PreStop hooked
+     is executed. Regardless of the outcome of the handler, the container will
+     eventually terminate within the Pod's termination grace period. Other
+     management of the container blocks until the hook completes or until the
+     termination grace period is reached. More info:
+     https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
+
+     Handler defines a specific action that should be taken
+
+##### exec \<Object\>
+**PATH:**  pod.spec.initContainers.lifecycle.preStop.exec
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: exec <Object>
+
+DESCRIPTION:
+     One and only one of the following should be specified. Exec specifies the
+     action to take.
+
+     ExecAction describes a "run in container" action.
+
+##### exec	\<Object\>
+**PATH:**  pod.spec.initContainers.lifecycle.preStop.exec
+
+     One and only one of the following should be specified. Exec specifies the
+     action to take.
+
+##### httpGet \<Object\>
+**PATH:**  pod.spec.initContainers.lifecycle.preStop.httpGet
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: httpGet <Object>
+
+DESCRIPTION:
+     HTTPGet specifies the http request to perform.
+
+     HTTPGetAction describes an action based on HTTP Get requests.
+
+###### host	\<string\>
+**PATH:**  pod.spec.initContainers.lifecycle.preStop.httpGet.host
+
+     Host name to connect to, defaults to the pod IP. You probably want to set
+     "Host" in httpHeaders instead.
+
+###### httpHeaders \<[]Object\>
+**PATH:**  pod.spec.initContainers.lifecycle.preStop.httpGet.httpHeaders
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: httpHeaders <[]Object>
+
+DESCRIPTION:
+     Custom headers to set in the request. HTTP allows repeated headers.
+
+     HTTPHeader describes a custom header to be used in HTTP probes
+
+- name	\<string\> -required-
+**PATH:**  pod.spec.initContainers.lifecycle.preStop.httpGet.httpHeaders.name
+
+     The header field name
+
+###### httpHeaders	\<[]Object\>
+**PATH:**  pod.spec.initContainers.lifecycle.preStop.httpGet.httpHeaders
+
+     Custom headers to set in the request. HTTP allows repeated headers.
+
+###### path	\<string\>
+**PATH:**  pod.spec.initContainers.lifecycle.preStop.httpGet.path
+
+     Path to access on the HTTP server.
+
+###### port	\<string\> -required-
+**PATH:**  pod.spec.initContainers.lifecycle.preStop.httpGet.port
+
+     Name or number of the port to access on the container. Number must be in
+     the range 1 to 65535. Name must be an IANA_SVC_NAME.
+
+##### httpGet	\<Object\>
+**PATH:**  pod.spec.initContainers.lifecycle.preStop.httpGet
+
+     HTTPGet specifies the http request to perform.
+
+##### tcpSocket \<Object\>
+**PATH:**  pod.spec.initContainers.lifecycle.preStop.tcpSocket
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: tcpSocket <Object>
+
+DESCRIPTION:
+     TCPSocket specifies an action involving a TCP port. TCP hooks not yet
+     supported
+
+     TCPSocketAction describes an action based on opening a socket
+
+###### host	\<string\>
+**PATH:**  pod.spec.initContainers.lifecycle.preStop.tcpSocket.host
+
+     Optional: Host name to connect to, defaults to the pod IP.
+
+### lifecycle	\<Object\>
+**PATH:**  pod.spec.initContainers.lifecycle
+
+     Actions that the management system should take in response to container
+     lifecycle events. Cannot be updated.
+
+### livenessProbe \<Object\>
+**PATH:**  pod.spec.initContainers.livenessProbe
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: livenessProbe <Object>
+
+DESCRIPTION:
+     Periodic probe of container liveness. Container will be restarted if the
+     probe fails. Cannot be updated. More info:
+     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+
+     Probe describes a health check to be performed against a container to
+     determine whether it is alive or ready to receive traffic.
+
+#### exec \<Object\>
+**PATH:**  pod.spec.initContainers.livenessProbe.exec
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: exec <Object>
+
+DESCRIPTION:
+     One and only one of the following should be specified. Exec specifies the
+     action to take.
+
+     ExecAction describes a "run in container" action.
+
+#### exec	\<Object\>
+**PATH:**  pod.spec.initContainers.livenessProbe.exec
+
+     One and only one of the following should be specified. Exec specifies the
+     action to take.
+
+#### failureThreshold	\<integer\>
+**PATH:**  pod.spec.initContainers.livenessProbe.failureThreshold
+
+     Minimum consecutive failures for the probe to be considered failed after
+     having succeeded. Defaults to 3. Minimum value is 1.
+
+#### httpGet \<Object\>
+**PATH:**  pod.spec.initContainers.livenessProbe.httpGet
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: httpGet <Object>
+
+DESCRIPTION:
+     HTTPGet specifies the http request to perform.
+
+     HTTPGetAction describes an action based on HTTP Get requests.
+
+##### host	\<string\>
+**PATH:**  pod.spec.initContainers.livenessProbe.httpGet.host
+
+     Host name to connect to, defaults to the pod IP. You probably want to set
+     "Host" in httpHeaders instead.
+
+##### httpHeaders \<[]Object\>
+**PATH:**  pod.spec.initContainers.livenessProbe.httpGet.httpHeaders
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: httpHeaders <[]Object>
+
+DESCRIPTION:
+     Custom headers to set in the request. HTTP allows repeated headers.
+
+     HTTPHeader describes a custom header to be used in HTTP probes
+
+###### name	\<string\> -required-
+**PATH:**  pod.spec.initContainers.livenessProbe.httpGet.httpHeaders.name
+
+     The header field name
+
+##### httpHeaders	\<[]Object\>
+**PATH:**  pod.spec.initContainers.livenessProbe.httpGet.httpHeaders
+
+     Custom headers to set in the request. HTTP allows repeated headers.
+
+##### path	\<string\>
+**PATH:**  pod.spec.initContainers.livenessProbe.httpGet.path
+
+     Path to access on the HTTP server.
+
+##### port	\<string\> -required-
+**PATH:**  pod.spec.initContainers.livenessProbe.httpGet.port
+
+     Name or number of the port to access on the container. Number must be in
+     the range 1 to 65535. Name must be an IANA_SVC_NAME.
+
+#### httpGet	\<Object\>
+**PATH:**  pod.spec.initContainers.livenessProbe.httpGet
+
+     HTTPGet specifies the http request to perform.
+
+#### initialDelaySeconds	\<integer\>
+**PATH:**  pod.spec.initContainers.livenessProbe.initialDelaySeconds
+
+     Number of seconds after the container has started before liveness probes
+     are initiated. More info:
+     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+
+#### periodSeconds	\<integer\>
+**PATH:**  pod.spec.initContainers.livenessProbe.periodSeconds
+
+     How often (in seconds) to perform the probe. Default to 10 seconds. Minimum
+     value is 1.
+
+#### successThreshold	\<integer\>
+**PATH:**  pod.spec.initContainers.livenessProbe.successThreshold
+
+     Minimum consecutive successes for the probe to be considered successful
+     after having failed. Defaults to 1. Must be 1 for liveness. Minimum value
+     is 1.
+
+#### tcpSocket \<Object\>
+**PATH:**  pod.spec.initContainers.livenessProbe.tcpSocket
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: tcpSocket <Object>
+
+DESCRIPTION:
+     TCPSocket specifies an action involving a TCP port. TCP hooks not yet
+     supported
+
+     TCPSocketAction describes an action based on opening a socket
+
+##### host	\<string\>
+**PATH:**  pod.spec.initContainers.livenessProbe.tcpSocket.host
+
+     Optional: Host name to connect to, defaults to the pod IP.
+
+#### tcpSocket	\<Object\>
+**PATH:**  pod.spec.initContainers.livenessProbe.tcpSocket
+
+     TCPSocket specifies an action involving a TCP port. TCP hooks not yet
+     supported
+
+### livenessProbe	\<Object\>
+**PATH:**  pod.spec.initContainers.livenessProbe
+
+     Periodic probe of container liveness. Container will be restarted if the
+     probe fails. Cannot be updated. More info:
+     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+
+### name	\<string\> -required-
+**PATH:**  pod.spec.initContainers.name
+
+     Name of the container specified as a DNS_LABEL. Each container in a pod
+     must have a unique name (DNS_LABEL). Cannot be updated.
+
+### ports \<[]Object\>
+**PATH:**  pod.spec.initContainers.ports
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: ports <[]Object>
+
+DESCRIPTION:
+     List of ports to expose from the container. Exposing a port here gives the
+     system additional information about the network connections a container
+     uses, but is primarily informational. Not specifying a port here DOES NOT
+     prevent that port from being exposed. Any port which is listening on the
+     default "0.0.0.0" address inside a container will be accessible from the
+     network. Cannot be updated.
+
+     ContainerPort represents a network port in a single container.
+
+#### containerPort	\<integer\> -required-
+**PATH:**  pod.spec.initContainers.ports.containerPort
+
+     Number of port to expose on the pod's IP address. This must be a valid port
+     number, 0 < x < 65536.
+
+#### hostIP	\<string\>
+**PATH:**  pod.spec.initContainers.ports.hostIP
+
+     What host IP to bind the external port to.
+
+#### hostPort	\<integer\>
+**PATH:**  pod.spec.initContainers.ports.hostPort
+
+     Number of port to expose on the host. If specified, this must be a valid
+     port number, 0 < x < 65536. If HostNetwork is specified, this must match
+     ContainerPort. Most containers do not need this.
+
+#### name	\<string\>
+**PATH:**  pod.spec.initContainers.ports.name
+
+     If specified, this must be an IANA_SVC_NAME and unique within the pod. Each
+     named port in a pod must have a unique name. Name for the port that can be
+     referred to by services.
+
+### ports	\<[]Object\>
+**PATH:**  pod.spec.initContainers.ports
+
+     List of ports to expose from the container. Exposing a port here gives the
+     system additional information about the network connections a container
+     uses, but is primarily informational. Not specifying a port here DOES NOT
+     prevent that port from being exposed. Any port which is listening on the
+     default "0.0.0.0" address inside a container will be accessible from the
+     network. Cannot be updated.
+
+### readinessProbe \<Object\>
+**PATH:**  pod.spec.initContainers.readinessProbe
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: readinessProbe <Object>
+
+DESCRIPTION:
+     Periodic probe of container service readiness. Container will be removed
+     from service endpoints if the probe fails. Cannot be updated. More info:
+     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+
+     Probe describes a health check to be performed against a container to
+     determine whether it is alive or ready to receive traffic.
+
+#### exec \<Object\>
+**PATH:**  pod.spec.initContainers.readinessProbe.exec
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: exec <Object>
+
+DESCRIPTION:
+     One and only one of the following should be specified. Exec specifies the
+     action to take.
+
+     ExecAction describes a "run in container" action.
+
+#### exec	\<Object\>
+**PATH:**  pod.spec.initContainers.readinessProbe.exec
+
+     One and only one of the following should be specified. Exec specifies the
+     action to take.
+
+#### failureThreshold	\<integer\>
+**PATH:**  pod.spec.initContainers.readinessProbe.failureThreshold
+
+     Minimum consecutive failures for the probe to be considered failed after
+     having succeeded. Defaults to 3. Minimum value is 1.
+
+#### httpGet \<Object\>
+**PATH:**  pod.spec.initContainers.readinessProbe.httpGet
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: httpGet <Object>
+
+DESCRIPTION:
+     HTTPGet specifies the http request to perform.
+
+     HTTPGetAction describes an action based on HTTP Get requests.
+
+##### host	\<string\>
+**PATH:**  pod.spec.initContainers.readinessProbe.httpGet.host
+
+     Host name to connect to, defaults to the pod IP. You probably want to set
+     "Host" in httpHeaders instead.
+
+##### httpHeaders \<[]Object\>
+**PATH:**  pod.spec.initContainers.readinessProbe.httpGet.httpHeaders
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: httpHeaders <[]Object>
+
+DESCRIPTION:
+     Custom headers to set in the request. HTTP allows repeated headers.
+
+     HTTPHeader describes a custom header to be used in HTTP probes
+
+###### name	\<string\> -required-
+**PATH:**  pod.spec.initContainers.readinessProbe.httpGet.httpHeaders.name
+
+     The header field name
+
+##### httpHeaders	\<[]Object\>
+**PATH:**  pod.spec.initContainers.readinessProbe.httpGet.httpHeaders
+
+     Custom headers to set in the request. HTTP allows repeated headers.
+
+##### path	\<string\>
+**PATH:**  pod.spec.initContainers.readinessProbe.httpGet.path
+
+     Path to access on the HTTP server.
+
+##### port	\<string\> -required-
+**PATH:**  pod.spec.initContainers.readinessProbe.httpGet.port
+
+     Name or number of the port to access on the container. Number must be in
+     the range 1 to 65535. Name must be an IANA_SVC_NAME.
+
+#### httpGet	\<Object\>
+**PATH:**  pod.spec.initContainers.readinessProbe.httpGet
+
+     HTTPGet specifies the http request to perform.
+
+#### initialDelaySeconds	\<integer\>
+**PATH:**  pod.spec.initContainers.readinessProbe.initialDelaySeconds
+
+     Number of seconds after the container has started before liveness probes
+     are initiated. More info:
+     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+
+#### periodSeconds	\<integer\>
+**PATH:**  pod.spec.initContainers.readinessProbe.periodSeconds
+
+     How often (in seconds) to perform the probe. Default to 10 seconds. Minimum
+     value is 1.
+
+#### successThreshold	\<integer\>
+**PATH:**  pod.spec.initContainers.readinessProbe.successThreshold
+
+     Minimum consecutive successes for the probe to be considered successful
+     after having failed. Defaults to 1. Must be 1 for liveness. Minimum value
+     is 1.
+
+#### tcpSocket \<Object\>
+**PATH:**  pod.spec.initContainers.readinessProbe.tcpSocket
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: tcpSocket <Object>
+
+DESCRIPTION:
+     TCPSocket specifies an action involving a TCP port. TCP hooks not yet
+     supported
+
+     TCPSocketAction describes an action based on opening a socket
+
+##### host	\<string\>
+**PATH:**  pod.spec.initContainers.readinessProbe.tcpSocket.host
+
+     Optional: Host name to connect to, defaults to the pod IP.
+
+#### tcpSocket	\<Object\>
+**PATH:**  pod.spec.initContainers.readinessProbe.tcpSocket
+
+     TCPSocket specifies an action involving a TCP port. TCP hooks not yet
+     supported
+
+### readinessProbe	\<Object\>
+**PATH:**  pod.spec.initContainers.readinessProbe
+
+     Periodic probe of container service readiness. Container will be removed
+     from service endpoints if the probe fails. Cannot be updated. More info:
+     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+
+### resources \<Object\>
+**PATH:**  pod.spec.initContainers.resources
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: resources <Object>
+
+DESCRIPTION:
+     Compute Resources required by this container. Cannot be updated. More info:
+     https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+
+     ResourceRequirements describes the compute resource requirements.
+
+#### limits	\<map[string]string\>
+**PATH:**  pod.spec.initContainers.resources.limits
+
+     Limits describes the maximum amount of compute resources allowed. More
+     info:
+     https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+
+### resources	\<Object\>
+**PATH:**  pod.spec.initContainers.resources
+
+     Compute Resources required by this container. Cannot be updated. More info:
+     https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+
+### securityContext \<Object\>
+**PATH:**  pod.spec.initContainers.securityContext
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: securityContext <Object>
+
+DESCRIPTION:
+     Security options the pod should run with. More info:
+     https://kubernetes.io/docs/concepts/policy/security-context/ More info:
+     https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+
+     SecurityContext holds security configuration that will be applied to a
+     container. Some fields are present in both SecurityContext and
+     PodSecurityContext. When both are set, the values in SecurityContext take
+     precedence.
+
+#### allowPrivilegeEscalation	\<boolean\>
+**PATH:**  pod.spec.initContainers.securityContext.allowPrivilegeEscalation
+
+     AllowPrivilegeEscalation controls whether a process can gain more
+     privileges than its parent process. This bool directly controls if the
+     no_new_privs flag will be set on the container process.
+     AllowPrivilegeEscalation is true always when the container is: 1) run as
+     Privileged 2) has CAP_SYS_ADMIN
+
+#### capabilities \<Object\>
+**PATH:**  pod.spec.initContainers.securityContext.capabilities
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: capabilities <Object>
+
+DESCRIPTION:
+     The capabilities to add/drop when running containers. Defaults to the
+     default set of capabilities granted by the container runtime.
+
+     Adds and removes POSIX capabilities from running containers.
+
+##### add	\<[]string\>
+**PATH:**  pod.spec.initContainers.securityContext.capabilities.add
+
+     Added capabilities
+
+#### capabilities	\<Object\>
+**PATH:**  pod.spec.initContainers.securityContext.capabilities
+
+     The capabilities to add/drop when running containers. Defaults to the
+     default set of capabilities granted by the container runtime.
+
+#### privileged	\<boolean\>
+**PATH:**  pod.spec.initContainers.securityContext.privileged
+
+     Run container in privileged mode. Processes in privileged containers are
+     essentially equivalent to root on the host. Defaults to false.
+
+#### procMount	\<string\>
+**PATH:**  pod.spec.initContainers.securityContext.procMount
+
+     procMount denotes the type of proc mount to use for the containers. The
+     default is DefaultProcMount which uses the container runtime defaults for
+     readonly paths and masked paths. This requires the ProcMountType feature
+     flag to be enabled.
+
+#### readOnlyRootFilesystem	\<boolean\>
+**PATH:**  pod.spec.initContainers.securityContext.readOnlyRootFilesystem
+
+     Whether this container has a read-only root filesystem. Default is false.
+
+#### runAsGroup	\<integer\>
+**PATH:**  pod.spec.initContainers.securityContext.runAsGroup
+
+     The GID to run the entrypoint of the container process. Uses runtime
+     default if unset. May also be set in PodSecurityContext. If set in both
+     SecurityContext and PodSecurityContext, the value specified in
+     SecurityContext takes precedence.
+
+#### runAsNonRoot	\<boolean\>
+**PATH:**  pod.spec.initContainers.securityContext.runAsNonRoot
+
+     Indicates that the container must run as a non-root user. If true, the
+     Kubelet will validate the image at runtime to ensure that it does not run
+     as UID 0 (root) and fail to start the container if it does. If unset or
+     false, no such validation will be performed. May also be set in
+     PodSecurityContext. If set in both SecurityContext and PodSecurityContext,
+     the value specified in SecurityContext takes precedence.
+
+#### runAsUser	\<integer\>
+**PATH:**  pod.spec.initContainers.securityContext.runAsUser
+
+     The UID to run the entrypoint of the container process. Defaults to user
+     specified in image metadata if unspecified. May also be set in
+     PodSecurityContext. If set in both SecurityContext and PodSecurityContext,
+     the value specified in SecurityContext takes precedence.
+
+#### seLinuxOptions \<Object\>
+**PATH:**  pod.spec.initContainers.securityContext.seLinuxOptions
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: seLinuxOptions <Object>
+
+DESCRIPTION:
+     The SELinux context to be applied to the container. If unspecified, the
+     container runtime will allocate a random SELinux context for each
+     container. May also be set in PodSecurityContext. If set in both
+     SecurityContext and PodSecurityContext, the value specified in
+     SecurityContext takes precedence.
+
+     SELinuxOptions are the labels to be applied to the container
+
+##### level	\<string\>
+**PATH:**  pod.spec.initContainers.securityContext.seLinuxOptions.level
+
+     Level is SELinux level label that applies to the container.
+
+##### role	\<string\>
+**PATH:**  pod.spec.initContainers.securityContext.seLinuxOptions.role
+
+     Role is a SELinux role label that applies to the container.
+
+##### type	\<string\>
+**PATH:**  pod.spec.initContainers.securityContext.seLinuxOptions.type
+
+     Type is a SELinux type label that applies to the container.
+
+### securityContext	\<Object\>
+**PATH:**  pod.spec.initContainers.securityContext
+
+     Security options the pod should run with. More info:
+     https://kubernetes.io/docs/concepts/policy/security-context/ More info:
+     https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+
+### stdin	\<boolean\>
+**PATH:**  pod.spec.initContainers.stdin
+
+     Whether this container should allocate a buffer for stdin in the container
+     runtime. If this is not set, reads from stdin in the container will always
+     result in EOF. Default is false.
+
+### stdinOnce	\<boolean\>
+**PATH:**  pod.spec.initContainers.stdinOnce
+
+     Whether the container runtime should close the stdin channel after it has
+     been opened by a single attach. When stdin is true the stdin stream will
+     remain open across multiple attach sessions. If stdinOnce is set to true,
+     stdin is opened on container start, is empty until the first client
+     attaches to stdin, and then remains open and accepts data until the client
+     disconnects, at which time stdin is closed and remains closed until the
+     container is restarted. If this flag is false, a container processes that
+     reads from stdin will never receive an EOF. Default is false
+
+### terminationMessagePath	\<string\>
+**PATH:**  pod.spec.initContainers.terminationMessagePath
+
+     Optional: Path at which the file to which the container's termination
+     message will be written is mounted into the container's filesystem. Message
+     written is intended to be brief final status, such as an assertion failure
+     message. Will be truncated by the node if greater than 4096 bytes. The
+     total message length across all containers will be limited to 12kb.
+     Defaults to /dev/termination-log. Cannot be updated.
+
+### terminationMessagePolicy	\<string\>
+**PATH:**  pod.spec.initContainers.terminationMessagePolicy
+
+     Indicate how the termination message should be populated. File will use the
+     contents of terminationMessagePath to populate the container status message
+     on both success and failure. FallbackToLogsOnError will use the last chunk
+     of container log output if the termination message file is empty and the
+     container exited with an error. The log output is limited to 2048 bytes or
+     80 lines, whichever is smaller. Defaults to File. Cannot be updated.
+
+### tty	\<boolean\>
+**PATH:**  pod.spec.initContainers.tty
+
+     Whether this container should allocate a TTY for itself, also requires
+     'stdin' to be true. Default is false.
+
+### volumeDevices \<[]Object\>
+**PATH:**  pod.spec.initContainers.volumeDevices
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: volumeDevices <[]Object>
+
+DESCRIPTION:
+     volumeDevices is the list of block devices to be used by the container.
+     This is a beta feature.
+
+     volumeDevice describes a mapping of a raw block device within a container.
+
+#### devicePath	\<string\> -required-
+**PATH:**  pod.spec.initContainers.volumeDevices.devicePath
+
+     devicePath is the path inside of the container that the device will be
+     mapped to.
+
+### volumeDevices	\<[]Object\>
+**PATH:**  pod.spec.initContainers.volumeDevices
+
+     volumeDevices is the list of block devices to be used by the container.
+     This is a beta feature.
+
+### volumeMounts \<[]Object\>
+**PATH:**  pod.spec.initContainers.volumeMounts
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: volumeMounts <[]Object>
+
+DESCRIPTION:
+     Pod volumes to mount into the container's filesystem. Cannot be updated.
+
+     VolumeMount describes a mounting of a Volume within a container.
+
+#### mountPath	\<string\> -required-
+**PATH:**  pod.spec.initContainers.volumeMounts.mountPath
+
+     Path within the container at which the volume should be mounted. Must not
+     contain ':'.
+
+#### mountPropagation	\<string\>
+**PATH:**  pod.spec.initContainers.volumeMounts.mountPropagation
+
+     mountPropagation determines how mounts are propagated from the host to
+     container and the other way around. When not set, MountPropagationNone is
+     used. This field is beta in 1.10.
+
+#### name	\<string\> -required-
+**PATH:**  pod.spec.initContainers.volumeMounts.name
+
+     This must match the Name of a Volume.
+
+#### readOnly	\<boolean\>
+**PATH:**  pod.spec.initContainers.volumeMounts.readOnly
+
+     Mounted read-only if true, read-write otherwise (false or unspecified).
+     Defaults to false.
+
+#### subPath	\<string\>
+**PATH:**  pod.spec.initContainers.volumeMounts.subPath
+
+     Path within the volume from which the container's volume should be mounted.
+     Defaults to "" (volume's root).
+
+### volumeMounts	\<[]Object\>
+**PATH:**  pod.spec.initContainers.volumeMounts
+
+     Pod volumes to mount into the container's filesystem. Cannot be updated.
+
+## initContainers	\<[]Object\>
 **PATH:**  pod.spec.initContainers
 
      List of initialization containers belonging to the pod. Init containers are
@@ -344,14 +3822,14 @@ DESCRIPTION:
      or removed. Cannot be updated. More info:
      https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
 
-### nodeName	\<string\>
+## nodeName	\<string\>
 **PATH:**  pod.spec.nodeName
 
      NodeName is a request to schedule this pod onto a specific node. If it is
      non-empty, the scheduler simply schedules this pod onto that node, assuming
      that it fits resource requirements.
 
-### nodeSelector	\<map[string]string\>
+## nodeSelector	\<map[string]string\>
 **PATH:**  pod.spec.nodeSelector
 
      NodeSelector is a selector which must be true for the pod to fit on a node.
@@ -359,7 +3837,7 @@ DESCRIPTION:
      that node. More info:
      https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
 
-### priority	\<integer\>
+## priority	\<integer\>
 **PATH:**  pod.spec.priority
 
      The priority value. Various system components use this field to find the
@@ -368,7 +3846,7 @@ DESCRIPTION:
      this field from PriorityClassName. The higher the value, the higher the
      priority.
 
-### priorityClassName	\<string\>
+## priorityClassName	\<string\>
 **PATH:**  pod.spec.priorityClassName
 
      If specified, indicates the pod's priority. "system-node-critical" and
@@ -378,7 +3856,23 @@ DESCRIPTION:
      not specified, the pod priority will be default or zero if there is no
      default.
 
-### readinessGates	\<[]Object\>
+## readinessGates \<[]Object\>
+**PATH:**  pod.spec.readinessGates
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: readinessGates <[]Object>
+
+DESCRIPTION:
+     If specified, all readiness gates will be evaluated for pod readiness. A
+     pod is ready when all its containers are ready AND all conditions specified
+     in the readiness gates have status equal to "True" More info:
+     https://git.k8s.io/enhancements/keps/sig-network/0007-pod-ready%!B(MISSING)%!B(MISSING).md
+
+     PodReadinessGate contains the reference to a pod condition
+
+## readinessGates	\<[]Object\>
 **PATH:**  pod.spec.readinessGates
 
      If specified, all readiness gates will be evaluated for pod readiness. A
@@ -386,14 +3880,14 @@ DESCRIPTION:
      in the readiness gates have status equal to "True" More info:
      https://git.k8s.io/enhancements/keps/sig-network/0007-pod-ready%2B%2B.md
 
-### restartPolicy	\<string\>
+## restartPolicy	\<string\>
 **PATH:**  pod.spec.restartPolicy
 
      Restart policy for all containers within the pod. One of Always, OnFailure,
      Never. Default to Always. More info:
      https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
 
-### runtimeClassName	\<string\>
+## runtimeClassName	\<string\>
 **PATH:**  pod.spec.runtimeClassName
 
      RuntimeClassName refers to a RuntimeClass object in the node.k8s.io group,
@@ -404,33 +3898,152 @@ DESCRIPTION:
      https://git.k8s.io/enhancements/keps/sig-node/runtime-class.md This is an
      alpha feature and may change in the future.
 
-### schedulerName	\<string\>
+## schedulerName	\<string\>
 **PATH:**  pod.spec.schedulerName
 
      If specified, the pod will be dispatched by specified scheduler. If not
      specified, the pod will be dispatched by default scheduler.
 
-### securityContext	\<Object\>
+## securityContext \<Object\>
+**PATH:**  pod.spec.securityContext
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: securityContext <Object>
+
+DESCRIPTION:
+     SecurityContext holds pod-level security attributes and common container
+     settings. Optional: Defaults to empty. See type description for default
+     values of each field.
+
+     PodSecurityContext holds pod-level security attributes and common container
+     settings. Some fields are also present in container.securityContext. Field
+     values of container.securityContext take precedence over field values of
+     PodSecurityContext.
+
+### fsGroup	\<integer\>
+**PATH:**  pod.spec.securityContext.fsGroup
+
+     A special supplemental group that applies to all containers in a pod. Some
+     volume types allow the Kubelet to change the ownership of that volume to be
+     owned by the pod: 1. The owning GID will be the FSGroup 2. The setgid bit
+     is set (new files created in the volume will be owned by FSGroup) 3. The
+     permission bits are OR'd with rw-rw---- If unset, the Kubelet will not
+     modify the ownership and permissions of any volume.
+
+### runAsGroup	\<integer\>
+**PATH:**  pod.spec.securityContext.runAsGroup
+
+     The GID to run the entrypoint of the container process. Uses runtime
+     default if unset. May also be set in SecurityContext. If set in both
+     SecurityContext and PodSecurityContext, the value specified in
+     SecurityContext takes precedence for that container.
+
+### runAsNonRoot	\<boolean\>
+**PATH:**  pod.spec.securityContext.runAsNonRoot
+
+     Indicates that the container must run as a non-root user. If true, the
+     Kubelet will validate the image at runtime to ensure that it does not run
+     as UID 0 (root) and fail to start the container if it does. If unset or
+     false, no such validation will be performed. May also be set in
+     SecurityContext. If set in both SecurityContext and PodSecurityContext, the
+     value specified in SecurityContext takes precedence.
+
+### runAsUser	\<integer\>
+**PATH:**  pod.spec.securityContext.runAsUser
+
+     The UID to run the entrypoint of the container process. Defaults to user
+     specified in image metadata if unspecified. May also be set in
+     SecurityContext. If set in both SecurityContext and PodSecurityContext, the
+     value specified in SecurityContext takes precedence for that container.
+
+### seLinuxOptions \<Object\>
+**PATH:**  pod.spec.securityContext.seLinuxOptions
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: seLinuxOptions <Object>
+
+DESCRIPTION:
+     The SELinux context to be applied to all containers. If unspecified, the
+     container runtime will allocate a random SELinux context for each
+     container. May also be set in SecurityContext. If set in both
+     SecurityContext and PodSecurityContext, the value specified in
+     SecurityContext takes precedence for that container.
+
+     SELinuxOptions are the labels to be applied to the container
+
+#### level	\<string\>
+**PATH:**  pod.spec.securityContext.seLinuxOptions.level
+
+     Level is SELinux level label that applies to the container.
+
+#### role	\<string\>
+**PATH:**  pod.spec.securityContext.seLinuxOptions.role
+
+     Role is a SELinux role label that applies to the container.
+
+#### type	\<string\>
+**PATH:**  pod.spec.securityContext.seLinuxOptions.type
+
+     Type is a SELinux type label that applies to the container.
+
+### seLinuxOptions	\<Object\>
+**PATH:**  pod.spec.securityContext.seLinuxOptions
+
+     The SELinux context to be applied to all containers. If unspecified, the
+     container runtime will allocate a random SELinux context for each
+     container. May also be set in SecurityContext. If set in both
+     SecurityContext and PodSecurityContext, the value specified in
+     SecurityContext takes precedence for that container.
+
+   supplementalGroups	<[]integer>
+     A list of groups applied to the first process run in each container, in
+     addition to the container's primary GID. If unspecified, no groups will be
+     added to any container.
+
+### sysctls \<[]Object\>
+**PATH:**  pod.spec.securityContext.sysctls
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: sysctls <[]Object>
+
+DESCRIPTION:
+     Sysctls hold a list of namespaced sysctls used for the pod. Pods with
+     unsupported sysctls (by the container runtime) might fail to launch.
+
+     Sysctl defines a kernel parameter to be set
+
+#### name	\<string\> -required-
+**PATH:**  pod.spec.securityContext.sysctls.name
+
+     Name of a property to set
+
+## securityContext	\<Object\>
 **PATH:**  pod.spec.securityContext
 
      SecurityContext holds pod-level security attributes and common container
      settings. Optional: Defaults to empty. See type description for default
      values of each field.
 
-### serviceAccount	\<string\>
+## serviceAccount	\<string\>
 **PATH:**  pod.spec.serviceAccount
 
      DeprecatedServiceAccount is a depreciated alias for ServiceAccountName.
      Deprecated: Use serviceAccountName instead.
 
-### serviceAccountName	\<string\>
+## serviceAccountName	\<string\>
 **PATH:**  pod.spec.serviceAccountName
 
      ServiceAccountName is the name of the ServiceAccount to use to run this
      pod. More info:
      https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
 
-### shareProcessNamespace	\<boolean\>
+## shareProcessNamespace	\<boolean\>
 **PATH:**  pod.spec.shareProcessNamespace
 
      Share a single process namespace between all of the containers in a pod.
@@ -440,14 +4053,14 @@ DESCRIPTION:
      be set. Optional: Default to false. This field is beta-level and may be
      disabled with the PodShareProcessNamespace feature.
 
-### subdomain	\<string\>
+## subdomain	\<string\>
 **PATH:**  pod.spec.subdomain
 
      If specified, the fully qualified Pod hostname will be
      "<hostname>.<subdomain>.<pod namespace>.svc.<cluster domain>". If not
      specified, the pod will not have a domainname at all.
 
-### terminationGracePeriodSeconds	\<integer\>
+## terminationGracePeriodSeconds	\<integer\>
 **PATH:**  pod.spec.terminationGracePeriodSeconds
 
      Optional duration in seconds the pod needs to terminate gracefully. May be
@@ -459,7 +4072,7 @@ DESCRIPTION:
      this value longer than the expected cleanup time for your process. Defaults
      to 30 seconds.
 
-### tolerations \<[]Object\>
+## tolerations \<[]Object\>
 **PATH:**  pod.spec.tolerations
 
 KIND:     Pod
@@ -473,28 +4086,28 @@ DESCRIPTION:
      The pod this Toleration is attached to tolerates any taint that matches the
      triple <key,value,effect> using the matching operator <operator>.
 
-#### effect	\<string\>
+### effect	\<string\>
 **PATH:**  pod.spec.tolerations.effect
 
      Effect indicates the taint effect to match. Empty means match all taint
      effects. When specified, allowed values are NoSchedule, PreferNoSchedule
      and NoExecute.
 
-#### key	\<string\>
+### key	\<string\>
 **PATH:**  pod.spec.tolerations.key
 
      Key is the taint key that the toleration applies to. Empty means match all
      taint keys. If the key is empty, operator must be Exists; this combination
      means to match all values and all keys.
 
-#### operator	\<string\>
+### operator	\<string\>
 **PATH:**  pod.spec.tolerations.operator
 
      Operator represents a key's relationship to the value. Valid operators are
      Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for
      value, so that a pod can tolerate all taints of a particular category.
 
-#### tolerationSeconds	\<integer\>
+### tolerationSeconds	\<integer\>
 **PATH:**  pod.spec.tolerations.tolerationSeconds
 
      TolerationSeconds represents the period of time the toleration (which must
@@ -503,12 +4116,12 @@ DESCRIPTION:
      (do not evict). Zero and negative values will be treated as 0 (evict
      immediately) by the system.
 
-### tolerations	\<[]Object\>
+## tolerations	\<[]Object\>
 **PATH:**  pod.spec.tolerations
 
      If specified, the pod's tolerations.
 
-### volumes \<[]Object\>
+## volumes \<[]Object\>
 **PATH:**  pod.spec.volumes
 
 KIND:     Pod
@@ -523,7 +4136,7 @@ DESCRIPTION:
      Volume represents a named volume in a pod that may be accessed by any
      container in the pod.
 
-#### awsElasticBlockStore \<Object\>
+### awsElasticBlockStore \<Object\>
 **PATH:**  pod.spec.volumes.awsElasticBlockStore
 
 KIND:     Pod
@@ -541,7 +4154,7 @@ DESCRIPTION:
      as the kubelet. An AWS EBS disk can only be mounted as read/write once. AWS
      EBS volumes support ownership management and SELinux relabeling.
 
-##### fsType	\<string\>
+#### fsType	\<string\>
 **PATH:**  pod.spec.volumes.awsElasticBlockStore.fsType
 
      Filesystem type of the volume that you want to mount. Tip: Ensure that the
@@ -550,7 +4163,7 @@ DESCRIPTION:
      More info:
      https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
 
-##### partition	\<integer\>
+#### partition	\<integer\>
 **PATH:**  pod.spec.volumes.awsElasticBlockStore.partition
 
      The partition in the volume that you want to mount. If omitted, the default
@@ -558,14 +4171,21 @@ DESCRIPTION:
      partition as "1". Similarly, the volume partition for /dev/sda is "0" (or
      you can leave the property empty).
 
-#### awsElasticBlockStore	\<Object\>
+#### readOnly	\<boolean\>
+**PATH:**  pod.spec.volumes.awsElasticBlockStore.readOnly
+
+     Specify "true" to force and set the ReadOnly property in VolumeMounts to
+     "true". If omitted, the default is "false". More info:
+     https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
+
+### awsElasticBlockStore	\<Object\>
 **PATH:**  pod.spec.volumes.awsElasticBlockStore
 
      AWSElasticBlockStore represents an AWS Disk resource that is attached to a
      kubelet's host machine and then exposed to the pod. More info:
      https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
 
-#### azureDisk \<Object\>
+### azureDisk \<Object\>
 **PATH:**  pod.spec.volumes.azureDisk
 
 KIND:     Pod
@@ -580,38 +4200,42 @@ DESCRIPTION:
      AzureDisk represents an Azure Data Disk mount on the host and bind mount to
      the pod.
 
-##### cachingMode	\<string\>
+#### cachingMode	\<string\>
 **PATH:**  pod.spec.volumes.azureDisk.cachingMode
 
      Host Caching mode: None, Read Only, Read Write.
 
-   diskName	<string> -required-
+#### diskName	\<string\> -required-
+**PATH:**  pod.spec.volumes.azureDisk.diskName
+
      The Name of the data disk in the blob storage
 
-   diskURI	<string> -required-
+#### diskURI	\<string\> -required-
+**PATH:**  pod.spec.volumes.azureDisk.diskURI
+
      The URI the data disk in the blob storage
 
-##### fsType	\<string\>
+#### fsType	\<string\>
 **PATH:**  pod.spec.volumes.azureDisk.fsType
 
      Filesystem type to mount. Must be a filesystem type supported by the host
      operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be
      "ext4" if unspecified.
 
-##### kind	\<string\>
+#### kind	\<string\>
 **PATH:**  pod.spec.volumes.azureDisk.kind
 
      Expected values Shared: multiple blob disks per storage account Dedicated:
      single blob disk per storage account Managed: azure managed data disk (only
      in managed availability set). defaults to shared
 
-#### azureDisk	\<Object\>
+### azureDisk	\<Object\>
 **PATH:**  pod.spec.volumes.azureDisk
 
      AzureDisk represents an Azure Data Disk mount on the host and bind mount to
      the pod.
 
-#### azureFile \<Object\>
+### azureFile \<Object\>
 **PATH:**  pod.spec.volumes.azureFile
 
 KIND:     Pod
@@ -626,13 +4250,24 @@ DESCRIPTION:
      AzureFile represents an Azure File Service mount on the host and bind mount
      to the pod.
 
-#### azureFile	\<Object\>
+#### readOnly	\<boolean\>
+**PATH:**  pod.spec.volumes.azureFile.readOnly
+
+     Defaults to false (read/write). ReadOnly here will force the ReadOnly
+     setting in VolumeMounts.
+
+#### secretName	\<string\> -required-
+**PATH:**  pod.spec.volumes.azureFile.secretName
+
+     the name of secret that contains Azure Storage Account Name and Key
+
+### azureFile	\<Object\>
 **PATH:**  pod.spec.volumes.azureFile
 
      AzureFile represents an Azure File Service mount on the host and bind mount
      to the pod.
 
-#### cephfs \<Object\>
+### cephfs \<Object\>
 **PATH:**  pod.spec.volumes.cephfs
 
 KIND:     Pod
@@ -646,43 +4281,61 @@ DESCRIPTION:
      Represents a Ceph Filesystem mount that lasts the lifetime of a pod Cephfs
      volumes do not support ownership management or SELinux relabeling.
 
-   monitors	<[]string> -required-
+#### monitors	\<[]string\> -required-
+**PATH:**  pod.spec.volumes.cephfs.monitors
+
      Required: Monitors is a collection of Ceph monitors More info:
      https://releases.k8s.io/HEAD/examples/volumes/cephfs/README.md#how-to-use-it
 
-##### path	\<string\>
+#### path	\<string\>
 **PATH:**  pod.spec.volumes.cephfs.path
 
      Optional: Used as the mounted root, rather than the full Ceph tree, default
      is /
 
-##### readOnly	\<boolean\>
+#### readOnly	\<boolean\>
 **PATH:**  pod.spec.volumes.cephfs.readOnly
 
      Optional: Defaults to false (read/write). ReadOnly here will force the
      ReadOnly setting in VolumeMounts. More info:
      https://releases.k8s.io/HEAD/examples/volumes/cephfs/README.md#how-to-use-it
 
-##### secretFile	\<string\>
+#### secretFile	\<string\>
 **PATH:**  pod.spec.volumes.cephfs.secretFile
 
      Optional: SecretFile is the path to key ring for User, default is
      /etc/ceph/user.secret More info:
      https://releases.k8s.io/HEAD/examples/volumes/cephfs/README.md#how-to-use-it
 
-##### secretRef	\<Object\>
+#### secretRef \<Object\>
+**PATH:**  pod.spec.volumes.cephfs.secretRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: secretRef <Object>
+
+DESCRIPTION:
+     Optional: SecretRef is reference to the authentication secret for User,
+     default is empty. More info:
+     https://releases.k8s.io/HEAD/examples/volumes/cephfs/README.md#how-to-use-it
+
+     LocalObjectReference contains enough information to let you locate the
+     referenced object inside the same namespace.
+
+#### secretRef	\<Object\>
 **PATH:**  pod.spec.volumes.cephfs.secretRef
 
      Optional: SecretRef is reference to the authentication secret for User,
      default is empty. More info:
      https://releases.k8s.io/HEAD/examples/volumes/cephfs/README.md#how-to-use-it
 
-#### cephfs	\<Object\>
+### cephfs	\<Object\>
 **PATH:**  pod.spec.volumes.cephfs
 
      CephFS represents a Ceph FS mount on the host that shares a pod's lifetime
 
-#### cinder \<Object\>
+### cinder \<Object\>
 **PATH:**  pod.spec.volumes.cinder
 
 KIND:     Pod
@@ -700,7 +4353,7 @@ DESCRIPTION:
      region as the kubelet. Cinder volumes support ownership management and
      SELinux relabeling.
 
-##### fsType	\<string\>
+#### fsType	\<string\>
 **PATH:**  pod.spec.volumes.cinder.fsType
 
      Filesystem type to mount. Must be a filesystem type supported by the host
@@ -708,14 +4361,14 @@ DESCRIPTION:
      be "ext4" if unspecified. More info:
      https://releases.k8s.io/HEAD/examples/mysql-cinder-pd/README.md
 
-##### readOnly	\<boolean\>
+#### readOnly	\<boolean\>
 **PATH:**  pod.spec.volumes.cinder.readOnly
 
      Optional: Defaults to false (read/write). ReadOnly here will force the
      ReadOnly setting in VolumeMounts. More info:
      https://releases.k8s.io/HEAD/examples/mysql-cinder-pd/README.md
 
-##### secretRef \<Object\>
+#### secretRef \<Object\>
 **PATH:**  pod.spec.volumes.cinder.secretRef
 
 KIND:     Pod
@@ -730,14 +4383,20 @@ DESCRIPTION:
      LocalObjectReference contains enough information to let you locate the
      referenced object inside the same namespace.
 
-#### cinder	\<Object\>
+#### secretRef	\<Object\>
+**PATH:**  pod.spec.volumes.cinder.secretRef
+
+     Optional: points to a secret object containing parameters used to connect
+     to OpenStack.
+
+### cinder	\<Object\>
 **PATH:**  pod.spec.volumes.cinder
 
      Cinder represents a cinder volume attached and mounted on kubelets host
      machine More info:
      https://releases.k8s.io/HEAD/examples/mysql-cinder-pd/README.md
 
-#### configMap \<Object\>
+### configMap \<Object\>
 **PATH:**  pod.spec.volumes.configMap
 
 KIND:     Pod
@@ -754,7 +4413,7 @@ DESCRIPTION:
      specific mappings of keys to paths. ConfigMap volumes support ownership
      management and SELinux relabeling.
 
-##### defaultMode	\<integer\>
+#### defaultMode	\<integer\>
 **PATH:**  pod.spec.volumes.configMap.defaultMode
 
      Optional: mode bits to use on created files by default. Must be a value
@@ -763,7 +4422,39 @@ DESCRIPTION:
      affect the file mode, like fsGroup, and the result can be other mode bits
      set.
 
-##### items	\<[]Object\>
+#### items \<[]Object\>
+**PATH:**  pod.spec.volumes.configMap.items
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: items <[]Object>
+
+DESCRIPTION:
+     If unspecified, each key-value pair in the Data field of the referenced
+     ConfigMap will be projected into the volume as a file whose name is the key
+     and content is the value. If specified, the listed keys will be projected
+     into the specified paths, and unlisted keys will not be present. If a key
+     is specified which is not present in the ConfigMap, the volume setup will
+     error unless it is marked optional. Paths must be relative and may not
+     contain the '..' path or start with '..'.
+
+     Maps a string key to a path within a volume.
+
+##### key	\<string\> -required-
+**PATH:**  pod.spec.volumes.configMap.items.key
+
+     The key to project.
+
+##### mode	\<integer\>
+**PATH:**  pod.spec.volumes.configMap.items.mode
+
+     Optional: mode bits to use on this file, must be a value between 0 and
+     0777. If not specified, the volume defaultMode will be used. This might be
+     in conflict with other options that affect the file mode, like fsGroup, and
+     the result can be other mode bits set.
+
+#### items	\<[]Object\>
 **PATH:**  pod.spec.volumes.configMap.items
 
      If unspecified, each key-value pair in the Data field of the referenced
@@ -774,18 +4465,18 @@ DESCRIPTION:
      error unless it is marked optional. Paths must be relative and may not
      contain the '..' path or start with '..'.
 
-##### name	\<string\>
+#### name	\<string\>
 **PATH:**  pod.spec.volumes.configMap.name
 
      Name of the referent. More info:
      https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
 
-#### configMap	\<Object\>
+### configMap	\<Object\>
 **PATH:**  pod.spec.volumes.configMap
 
      ConfigMap represents a configMap that should populate this volume
 
-#### csi \<Object\>
+### csi \<Object\>
 **PATH:**  pod.spec.volumes.csi
 
 KIND:     Pod
@@ -800,18 +4491,38 @@ DESCRIPTION:
      Represents a source location of a volume to mount, managed by an external
      CSI driver
 
-   driver	<string> -required-
+#### driver	\<string\> -required-
+**PATH:**  pod.spec.volumes.csi.driver
+
      Driver is the name of the CSI driver that handles this volume. Consult with
      your admin for the correct name as registered in the cluster.
 
-##### fsType	\<string\>
+#### fsType	\<string\>
 **PATH:**  pod.spec.volumes.csi.fsType
 
      Filesystem type to mount. Ex. "ext4", "xfs", "ntfs". If not provided, the
      empty value is passed to the associated CSI driver which will determine the
      default filesystem to apply.
 
-##### nodePublishSecretRef	\<Object\>
+#### nodePublishSecretRef \<Object\>
+**PATH:**  pod.spec.volumes.csi.nodePublishSecretRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: nodePublishSecretRef <Object>
+
+DESCRIPTION:
+     NodePublishSecretRef is a reference to the secret object containing
+     sensitive information to pass to the CSI driver to complete the CSI
+     NodePublishVolume and NodeUnpublishVolume calls. This field is optional,
+     and may be empty if no secret is required. If the secret object contains
+     more than one secret, all secret references are passed.
+
+     LocalObjectReference contains enough information to let you locate the
+     referenced object inside the same namespace.
+
+#### nodePublishSecretRef	\<Object\>
 **PATH:**  pod.spec.volumes.csi.nodePublishSecretRef
 
      NodePublishSecretRef is a reference to the secret object containing
@@ -820,19 +4531,19 @@ DESCRIPTION:
      and may be empty if no secret is required. If the secret object contains
      more than one secret, all secret references are passed.
 
-##### readOnly	\<boolean\>
+#### readOnly	\<boolean\>
 **PATH:**  pod.spec.volumes.csi.readOnly
 
      Specifies a read-only configuration for the volume. Defaults to false
      (read/write).
 
-#### csi	\<Object\>
+### csi	\<Object\>
 **PATH:**  pod.spec.volumes.csi
 
      CSI (Container Storage Interface) represents storage that is handled by an
      external CSI driver (Alpha feature).
 
-#### downwardAPI \<Object\>
+### downwardAPI \<Object\>
 **PATH:**  pod.spec.volumes.downwardAPI
 
 KIND:     Pod
@@ -847,7 +4558,7 @@ DESCRIPTION:
      DownwardAPIVolumeSource represents a volume containing downward API info.
      Downward API volumes support ownership management and SELinux relabeling.
 
-##### defaultMode	\<integer\>
+#### defaultMode	\<integer\>
 **PATH:**  pod.spec.volumes.downwardAPI.defaultMode
 
      Optional: mode bits to use on created files by default. Must be a value
@@ -856,7 +4567,7 @@ DESCRIPTION:
      affect the file mode, like fsGroup, and the result can be other mode bits
      set.
 
-##### items \<[]Object\>
+#### items \<[]Object\>
 **PATH:**  pod.spec.volumes.downwardAPI.items
 
 KIND:     Pod
@@ -870,13 +4581,33 @@ DESCRIPTION:
      DownwardAPIVolumeFile represents information to create the file containing
      the pod field
 
-###### fieldRef	\<Object\>
+##### fieldRef \<Object\>
+**PATH:**  pod.spec.volumes.downwardAPI.items.fieldRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: fieldRef <Object>
+
+DESCRIPTION:
+     Required: Selects a field of the pod: only annotations, labels, name and
+     namespace are supported.
+
+     ObjectFieldSelector selects an APIVersioned field of an object.
+
+###### apiVersion	\<string\>
+**PATH:**  pod.spec.volumes.downwardAPI.items.fieldRef.apiVersion
+
+     Version of the schema the FieldPath is written in terms of, defaults to
+     "v1".
+
+##### fieldRef	\<Object\>
 **PATH:**  pod.spec.volumes.downwardAPI.items.fieldRef
 
      Required: Selects a field of the pod: only annotations, labels, name and
      namespace are supported.
 
-###### mode	\<integer\>
+##### mode	\<integer\>
 **PATH:**  pod.spec.volumes.downwardAPI.items.mode
 
      Optional: mode bits to use on this file, must be a value between 0 and
@@ -884,12 +4615,14 @@ DESCRIPTION:
      in conflict with other options that affect the file mode, like fsGroup, and
      the result can be other mode bits set.
 
-   path	<string> -required-
+##### path	\<string\> -required-
+**PATH:**  pod.spec.volumes.downwardAPI.items.path
+
      Required: Path is the relative path name of the file to be created. Must
      not be absolute or contain the '..' path. Must be utf-8 encoded. The first
      item of the relative path must not start with '..'
 
-###### resourceFieldRef \<Object\>
+##### resourceFieldRef \<Object\>
 **PATH:**  pod.spec.volumes.downwardAPI.items.resourceFieldRef
 
 KIND:     Pod
@@ -905,18 +4638,23 @@ DESCRIPTION:
      ResourceFieldSelector represents container resources (cpu, memory) and
      their output format
 
-####### containerName	\<string\>
+###### containerName	\<string\>
 **PATH:**  pod.spec.volumes.downwardAPI.items.resourceFieldRef.containerName
 
      Container name: required for volumes, optional for env vars
 
-#### downwardAPI	\<Object\>
+###### divisor	\<string\>
+**PATH:**  pod.spec.volumes.downwardAPI.items.resourceFieldRef.divisor
+
+     Specifies the output format of the exposed resources, defaults to "1"
+
+### downwardAPI	\<Object\>
 **PATH:**  pod.spec.volumes.downwardAPI
 
      DownwardAPI represents downward API about the pod that should populate this
      volume
 
-#### emptyDir \<Object\>
+### emptyDir \<Object\>
 **PATH:**  pod.spec.volumes.emptyDir
 
 KIND:     Pod
@@ -931,7 +4669,7 @@ DESCRIPTION:
      Represents an empty directory for a pod. Empty directory volumes support
      ownership management and SELinux relabeling.
 
-##### medium	\<string\>
+#### medium	\<string\>
 **PATH:**  pod.spec.volumes.emptyDir.medium
 
      What type of storage medium should back this directory. The default is ""
@@ -939,13 +4677,13 @@ DESCRIPTION:
      (default) or Memory. More info:
      https://kubernetes.io/docs/concepts/storage/volumes#emptydir
 
-#### emptyDir	\<Object\>
+### emptyDir	\<Object\>
 **PATH:**  pod.spec.volumes.emptyDir
 
      EmptyDir represents a temporary directory that shares a pod's lifetime.
      More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
 
-#### fc \<Object\>
+### fc \<Object\>
 **PATH:**  pod.spec.volumes.fc
 
 KIND:     Pod
@@ -961,36 +4699,36 @@ DESCRIPTION:
      mounted as read/write once. Fibre Channel volumes support ownership
      management and SELinux relabeling.
 
-##### fsType	\<string\>
+#### fsType	\<string\>
 **PATH:**  pod.spec.volumes.fc.fsType
 
      Filesystem type to mount. Must be a filesystem type supported by the host
      operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be
      "ext4" if unspecified.
 
-##### lun	\<integer\>
+#### lun	\<integer\>
 **PATH:**  pod.spec.volumes.fc.lun
 
      Optional: FC target lun number
 
-##### readOnly	\<boolean\>
+#### readOnly	\<boolean\>
 **PATH:**  pod.spec.volumes.fc.readOnly
 
      Optional: Defaults to false (read/write). ReadOnly here will force the
      ReadOnly setting in VolumeMounts.
 
-##### targetWWNs	\<[]string\>
+#### targetWWNs	\<[]string\>
 **PATH:**  pod.spec.volumes.fc.targetWWNs
 
      Optional: FC target worldwide names (WWNs)
 
-#### fc	\<Object\>
+### fc	\<Object\>
 **PATH:**  pod.spec.volumes.fc
 
      FC represents a Fibre Channel resource that is attached to a kubelet's host
      machine and then exposed to the pod.
 
-#### flexVolume \<Object\>
+### flexVolume \<Object\>
 **PATH:**  pod.spec.volumes.flexVolume
 
 KIND:     Pod
@@ -1005,28 +4743,30 @@ DESCRIPTION:
      FlexVolume represents a generic volume resource that is
      provisioned/attached using an exec based plugin.
 
-   driver	<string> -required-
+#### driver	\<string\> -required-
+**PATH:**  pod.spec.volumes.flexVolume.driver
+
      Driver is the name of the driver to use for this volume.
 
-##### fsType	\<string\>
+#### fsType	\<string\>
 **PATH:**  pod.spec.volumes.flexVolume.fsType
 
      Filesystem type to mount. Must be a filesystem type supported by the host
      operating system. Ex. "ext4", "xfs", "ntfs". The default filesystem depends
      on FlexVolume script.
 
-##### options	\<map[string]string\>
+#### options	\<map[string]string\>
 **PATH:**  pod.spec.volumes.flexVolume.options
 
      Optional: Extra command options if any.
 
-##### readOnly	\<boolean\>
+#### readOnly	\<boolean\>
 **PATH:**  pod.spec.volumes.flexVolume.readOnly
 
      Optional: Defaults to false (read/write). ReadOnly here will force the
      ReadOnly setting in VolumeMounts.
 
-##### secretRef \<Object\>
+#### secretRef \<Object\>
 **PATH:**  pod.spec.volumes.flexVolume.secretRef
 
 KIND:     Pod
@@ -1043,13 +4783,13 @@ DESCRIPTION:
      LocalObjectReference contains enough information to let you locate the
      referenced object inside the same namespace.
 
-#### flexVolume	\<Object\>
+### flexVolume	\<Object\>
 **PATH:**  pod.spec.volumes.flexVolume
 
      FlexVolume represents a generic volume resource that is
      provisioned/attached using an exec based plugin.
 
-#### flocker \<Object\>
+### flocker \<Object\>
 **PATH:**  pod.spec.volumes.flocker
 
 KIND:     Pod
@@ -1065,19 +4805,19 @@ DESCRIPTION:
      of datasetName and datasetUUID should be set. Flocker volumes do not
      support ownership management or SELinux relabeling.
 
-##### datasetName	\<string\>
+#### datasetName	\<string\>
 **PATH:**  pod.spec.volumes.flocker.datasetName
 
      Name of the dataset stored as metadata -> name on the dataset for Flocker
      should be considered as deprecated
 
-#### flocker	\<Object\>
+### flocker	\<Object\>
 **PATH:**  pod.spec.volumes.flocker
 
      Flocker represents a Flocker volume attached to a kubelet's host machine.
      This depends on the Flocker control service being running
 
-#### gcePersistentDisk \<Object\>
+### gcePersistentDisk \<Object\>
 **PATH:**  pod.spec.volumes.gcePersistentDisk
 
 KIND:     Pod
@@ -1096,7 +4836,7 @@ DESCRIPTION:
      read/write once or read-only many times. GCE PDs support ownership
      management and SELinux relabeling.
 
-##### fsType	\<string\>
+#### fsType	\<string\>
 **PATH:**  pod.spec.volumes.gcePersistentDisk.fsType
 
      Filesystem type of the volume that you want to mount. Tip: Ensure that the
@@ -1105,7 +4845,7 @@ DESCRIPTION:
      More info:
      https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
 
-##### partition	\<integer\>
+#### partition	\<integer\>
 **PATH:**  pod.spec.volumes.gcePersistentDisk.partition
 
      The partition in the volume that you want to mount. If omitted, the default
@@ -1114,19 +4854,21 @@ DESCRIPTION:
      you can leave the property empty). More info:
      https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
 
-   pdName	<string> -required-
+#### pdName	\<string\> -required-
+**PATH:**  pod.spec.volumes.gcePersistentDisk.pdName
+
      Unique name of the PD resource in GCE. Used to identify the disk in GCE.
      More info:
      https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
 
-#### gcePersistentDisk	\<Object\>
+### gcePersistentDisk	\<Object\>
 **PATH:**  pod.spec.volumes.gcePersistentDisk
 
      GCEPersistentDisk represents a GCE Disk resource that is attached to a
      kubelet's host machine and then exposed to the pod. More info:
      https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
 
-#### gitRepo \<Object\>
+### gitRepo \<Object\>
 **PATH:**  pod.spec.volumes.gitRepo
 
 KIND:     Pod
@@ -1147,7 +4889,7 @@ DESCRIPTION:
      InitContainer that clones the repo using git, then mount the EmptyDir into
      the Pod's container.
 
-##### directory	\<string\>
+#### directory	\<string\>
 **PATH:**  pod.spec.volumes.gitRepo.directory
 
      Target directory name. Must not contain or start with '..'. If '.' is
@@ -1155,10 +4897,12 @@ DESCRIPTION:
      specified, the volume will contain the git repository in the subdirectory
      with the given name.
 
-   repository	<string> -required-
+#### repository	\<string\> -required-
+**PATH:**  pod.spec.volumes.gitRepo.repository
+
      Repository URL
 
-#### gitRepo	\<Object\>
+### gitRepo	\<Object\>
 **PATH:**  pod.spec.volumes.gitRepo
 
      GitRepo represents a git repository at a particular revision. DEPRECATED:
@@ -1166,7 +4910,7 @@ DESCRIPTION:
      EmptyDir into an InitContainer that clones the repo using git, then mount
      the EmptyDir into the Pod's container.
 
-#### glusterfs \<Object\>
+### glusterfs \<Object\>
 **PATH:**  pod.spec.volumes.glusterfs
 
 KIND:     Pod
@@ -1182,23 +4926,27 @@ DESCRIPTION:
      Represents a Glusterfs mount that lasts the lifetime of a pod. Glusterfs
      volumes do not support ownership management or SELinux relabeling.
 
-   endpoints	<string> -required-
+#### endpoints	\<string\> -required-
+**PATH:**  pod.spec.volumes.glusterfs.endpoints
+
      EndpointsName is the endpoint name that details Glusterfs topology. More
      info:
      https://releases.k8s.io/HEAD/examples/volumes/glusterfs/README.md#create-a-pod
 
-   path	<string> -required-
+#### path	\<string\> -required-
+**PATH:**  pod.spec.volumes.glusterfs.path
+
      Path is the Glusterfs volume path. More info:
      https://releases.k8s.io/HEAD/examples/volumes/glusterfs/README.md#create-a-pod
 
-#### glusterfs	\<Object\>
+### glusterfs	\<Object\>
 **PATH:**  pod.spec.volumes.glusterfs
 
      Glusterfs represents a Glusterfs mount on the host that shares a pod's
      lifetime. More info:
      https://releases.k8s.io/HEAD/examples/volumes/glusterfs/README.md
 
-#### hostPath \<Object\>
+### hostPath \<Object\>
 **PATH:**  pod.spec.volumes.hostPath
 
 KIND:     Pod
@@ -1216,12 +4964,14 @@ DESCRIPTION:
      Represents a host path mapped into a pod. Host path volumes do not support
      ownership management or SELinux relabeling.
 
-   path	<string> -required-
+#### path	\<string\> -required-
+**PATH:**  pod.spec.volumes.hostPath.path
+
      Path of the directory on the host. If the path is a symlink, it will follow
      the link to the real path. More info:
      https://kubernetes.io/docs/concepts/storage/volumes#hostpath
 
-#### hostPath	\<Object\>
+### hostPath	\<Object\>
 **PATH:**  pod.spec.volumes.hostPath
 
      HostPath represents a pre-existing file or directory on the host machine
@@ -1230,7 +4980,7 @@ DESCRIPTION:
      machine. Most containers will NOT need this. More info:
      https://kubernetes.io/docs/concepts/storage/volumes#hostpath
 
-#### iscsi \<Object\>
+### iscsi \<Object\>
 **PATH:**  pod.spec.volumes.iscsi
 
 KIND:     Pod
@@ -1246,17 +4996,17 @@ DESCRIPTION:
      Represents an ISCSI disk. ISCSI volumes can only be mounted as read/write
      once. ISCSI volumes support ownership management and SELinux relabeling.
 
-##### chapAuthDiscovery	\<boolean\>
+#### chapAuthDiscovery	\<boolean\>
 **PATH:**  pod.spec.volumes.iscsi.chapAuthDiscovery
 
      whether support iSCSI Discovery CHAP authentication
 
-##### chapAuthSession	\<boolean\>
+#### chapAuthSession	\<boolean\>
 **PATH:**  pod.spec.volumes.iscsi.chapAuthSession
 
      whether support iSCSI Session CHAP authentication
 
-##### fsType	\<string\>
+#### fsType	\<string\>
 **PATH:**  pod.spec.volumes.iscsi.fsType
 
      Filesystem type of the volume that you want to mount. Tip: Ensure that the
@@ -1264,38 +5014,42 @@ DESCRIPTION:
      "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
      More info: https://kubernetes.io/docs/concepts/storage/volumes#iscsi
 
-##### initiatorName	\<string\>
+#### initiatorName	\<string\>
 **PATH:**  pod.spec.volumes.iscsi.initiatorName
 
      Custom iSCSI Initiator Name. If initiatorName is specified with
      iscsiInterface simultaneously, new iSCSI interface <target portal>:<volume
      name> will be created for the connection.
 
-   iqn	<string> -required-
+#### iqn	\<string\> -required-
+**PATH:**  pod.spec.volumes.iscsi.iqn
+
      Target iSCSI Qualified Name.
 
-##### iscsiInterface	\<string\>
+#### iscsiInterface	\<string\>
 **PATH:**  pod.spec.volumes.iscsi.iscsiInterface
 
      iSCSI Interface Name that uses an iSCSI transport. Defaults to 'default'
      (tcp).
 
-   lun	<integer> -required-
+#### lun	\<integer\> -required-
+**PATH:**  pod.spec.volumes.iscsi.lun
+
      iSCSI Target Lun number.
 
-##### portals	\<[]string\>
+#### portals	\<[]string\>
 **PATH:**  pod.spec.volumes.iscsi.portals
 
      iSCSI Target Portal List. The portal is either an IP or ip_addr:port if the
      port is other than default (typically TCP ports 860 and 3260).
 
-##### readOnly	\<boolean\>
+#### readOnly	\<boolean\>
 **PATH:**  pod.spec.volumes.iscsi.readOnly
 
      ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to
      false.
 
-##### secretRef \<Object\>
+#### secretRef \<Object\>
 **PATH:**  pod.spec.volumes.iscsi.secretRef
 
 KIND:     Pod
@@ -1309,18 +5063,25 @@ DESCRIPTION:
      LocalObjectReference contains enough information to let you locate the
      referenced object inside the same namespace.
 
-#### iscsi	\<Object\>
+#### secretRef	\<Object\>
+**PATH:**  pod.spec.volumes.iscsi.secretRef
+
+     CHAP Secret for iSCSI target and initiator authentication
+
+### iscsi	\<Object\>
 **PATH:**  pod.spec.volumes.iscsi
 
      ISCSI represents an ISCSI Disk resource that is attached to a kubelet's
      host machine and then exposed to the pod. More info:
      https://releases.k8s.io/HEAD/examples/volumes/iscsi/README.md
 
-   name	<string> -required-
+### name	\<string\> -required-
+**PATH:**  pod.spec.volumes.name
+
      Volume's name. Must be a DNS_LABEL and unique within the pod. More info:
      https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
 
-#### nfs \<Object\>
+### nfs \<Object\>
 **PATH:**  pod.spec.volumes.nfs
 
 KIND:     Pod
@@ -1335,17 +5096,26 @@ DESCRIPTION:
      Represents an NFS mount that lasts the lifetime of a pod. NFS volumes do
      not support ownership management or SELinux relabeling.
 
-   path	<string> -required-
+#### path	\<string\> -required-
+**PATH:**  pod.spec.volumes.nfs.path
+
      Path that is exported by the NFS server. More info:
      https://kubernetes.io/docs/concepts/storage/volumes#nfs
 
-#### nfs	\<Object\>
+#### readOnly	\<boolean\>
+**PATH:**  pod.spec.volumes.nfs.readOnly
+
+     ReadOnly here will force the NFS export to be mounted with read-only
+     permissions. Defaults to false. More info:
+     https://kubernetes.io/docs/concepts/storage/volumes#nfs
+
+### nfs	\<Object\>
 **PATH:**  pod.spec.volumes.nfs
 
      NFS represents an NFS mount on the host that shares a pod's lifetime More
      info: https://kubernetes.io/docs/concepts/storage/volumes#nfs
 
-#### persistentVolumeClaim \<Object\>
+### persistentVolumeClaim \<Object\>
 **PATH:**  pod.spec.volumes.persistentVolumeClaim
 
 KIND:     Pod
@@ -1363,19 +5133,21 @@ DESCRIPTION:
      pod. A PersistentVolumeClaimVolumeSource is, essentially, a wrapper around
      another type of volume that is owned by someone else (the system).
 
-   claimName	<string> -required-
+#### claimName	\<string\> -required-
+**PATH:**  pod.spec.volumes.persistentVolumeClaim.claimName
+
      ClaimName is the name of a PersistentVolumeClaim in the same namespace as
      the pod using this volume. More info:
      https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
 
-#### persistentVolumeClaim	\<Object\>
+### persistentVolumeClaim	\<Object\>
 **PATH:**  pod.spec.volumes.persistentVolumeClaim
 
      PersistentVolumeClaimVolumeSource represents a reference to a
      PersistentVolumeClaim in the same namespace. More info:
      https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
 
-#### photonPersistentDisk \<Object\>
+### photonPersistentDisk \<Object\>
 **PATH:**  pod.spec.volumes.photonPersistentDisk
 
 KIND:     Pod
@@ -1389,13 +5161,20 @@ DESCRIPTION:
 
      Represents a Photon Controller persistent disk resource.
 
-#### photonPersistentDisk	\<Object\>
+#### fsType	\<string\>
+**PATH:**  pod.spec.volumes.photonPersistentDisk.fsType
+
+     Filesystem type to mount. Must be a filesystem type supported by the host
+     operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be
+     "ext4" if unspecified.
+
+### photonPersistentDisk	\<Object\>
 **PATH:**  pod.spec.volumes.photonPersistentDisk
 
      PhotonPersistentDisk represents a PhotonController persistent disk attached
      and mounted on kubelets host machine
 
-#### portworxVolume \<Object\>
+### portworxVolume \<Object\>
 **PATH:**  pod.spec.volumes.portworxVolume
 
 KIND:     Pod
@@ -1409,20 +5188,26 @@ DESCRIPTION:
 
      PortworxVolumeSource represents a Portworx volume resource.
 
-##### fsType	\<string\>
+#### fsType	\<string\>
 **PATH:**  pod.spec.volumes.portworxVolume.fsType
 
      FSType represents the filesystem type to mount Must be a filesystem type
      supported by the host operating system. Ex. "ext4", "xfs". Implicitly
      inferred to be "ext4" if unspecified.
 
-#### portworxVolume	\<Object\>
+#### readOnly	\<boolean\>
+**PATH:**  pod.spec.volumes.portworxVolume.readOnly
+
+     Defaults to false (read/write). ReadOnly here will force the ReadOnly
+     setting in VolumeMounts.
+
+### portworxVolume	\<Object\>
 **PATH:**  pod.spec.volumes.portworxVolume
 
      PortworxVolume represents a portworx volume attached and mounted on
      kubelets host machine
 
-#### projected \<Object\>
+### projected \<Object\>
 **PATH:**  pod.spec.volumes.projected
 
 KIND:     Pod
@@ -1435,12 +5220,309 @@ DESCRIPTION:
 
      Represents a projected volume source
 
-#### projected	\<Object\>
+#### defaultMode	\<integer\>
+**PATH:**  pod.spec.volumes.projected.defaultMode
+
+     Mode bits to use on created files by default. Must be a value between 0 and
+     0777. Directories within the path are not affected by this setting. This
+     might be in conflict with other options that affect the file mode, like
+     fsGroup, and the result can be other mode bits set.
+
+#### sources \<[]Object\>
+**PATH:**  pod.spec.volumes.projected.sources
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: sources <[]Object>
+
+DESCRIPTION:
+     list of volume projections
+
+     Projection that may be projected along with other supported volume types
+
+##### configMap \<Object\>
+**PATH:**  pod.spec.volumes.projected.sources.configMap
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: configMap <Object>
+
+DESCRIPTION:
+     information about the configMap data to project
+
+     Adapts a ConfigMap into a projected volume. The contents of the target
+     ConfigMap's Data field will be presented in a projected volume as files
+     using the keys in the Data field as the file names, unless the items
+     element is populated with specific mappings of keys to paths. Note that
+     this is identical to a configmap volume source without the default mode.
+
+###### items \<[]Object\>
+**PATH:**  pod.spec.volumes.projected.sources.configMap.items
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: items <[]Object>
+
+DESCRIPTION:
+     If unspecified, each key-value pair in the Data field of the referenced
+     ConfigMap will be projected into the volume as a file whose name is the key
+     and content is the value. If specified, the listed keys will be projected
+     into the specified paths, and unlisted keys will not be present. If a key
+     is specified which is not present in the ConfigMap, the volume setup will
+     error unless it is marked optional. Paths must be relative and may not
+     contain the '..' path or start with '..'.
+
+     Maps a string key to a path within a volume.
+
+- key	\<string\> -required-
+**PATH:**  pod.spec.volumes.projected.sources.configMap.items.key
+
+     The key to project.
+
+- mode	\<integer\>
+**PATH:**  pod.spec.volumes.projected.sources.configMap.items.mode
+
+     Optional: mode bits to use on this file, must be a value between 0 and
+     0777. If not specified, the volume defaultMode will be used. This might be
+     in conflict with other options that affect the file mode, like fsGroup, and
+     the result can be other mode bits set.
+
+###### items	\<[]Object\>
+**PATH:**  pod.spec.volumes.projected.sources.configMap.items
+
+     If unspecified, each key-value pair in the Data field of the referenced
+     ConfigMap will be projected into the volume as a file whose name is the key
+     and content is the value. If specified, the listed keys will be projected
+     into the specified paths, and unlisted keys will not be present. If a key
+     is specified which is not present in the ConfigMap, the volume setup will
+     error unless it is marked optional. Paths must be relative and may not
+     contain the '..' path or start with '..'.
+
+###### name	\<string\>
+**PATH:**  pod.spec.volumes.projected.sources.configMap.name
+
+     Name of the referent. More info:
+     https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+##### configMap	\<Object\>
+**PATH:**  pod.spec.volumes.projected.sources.configMap
+
+     information about the configMap data to project
+
+##### downwardAPI \<Object\>
+**PATH:**  pod.spec.volumes.projected.sources.downwardAPI
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: downwardAPI <Object>
+
+DESCRIPTION:
+     information about the downwardAPI data to project
+
+     Represents downward API info for projecting into a projected volume. Note
+     that this is identical to a downwardAPI volume source without the default
+     mode.
+
+###### items \<[]Object\>
+**PATH:**  pod.spec.volumes.projected.sources.downwardAPI.items
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: items <[]Object>
+
+DESCRIPTION:
+     Items is a list of DownwardAPIVolume file
+
+     DownwardAPIVolumeFile represents information to create the file containing
+     the pod field
+
+- fieldRef \<Object\>
+**PATH:**  pod.spec.volumes.projected.sources.downwardAPI.items.fieldRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: fieldRef <Object>
+
+DESCRIPTION:
+     Required: Selects a field of the pod: only annotations, labels, name and
+     namespace are supported.
+
+     ObjectFieldSelector selects an APIVersioned field of an object.
+
+- apiVersion	\<string\>
+**PATH:**  pod.spec.volumes.projected.sources.downwardAPI.items.fieldRef.apiVersion
+
+     Version of the schema the FieldPath is written in terms of, defaults to
+     "v1".
+
+- fieldRef	\<Object\>
+**PATH:**  pod.spec.volumes.projected.sources.downwardAPI.items.fieldRef
+
+     Required: Selects a field of the pod: only annotations, labels, name and
+     namespace are supported.
+
+- mode	\<integer\>
+**PATH:**  pod.spec.volumes.projected.sources.downwardAPI.items.mode
+
+     Optional: mode bits to use on this file, must be a value between 0 and
+     0777. If not specified, the volume defaultMode will be used. This might be
+     in conflict with other options that affect the file mode, like fsGroup, and
+     the result can be other mode bits set.
+
+- path	\<string\> -required-
+**PATH:**  pod.spec.volumes.projected.sources.downwardAPI.items.path
+
+     Required: Path is the relative path name of the file to be created. Must
+     not be absolute or contain the '..' path. Must be utf-8 encoded. The first
+     item of the relative path must not start with '..'
+
+- resourceFieldRef \<Object\>
+**PATH:**  pod.spec.volumes.projected.sources.downwardAPI.items.resourceFieldRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: resourceFieldRef <Object>
+
+DESCRIPTION:
+     Selects a resource of the container: only resources limits and requests
+     (limits.cpu, limits.memory, requests.cpu and requests.memory) are currently
+     supported.
+
+     ResourceFieldSelector represents container resources (cpu, memory) and
+     their output format
+
+- containerName	\<string\>
+**PATH:**  pod.spec.volumes.projected.sources.downwardAPI.items.resourceFieldRef.containerName
+
+     Container name: required for volumes, optional for env vars
+
+- divisor	\<string\>
+**PATH:**  pod.spec.volumes.projected.sources.downwardAPI.items.resourceFieldRef.divisor
+
+     Specifies the output format of the exposed resources, defaults to "1"
+
+##### downwardAPI	\<Object\>
+**PATH:**  pod.spec.volumes.projected.sources.downwardAPI
+
+     information about the downwardAPI data to project
+
+##### secret \<Object\>
+**PATH:**  pod.spec.volumes.projected.sources.secret
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: secret <Object>
+
+DESCRIPTION:
+     information about the secret data to project
+
+     Adapts a secret into a projected volume. The contents of the target
+     Secret's Data field will be presented in a projected volume as files using
+     the keys in the Data field as the file names. Note that this is identical
+     to a secret volume source without the default mode.
+
+###### items \<[]Object\>
+**PATH:**  pod.spec.volumes.projected.sources.secret.items
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: items <[]Object>
+
+DESCRIPTION:
+     If unspecified, each key-value pair in the Data field of the referenced
+     Secret will be projected into the volume as a file whose name is the key
+     and content is the value. If specified, the listed keys will be projected
+     into the specified paths, and unlisted keys will not be present. If a key
+     is specified which is not present in the Secret, the volume setup will
+     error unless it is marked optional. Paths must be relative and may not
+     contain the '..' path or start with '..'.
+
+     Maps a string key to a path within a volume.
+
+- key	\<string\> -required-
+**PATH:**  pod.spec.volumes.projected.sources.secret.items.key
+
+     The key to project.
+
+- mode	\<integer\>
+**PATH:**  pod.spec.volumes.projected.sources.secret.items.mode
+
+     Optional: mode bits to use on this file, must be a value between 0 and
+     0777. If not specified, the volume defaultMode will be used. This might be
+     in conflict with other options that affect the file mode, like fsGroup, and
+     the result can be other mode bits set.
+
+###### items	\<[]Object\>
+**PATH:**  pod.spec.volumes.projected.sources.secret.items
+
+     If unspecified, each key-value pair in the Data field of the referenced
+     Secret will be projected into the volume as a file whose name is the key
+     and content is the value. If specified, the listed keys will be projected
+     into the specified paths, and unlisted keys will not be present. If a key
+     is specified which is not present in the Secret, the volume setup will
+     error unless it is marked optional. Paths must be relative and may not
+     contain the '..' path or start with '..'.
+
+###### name	\<string\>
+**PATH:**  pod.spec.volumes.projected.sources.secret.name
+
+     Name of the referent. More info:
+     https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+
+##### secret	\<Object\>
+**PATH:**  pod.spec.volumes.projected.sources.secret
+
+     information about the secret data to project
+
+##### serviceAccountToken \<Object\>
+**PATH:**  pod.spec.volumes.projected.sources.serviceAccountToken
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: serviceAccountToken <Object>
+
+DESCRIPTION:
+     information about the serviceAccountToken data to project
+
+     ServiceAccountTokenProjection represents a projected service account token
+     volume. This projection can be used to insert a service account token into
+     the pods runtime filesystem for use against APIs (Kubernetes API Server or
+     otherwise).
+
+###### audience	\<string\>
+**PATH:**  pod.spec.volumes.projected.sources.serviceAccountToken.audience
+
+     Audience is the intended audience of the token. A recipient of a token must
+     identify itself with an identifier specified in the audience of the token,
+     and otherwise should reject the token. The audience defaults to the
+     identifier of the apiserver.
+
+###### expirationSeconds	\<integer\>
+**PATH:**  pod.spec.volumes.projected.sources.serviceAccountToken.expirationSeconds
+
+     ExpirationSeconds is the requested duration of validity of the service
+     account token. As the token approaches expiration, the kubelet volume
+     plugin will proactively rotate the service account token. The kubelet will
+     start trying to rotate the token if the token is older than 80 percent of
+     its time to live or if the token is older than 24 hours.Defaults to 1 hour
+     and must be at least 10 minutes.
+
+### projected	\<Object\>
 **PATH:**  pod.spec.volumes.projected
 
      Items for all in one resources secrets, configmaps, and downward API
 
-#### quobyte \<Object\>
+### quobyte \<Object\>
 **PATH:**  pod.spec.volumes.quobyte
 
 KIND:     Pod
@@ -1454,34 +5536,41 @@ DESCRIPTION:
      Represents a Quobyte mount that lasts the lifetime of a pod. Quobyte
      volumes do not support ownership management or SELinux relabeling.
 
-##### group	\<string\>
+#### group	\<string\>
 **PATH:**  pod.spec.volumes.quobyte.group
 
      Group to map volume access to Default is no group
 
-##### readOnly	\<boolean\>
+#### readOnly	\<boolean\>
 **PATH:**  pod.spec.volumes.quobyte.readOnly
 
      ReadOnly here will force the Quobyte volume to be mounted with read-only
      permissions. Defaults to false.
 
-   registry	<string> -required-
+#### registry	\<string\> -required-
+**PATH:**  pod.spec.volumes.quobyte.registry
+
      Registry represents a single or multiple Quobyte Registry services
      specified as a string as host:port pair (multiple entries are separated
      with commas) which acts as the central registry for volumes
 
-##### tenant	\<string\>
+#### tenant	\<string\>
 **PATH:**  pod.spec.volumes.quobyte.tenant
 
      Tenant owning the given Quobyte volume in the Backend Used with dynamically
      provisioned Quobyte volumes, value is set by the plugin
 
-#### quobyte	\<Object\>
+#### user	\<string\>
+**PATH:**  pod.spec.volumes.quobyte.user
+
+     User to map volume access to Defaults to serivceaccount user
+
+### quobyte	\<Object\>
 **PATH:**  pod.spec.volumes.quobyte
 
      Quobyte represents a Quobyte mount on the host that shares a pod's lifetime
 
-#### rbd \<Object\>
+### rbd \<Object\>
 **PATH:**  pod.spec.volumes.rbd
 
 KIND:     Pod
@@ -1497,7 +5586,7 @@ DESCRIPTION:
      Represents a Rados Block Device mount that lasts the lifetime of a pod. RBD
      volumes support ownership management and SELinux relabeling.
 
-##### fsType	\<string\>
+#### fsType	\<string\>
 **PATH:**  pod.spec.volumes.rbd.fsType
 
      Filesystem type of the volume that you want to mount. Tip: Ensure that the
@@ -1505,49 +5594,69 @@ DESCRIPTION:
      "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
      More info: https://kubernetes.io/docs/concepts/storage/volumes#rbd
 
-   image	<string> -required-
+#### image	\<string\> -required-
+**PATH:**  pod.spec.volumes.rbd.image
+
      The rados image name. More info:
      https://releases.k8s.io/HEAD/examples/volumes/rbd/README.md#how-to-use-it
 
-##### keyring	\<string\>
+#### keyring	\<string\>
 **PATH:**  pod.spec.volumes.rbd.keyring
 
      Keyring is the path to key ring for RBDUser. Default is /etc/ceph/keyring.
      More info:
      https://releases.k8s.io/HEAD/examples/volumes/rbd/README.md#how-to-use-it
 
-   monitors	<[]string> -required-
+#### monitors	\<[]string\> -required-
+**PATH:**  pod.spec.volumes.rbd.monitors
+
      A collection of Ceph monitors. More info:
      https://releases.k8s.io/HEAD/examples/volumes/rbd/README.md#how-to-use-it
 
-##### pool	\<string\>
+#### pool	\<string\>
 **PATH:**  pod.spec.volumes.rbd.pool
 
      The rados pool name. Default is rbd. More info:
      https://releases.k8s.io/HEAD/examples/volumes/rbd/README.md#how-to-use-it
 
-##### readOnly	\<boolean\>
+#### readOnly	\<boolean\>
 **PATH:**  pod.spec.volumes.rbd.readOnly
 
      ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to
      false. More info:
      https://releases.k8s.io/HEAD/examples/volumes/rbd/README.md#how-to-use-it
 
-##### secretRef	\<Object\>
+#### secretRef \<Object\>
+**PATH:**  pod.spec.volumes.rbd.secretRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: secretRef <Object>
+
+DESCRIPTION:
+     SecretRef is name of the authentication secret for RBDUser. If provided
+     overrides keyring. Default is nil. More info:
+     https://releases.k8s.io/HEAD/examples/volumes/rbd/README.md#how-to-use-it
+
+     LocalObjectReference contains enough information to let you locate the
+     referenced object inside the same namespace.
+
+#### secretRef	\<Object\>
 **PATH:**  pod.spec.volumes.rbd.secretRef
 
      SecretRef is name of the authentication secret for RBDUser. If provided
      overrides keyring. Default is nil. More info:
      https://releases.k8s.io/HEAD/examples/volumes/rbd/README.md#how-to-use-it
 
-#### rbd	\<Object\>
+### rbd	\<Object\>
 **PATH:**  pod.spec.volumes.rbd
 
      RBD represents a Rados Block Device mount on the host that shares a pod's
      lifetime. More info:
      https://releases.k8s.io/HEAD/examples/volumes/rbd/README.md
 
-#### scaleIO \<Object\>
+### scaleIO \<Object\>
 **PATH:**  pod.spec.volumes.scaleIO
 
 KIND:     Pod
@@ -1561,56 +5670,77 @@ DESCRIPTION:
 
      ScaleIOVolumeSource represents a persistent ScaleIO volume
 
-##### fsType	\<string\>
+#### fsType	\<string\>
 **PATH:**  pod.spec.volumes.scaleIO.fsType
 
      Filesystem type to mount. Must be a filesystem type supported by the host
      operating system. Ex. "ext4", "xfs", "ntfs". Default is "xfs".
 
-   gateway	<string> -required-
+#### gateway	\<string\> -required-
+**PATH:**  pod.spec.volumes.scaleIO.gateway
+
      The host address of the ScaleIO API Gateway.
 
-##### protectionDomain	\<string\>
+#### protectionDomain	\<string\>
 **PATH:**  pod.spec.volumes.scaleIO.protectionDomain
 
      The name of the ScaleIO Protection Domain for the configured storage.
 
-##### readOnly	\<boolean\>
+#### readOnly	\<boolean\>
 **PATH:**  pod.spec.volumes.scaleIO.readOnly
 
      Defaults to false (read/write). ReadOnly here will force the ReadOnly
      setting in VolumeMounts.
 
-   secretRef	<Object> -required-
+#### secretRef \<Object\>
+**PATH:**  pod.spec.volumes.scaleIO.secretRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: secretRef <Object>
+
+DESCRIPTION:
      SecretRef references to the secret for ScaleIO user and other sensitive
      information. If this is not provided, Login operation will fail.
 
-##### sslEnabled	\<boolean\>
+     LocalObjectReference contains enough information to let you locate the
+     referenced object inside the same namespace.
+
+#### secretRef	\<Object\> -required-
+**PATH:**  pod.spec.volumes.scaleIO.secretRef
+
+     SecretRef references to the secret for ScaleIO user and other sensitive
+     information. If this is not provided, Login operation will fail.
+
+#### sslEnabled	\<boolean\>
 **PATH:**  pod.spec.volumes.scaleIO.sslEnabled
 
      Flag to enable/disable SSL communication with Gateway, default false
 
-##### storageMode	\<string\>
+#### storageMode	\<string\>
 **PATH:**  pod.spec.volumes.scaleIO.storageMode
 
      Indicates whether the storage for a volume should be ThickProvisioned or
      ThinProvisioned. Default is ThinProvisioned.
 
-##### storagePool	\<string\>
+#### storagePool	\<string\>
 **PATH:**  pod.spec.volumes.scaleIO.storagePool
 
      The ScaleIO Storage Pool associated with the protection domain.
 
-   system	<string> -required-
+#### system	\<string\> -required-
+**PATH:**  pod.spec.volumes.scaleIO.system
+
      The name of the storage system as configured in ScaleIO.
 
-#### scaleIO	\<Object\>
+### scaleIO	\<Object\>
 **PATH:**  pod.spec.volumes.scaleIO
 
      ScaleIO represents a ScaleIO persistent volume attached and mounted on
      Kubernetes nodes.
 
-#### secret \<Object\>
+### secret \<Object\>
 **PATH:**  pod.spec.volumes.secret
 
 KIND:     Pod
@@ -1627,7 +5757,7 @@ DESCRIPTION:
      field as the file names. Secret volumes support ownership management and
      SELinux relabeling.
 
-##### defaultMode	\<integer\>
+#### defaultMode	\<integer\>
 **PATH:**  pod.spec.volumes.secret.defaultMode
 
      Optional: mode bits to use on created files by default. Must be a value
@@ -1636,7 +5766,39 @@ DESCRIPTION:
      affect the file mode, like fsGroup, and the result can be other mode bits
      set.
 
-##### items	\<[]Object\>
+#### items \<[]Object\>
+**PATH:**  pod.spec.volumes.secret.items
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: items <[]Object>
+
+DESCRIPTION:
+     If unspecified, each key-value pair in the Data field of the referenced
+     Secret will be projected into the volume as a file whose name is the key
+     and content is the value. If specified, the listed keys will be projected
+     into the specified paths, and unlisted keys will not be present. If a key
+     is specified which is not present in the Secret, the volume setup will
+     error unless it is marked optional. Paths must be relative and may not
+     contain the '..' path or start with '..'.
+
+     Maps a string key to a path within a volume.
+
+##### key	\<string\> -required-
+**PATH:**  pod.spec.volumes.secret.items.key
+
+     The key to project.
+
+##### mode	\<integer\>
+**PATH:**  pod.spec.volumes.secret.items.mode
+
+     Optional: mode bits to use on this file, must be a value between 0 and
+     0777. If not specified, the volume defaultMode will be used. This might be
+     in conflict with other options that affect the file mode, like fsGroup, and
+     the result can be other mode bits set.
+
+#### items	\<[]Object\>
 **PATH:**  pod.spec.volumes.secret.items
 
      If unspecified, each key-value pair in the Data field of the referenced
@@ -1647,18 +5809,18 @@ DESCRIPTION:
      error unless it is marked optional. Paths must be relative and may not
      contain the '..' path or start with '..'.
 
-##### optional	\<boolean\>
+#### optional	\<boolean\>
 **PATH:**  pod.spec.volumes.secret.optional
 
      Specify whether the Secret or it's keys must be defined
 
-#### secret	\<Object\>
+### secret	\<Object\>
 **PATH:**  pod.spec.volumes.secret
 
      Secret represents a secret that should populate this volume. More info:
      https://kubernetes.io/docs/concepts/storage/volumes#secret
 
-#### storageos \<Object\>
+### storageos \<Object\>
 **PATH:**  pod.spec.volumes.storageos
 
 KIND:     Pod
@@ -1672,38 +5834,53 @@ DESCRIPTION:
 
      Represents a StorageOS persistent volume resource.
 
-##### fsType	\<string\>
+#### fsType	\<string\>
 **PATH:**  pod.spec.volumes.storageos.fsType
 
      Filesystem type to mount. Must be a filesystem type supported by the host
      operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be
      "ext4" if unspecified.
 
-##### readOnly	\<boolean\>
+#### readOnly	\<boolean\>
 **PATH:**  pod.spec.volumes.storageos.readOnly
 
      Defaults to false (read/write). ReadOnly here will force the ReadOnly
      setting in VolumeMounts.
 
-##### secretRef	\<Object\>
+#### secretRef \<Object\>
+**PATH:**  pod.spec.volumes.storageos.secretRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: secretRef <Object>
+
+DESCRIPTION:
+     SecretRef specifies the secret to use for obtaining the StorageOS API
+     credentials. If not specified, default values will be attempted.
+
+     LocalObjectReference contains enough information to let you locate the
+     referenced object inside the same namespace.
+
+#### secretRef	\<Object\>
 **PATH:**  pod.spec.volumes.storageos.secretRef
 
      SecretRef specifies the secret to use for obtaining the StorageOS API
      credentials. If not specified, default values will be attempted.
 
-##### volumeName	\<string\>
+#### volumeName	\<string\>
 **PATH:**  pod.spec.volumes.storageos.volumeName
 
      VolumeName is the human-readable name of the StorageOS volume. Volume names
      are only unique within a namespace.
 
-#### storageos	\<Object\>
+### storageos	\<Object\>
 **PATH:**  pod.spec.volumes.storageos
 
      StorageOS represents a StorageOS volume attached and mounted on Kubernetes
      nodes.
 
-#### vsphereVolume \<Object\>
+### vsphereVolume \<Object\>
 **PATH:**  pod.spec.volumes.vsphereVolume
 
 KIND:     Pod
@@ -1717,26 +5894,31 @@ DESCRIPTION:
 
      Represents a vSphere volume resource.
 
-##### fsType	\<string\>
+#### fsType	\<string\>
 **PATH:**  pod.spec.volumes.vsphereVolume.fsType
 
      Filesystem type to mount. Must be a filesystem type supported by the host
      operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be
      "ext4" if unspecified.
 
-##### storagePolicyID	\<string\>
+#### storagePolicyID	\<string\>
 **PATH:**  pod.spec.volumes.vsphereVolume.storagePolicyID
 
      Storage Policy Based Management (SPBM) profile ID associated with the
      StoragePolicyName.
 
-## spec	\<Object\>
+#### storagePolicyName	\<string\>
+**PATH:**  pod.spec.volumes.vsphereVolume.storagePolicyName
+
+     Storage Policy Based Management (SPBM) profile name.
+
+# spec	\<Object\>
 **PATH:**  pod.spec
 
      Specification of the desired behavior of the pod. More info:
      https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status
 
-## status \<Object\>
+# status \<Object\>
 **PATH:**  pod.status
 
 KIND:     Pod
@@ -1753,7 +5935,7 @@ DESCRIPTION:
      trail the actual state of a system, especially if the node that hosts the
      pod cannot contact the control plane.
 
-### conditions \<[]Object\>
+## conditions \<[]Object\>
 **PATH:**  pod.status.conditions
 
 KIND:     Pod
@@ -1767,41 +5949,560 @@ DESCRIPTION:
 
      PodCondition contains details for the current condition of this pod.
 
-#### lastProbeTime	\<string\>
+### lastProbeTime	\<string\>
 **PATH:**  pod.status.conditions.lastProbeTime
 
      Last time we probed the condition.
 
-#### lastTransitionTime	\<string\>
+### lastTransitionTime	\<string\>
 **PATH:**  pod.status.conditions.lastTransitionTime
 
      Last time the condition transitioned from one status to another.
 
-#### message	\<string\>
+### message	\<string\>
 **PATH:**  pod.status.conditions.message
 
      Human-readable message indicating details about last transition.
 
-### conditions	\<[]Object\>
+### reason	\<string\>
+**PATH:**  pod.status.conditions.reason
+
+     Unique, one-word, CamelCase reason for the condition's last transition.
+
+### status	\<string\> -required-
+**PATH:**  pod.status.conditions.status
+
+     Status is the status of the condition. Can be True, False, Unknown. More
+     info:
+     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions
+
+## conditions	\<[]Object\>
 **PATH:**  pod.status.conditions
 
      Current service state of pod. More info:
      https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions
 
-### containerStatuses	\<[]Object\>
+## containerStatuses \<[]Object\>
+**PATH:**  pod.status.containerStatuses
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: containerStatuses <[]Object>
+
+DESCRIPTION:
+     The list has one entry per container in the manifest. Each entry is
+     currently the output of `docker inspect`. More info:
+     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status
+
+     ContainerStatus contains details for the current status of this container.
+
+### containerID	\<string\>
+**PATH:**  pod.status.containerStatuses.containerID
+
+     Container's ID in the format 'docker://<container_id>'.
+
+### image	\<string\> -required-
+**PATH:**  pod.status.containerStatuses.image
+
+     The image the container is running. More info:
+     https://kubernetes.io/docs/concepts/containers/images
+
+### imageID	\<string\> -required-
+**PATH:**  pod.status.containerStatuses.imageID
+
+     ImageID of the container's image.
+
+### lastState \<Object\>
+**PATH:**  pod.status.containerStatuses.lastState
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: lastState <Object>
+
+DESCRIPTION:
+     Details about the container's last termination condition.
+
+     ContainerState holds a possible state of container. Only one of its members
+     may be specified. If none of them is specified, the default one is
+     ContainerStateWaiting.
+
+#### running \<Object\>
+**PATH:**  pod.status.containerStatuses.lastState.running
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: running <Object>
+
+DESCRIPTION:
+     Details about a running container
+
+     ContainerStateRunning is a running state of a container.
+
+#### running	\<Object\>
+**PATH:**  pod.status.containerStatuses.lastState.running
+
+     Details about a running container
+
+#### terminated \<Object\>
+**PATH:**  pod.status.containerStatuses.lastState.terminated
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: terminated <Object>
+
+DESCRIPTION:
+     Details about a terminated container
+
+     ContainerStateTerminated is a terminated state of a container.
+
+##### containerID	\<string\>
+**PATH:**  pod.status.containerStatuses.lastState.terminated.containerID
+
+     Container's ID in the format 'docker://<container_id>'
+
+##### exitCode	\<integer\> -required-
+**PATH:**  pod.status.containerStatuses.lastState.terminated.exitCode
+
+     Exit status from the last termination of the container
+
+##### finishedAt	\<string\>
+**PATH:**  pod.status.containerStatuses.lastState.terminated.finishedAt
+
+     Time at which the container last terminated
+
+##### message	\<string\>
+**PATH:**  pod.status.containerStatuses.lastState.terminated.message
+
+     Message regarding the last termination of the container
+
+##### reason	\<string\>
+**PATH:**  pod.status.containerStatuses.lastState.terminated.reason
+
+     (brief) reason from the last termination of the container
+
+##### signal	\<integer\>
+**PATH:**  pod.status.containerStatuses.lastState.terminated.signal
+
+     Signal from the last termination of the container
+
+#### terminated	\<Object\>
+**PATH:**  pod.status.containerStatuses.lastState.terminated
+
+     Details about a terminated container
+
+#### waiting \<Object\>
+**PATH:**  pod.status.containerStatuses.lastState.waiting
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: waiting <Object>
+
+DESCRIPTION:
+     Details about a waiting container
+
+     ContainerStateWaiting is a waiting state of a container.
+
+##### message	\<string\>
+**PATH:**  pod.status.containerStatuses.lastState.waiting.message
+
+     Message regarding why the container is not yet running.
+
+### lastState	\<Object\>
+**PATH:**  pod.status.containerStatuses.lastState
+
+     Details about the container's last termination condition.
+
+### name	\<string\> -required-
+**PATH:**  pod.status.containerStatuses.name
+
+     This must be a DNS_LABEL. Each container in a pod must have a unique name.
+     Cannot be updated.
+
+### ready	\<boolean\> -required-
+**PATH:**  pod.status.containerStatuses.ready
+
+     Specifies whether the container has passed its readiness probe.
+
+### restartCount	\<integer\> -required-
+**PATH:**  pod.status.containerStatuses.restartCount
+
+     The number of times the container has been restarted, currently based on
+     the number of dead containers that have not yet been removed. Note that
+     this is calculated from dead containers. But those containers are subject
+     to garbage collection. This value will get capped at 5 by GC.
+
+### state \<Object\>
+**PATH:**  pod.status.containerStatuses.state
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: state <Object>
+
+DESCRIPTION:
+     Details about the container's current condition.
+
+     ContainerState holds a possible state of container. Only one of its members
+     may be specified. If none of them is specified, the default one is
+     ContainerStateWaiting.
+
+#### running \<Object\>
+**PATH:**  pod.status.containerStatuses.state.running
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: running <Object>
+
+DESCRIPTION:
+     Details about a running container
+
+     ContainerStateRunning is a running state of a container.
+
+#### running	\<Object\>
+**PATH:**  pod.status.containerStatuses.state.running
+
+     Details about a running container
+
+#### terminated \<Object\>
+**PATH:**  pod.status.containerStatuses.state.terminated
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: terminated <Object>
+
+DESCRIPTION:
+     Details about a terminated container
+
+     ContainerStateTerminated is a terminated state of a container.
+
+##### containerID	\<string\>
+**PATH:**  pod.status.containerStatuses.state.terminated.containerID
+
+     Container's ID in the format 'docker://<container_id>'
+
+##### exitCode	\<integer\> -required-
+**PATH:**  pod.status.containerStatuses.state.terminated.exitCode
+
+     Exit status from the last termination of the container
+
+##### finishedAt	\<string\>
+**PATH:**  pod.status.containerStatuses.state.terminated.finishedAt
+
+     Time at which the container last terminated
+
+##### message	\<string\>
+**PATH:**  pod.status.containerStatuses.state.terminated.message
+
+     Message regarding the last termination of the container
+
+##### reason	\<string\>
+**PATH:**  pod.status.containerStatuses.state.terminated.reason
+
+     (brief) reason from the last termination of the container
+
+##### signal	\<integer\>
+**PATH:**  pod.status.containerStatuses.state.terminated.signal
+
+     Signal from the last termination of the container
+
+#### terminated	\<Object\>
+**PATH:**  pod.status.containerStatuses.state.terminated
+
+     Details about a terminated container
+
+#### waiting \<Object\>
+**PATH:**  pod.status.containerStatuses.state.waiting
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: waiting <Object>
+
+DESCRIPTION:
+     Details about a waiting container
+
+     ContainerStateWaiting is a waiting state of a container.
+
+##### message	\<string\>
+**PATH:**  pod.status.containerStatuses.state.waiting.message
+
+     Message regarding why the container is not yet running.
+
+## containerStatuses	\<[]Object\>
 **PATH:**  pod.status.containerStatuses
 
      The list has one entry per container in the manifest. Each entry is
      currently the output of `docker inspect`. More info:
      https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status
 
-### hostIP	\<string\>
+## hostIP	\<string\>
 **PATH:**  pod.status.hostIP
 
      IP address of the host to which the pod is assigned. Empty if not yet
      scheduled.
 
-### initContainerStatuses	\<[]Object\>
+## initContainerStatuses \<[]Object\>
+**PATH:**  pod.status.initContainerStatuses
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: initContainerStatuses <[]Object>
+
+DESCRIPTION:
+     The list has one entry per init container in the manifest. The most recent
+     successful init container will have ready = true, the most recently started
+     container will have startTime set. More info:
+     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status
+
+     ContainerStatus contains details for the current status of this container.
+
+### containerID	\<string\>
+**PATH:**  pod.status.initContainerStatuses.containerID
+
+     Container's ID in the format 'docker://<container_id>'.
+
+### image	\<string\> -required-
+**PATH:**  pod.status.initContainerStatuses.image
+
+     The image the container is running. More info:
+     https://kubernetes.io/docs/concepts/containers/images
+
+### imageID	\<string\> -required-
+**PATH:**  pod.status.initContainerStatuses.imageID
+
+     ImageID of the container's image.
+
+### lastState \<Object\>
+**PATH:**  pod.status.initContainerStatuses.lastState
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: lastState <Object>
+
+DESCRIPTION:
+     Details about the container's last termination condition.
+
+     ContainerState holds a possible state of container. Only one of its members
+     may be specified. If none of them is specified, the default one is
+     ContainerStateWaiting.
+
+#### running \<Object\>
+**PATH:**  pod.status.initContainerStatuses.lastState.running
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: running <Object>
+
+DESCRIPTION:
+     Details about a running container
+
+     ContainerStateRunning is a running state of a container.
+
+#### running	\<Object\>
+**PATH:**  pod.status.initContainerStatuses.lastState.running
+
+     Details about a running container
+
+#### terminated \<Object\>
+**PATH:**  pod.status.initContainerStatuses.lastState.terminated
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: terminated <Object>
+
+DESCRIPTION:
+     Details about a terminated container
+
+     ContainerStateTerminated is a terminated state of a container.
+
+##### containerID	\<string\>
+**PATH:**  pod.status.initContainerStatuses.lastState.terminated.containerID
+
+     Container's ID in the format 'docker://<container_id>'
+
+##### exitCode	\<integer\> -required-
+**PATH:**  pod.status.initContainerStatuses.lastState.terminated.exitCode
+
+     Exit status from the last termination of the container
+
+##### finishedAt	\<string\>
+**PATH:**  pod.status.initContainerStatuses.lastState.terminated.finishedAt
+
+     Time at which the container last terminated
+
+##### message	\<string\>
+**PATH:**  pod.status.initContainerStatuses.lastState.terminated.message
+
+     Message regarding the last termination of the container
+
+##### reason	\<string\>
+**PATH:**  pod.status.initContainerStatuses.lastState.terminated.reason
+
+     (brief) reason from the last termination of the container
+
+##### signal	\<integer\>
+**PATH:**  pod.status.initContainerStatuses.lastState.terminated.signal
+
+     Signal from the last termination of the container
+
+#### terminated	\<Object\>
+**PATH:**  pod.status.initContainerStatuses.lastState.terminated
+
+     Details about a terminated container
+
+#### waiting \<Object\>
+**PATH:**  pod.status.initContainerStatuses.lastState.waiting
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: waiting <Object>
+
+DESCRIPTION:
+     Details about a waiting container
+
+     ContainerStateWaiting is a waiting state of a container.
+
+##### message	\<string\>
+**PATH:**  pod.status.initContainerStatuses.lastState.waiting.message
+
+     Message regarding why the container is not yet running.
+
+### lastState	\<Object\>
+**PATH:**  pod.status.initContainerStatuses.lastState
+
+     Details about the container's last termination condition.
+
+### name	\<string\> -required-
+**PATH:**  pod.status.initContainerStatuses.name
+
+     This must be a DNS_LABEL. Each container in a pod must have a unique name.
+     Cannot be updated.
+
+### ready	\<boolean\> -required-
+**PATH:**  pod.status.initContainerStatuses.ready
+
+     Specifies whether the container has passed its readiness probe.
+
+### restartCount	\<integer\> -required-
+**PATH:**  pod.status.initContainerStatuses.restartCount
+
+     The number of times the container has been restarted, currently based on
+     the number of dead containers that have not yet been removed. Note that
+     this is calculated from dead containers. But those containers are subject
+     to garbage collection. This value will get capped at 5 by GC.
+
+### state \<Object\>
+**PATH:**  pod.status.initContainerStatuses.state
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: state <Object>
+
+DESCRIPTION:
+     Details about the container's current condition.
+
+     ContainerState holds a possible state of container. Only one of its members
+     may be specified. If none of them is specified, the default one is
+     ContainerStateWaiting.
+
+#### running \<Object\>
+**PATH:**  pod.status.initContainerStatuses.state.running
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: running <Object>
+
+DESCRIPTION:
+     Details about a running container
+
+     ContainerStateRunning is a running state of a container.
+
+#### running	\<Object\>
+**PATH:**  pod.status.initContainerStatuses.state.running
+
+     Details about a running container
+
+#### terminated \<Object\>
+**PATH:**  pod.status.initContainerStatuses.state.terminated
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: terminated <Object>
+
+DESCRIPTION:
+     Details about a terminated container
+
+     ContainerStateTerminated is a terminated state of a container.
+
+##### containerID	\<string\>
+**PATH:**  pod.status.initContainerStatuses.state.terminated.containerID
+
+     Container's ID in the format 'docker://<container_id>'
+
+##### exitCode	\<integer\> -required-
+**PATH:**  pod.status.initContainerStatuses.state.terminated.exitCode
+
+     Exit status from the last termination of the container
+
+##### finishedAt	\<string\>
+**PATH:**  pod.status.initContainerStatuses.state.terminated.finishedAt
+
+     Time at which the container last terminated
+
+##### message	\<string\>
+**PATH:**  pod.status.initContainerStatuses.state.terminated.message
+
+     Message regarding the last termination of the container
+
+##### reason	\<string\>
+**PATH:**  pod.status.initContainerStatuses.state.terminated.reason
+
+     (brief) reason from the last termination of the container
+
+##### signal	\<integer\>
+**PATH:**  pod.status.initContainerStatuses.state.terminated.signal
+
+     Signal from the last termination of the container
+
+#### terminated	\<Object\>
+**PATH:**  pod.status.initContainerStatuses.state.terminated
+
+     Details about a terminated container
+
+#### waiting \<Object\>
+**PATH:**  pod.status.initContainerStatuses.state.waiting
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: waiting <Object>
+
+DESCRIPTION:
+     Details about a waiting container
+
+     ContainerStateWaiting is a waiting state of a container.
+
+##### message	\<string\>
+**PATH:**  pod.status.initContainerStatuses.state.waiting.message
+
+     Message regarding why the container is not yet running.
+
+## initContainerStatuses	\<[]Object\>
 **PATH:**  pod.status.initContainerStatuses
 
      The list has one entry per init container in the manifest. The most recent
@@ -1809,13 +6510,13 @@ DESCRIPTION:
      container will have startTime set. More info:
      https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status
 
-### message	\<string\>
+## message	\<string\>
 **PATH:**  pod.status.message
 
      A human readable message indicating details about why the pod is in this
      condition.
 
-### nominatedNodeName	\<string\>
+## nominatedNodeName	\<string\>
 **PATH:**  pod.status.nominatedNodeName
 
      nominatedNodeName is set only when this pod preempts other pods on the
@@ -1827,7 +6528,7 @@ DESCRIPTION:
      after preemption. As a result, this field may be different than
      PodSpec.nodeName when the pod is scheduled.
 
-### phase	\<string\>
+## phase	\<string\>
 **PATH:**  pod.status.phase
 
      The phase of a Pod is a simple, high-level summary of where the Pod is in
@@ -1848,13 +6549,13 @@ DESCRIPTION:
      pod. More info:
      https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-phase
 
-### podIP	\<string\>
+## podIP	\<string\>
 **PATH:**  pod.status.podIP
 
      IP address allocated to the pod. Routable at least within the cluster.
      Empty if not yet allocated.
 
-### qosClass	\<string\>
+## qosClass	\<string\>
 **PATH:**  pod.status.qosClass
 
      The Quality of Service (QOS) classification assigned to the pod based on
@@ -1862,7 +6563,7 @@ DESCRIPTION:
      info:
      https://git.k8s.io/community/contributors/design-proposals/node/resource-qos.md
 
-### reason	\<string\>
+## reason	\<string\>
 **PATH:**  pod.status.reason
 
      A brief CamelCase message indicating details about why the pod is in this

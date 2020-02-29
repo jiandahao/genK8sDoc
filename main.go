@@ -1,16 +1,12 @@
 package main
 
 import (
-	"bufio"
 	"bytes"
 	"fmt"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
-	"io"
 	"io/ioutil"
 	"os/exec"
-	"regexp"
-	"strconv"
 	"strings"
 )
 
@@ -42,9 +38,12 @@ var paramType  =  []string{
 }
 func isParamClaim(s string) (bool,string){
 	s = strings.TrimSpace(s)
-	if ok,err := regexp.Match(`^\s*\S+\s+\S+\s*$`,[]byte(s)); !ok || err != nil{
+	if strings.HasPrefix(s, "RESOURCE:"){
 		return false, ""
 	}
+	//if ok,err := regexp.Match(`^\s*\S+\s+\S+\s*$`,[]byte(s)); !ok || err != nil{
+	//	return false, ""
+	//}
 	for i := 0; i < len(paramType) ; i++{
 		if strings.Contains(s, paramType[i]){
 			return true, paramType[i]
@@ -60,71 +59,6 @@ func QuoteMeta(s string) string{
 	return p
 }
 
-func getDocument(prefix string, param string) (string,error){
-	cmd := exec.Command("kubectl","explain",param)
-	stdout, err := cmd.StdoutPipe()
-	if err != nil{
-		return "",nil
-	}
-	cmd.Start()
-	reader := bufio.NewReader(stdout)
-	document := ""
-	preDoc := ""
-	for{
-		line, err := reader.ReadString('\n')
-		if err != nil || err == io.EOF{
-			break
-		}
-		if strings.HasPrefix(line, "KIND:"){
-			kind := strings.TrimPrefix(line, "KIND:")
-			fmt.Println("## "+strings.TrimSpace(kind))
-			document += fmt.Sprintf("%s %s\n",prefix,kind)
-			continue
-		}
-		if ok, s := isParamClaim(line); ok{
-			if preDoc != ""{
-				document += fmt.Sprintf("%s",preDoc)
-				preDoc = ""
-			}
-			paramName := strings.TrimSuffix(line, s)
-			paramName = strings.TrimSpace(paramName)
-			if strings.Contains(s,"Object"){
-
-			}
-		}else{
-			preDoc += line
-		}
-	}
-	cmd.Wait()
-	return "",nil
-}
-
-func getAllParams(depth int, params string, lastType string) {
-	if !strings.Contains(lastType,"Object"){
-		return
-	}
-	cmd := exec.Command("kubectl","explain",params)
-	var stdOut bytes.Buffer
-	var stdErr bytes.Buffer
-	cmd.Stdout = &stdOut
-	cmd.Stderr = &stdErr
-	if err := cmd.Run(); err != nil{
-		log.Println(stdErr.String())
-		return
-	}
-	result := stdOut.String()
-	lines := strings.Split(result,"\n")
-	for i := 0; i< len(lines); i++{
-		if ok, s := isParamClaim(lines[i]); ok {
-			paramName := strings.TrimSuffix(lines[i], s)
-			paramName = strings.TrimSpace(paramName)
-			fmt.Println(strconv.Itoa(depth) + " " + params + "." + paramName)
-			getAllParams(depth+1, params+"."+paramName, s)
-		}
-	}
-}
-
-
 func getParamNameFromParamPath(paramsPath string) string{
 	pathList := strings.Split(paramsPath,".")
 	if len(pathList) == 0 {
@@ -133,14 +67,40 @@ func getParamNameFromParamPath(paramsPath string) string{
 	return pathList[len(pathList)-1]
 }
 
+func getParamNameFromParamClaim( claim string) string{
+	claim = strings.TrimSpace(claim)
+	s := strings.ReplaceAll(claim, " ","")
+	t := strings.Split(s,"<")
+	s = t[0]
+	s = strings.TrimSpace(s)
+	return s
+}
+
+func makeTitlePrefix( prefix string) string{
+	if len(prefix) > 6{
+		//newPrefix := ""
+		//length := len(prefix) - 7
+		//for ; length>0; length--{
+		//	newPrefix += "\t"
+		//}
+		//return newPrefix + "- "
+		return "-"
+	}
+	return prefix
+}
 // 深度遍历所有的参数，并获取其说明文档
 func parseDocument(titlePrefix string, paramPath string,lastType string, doc *string){
 	if !strings.Contains(lastType,"Object"){
 		return
 	}
-	if len(titlePrefix) > 6{
-		titlePrefix = "- "
-	}
+	//if len(titlePrefix) > 6{
+	//	titlePrefix = ""
+	//	length := len(titlePrefix) - 7
+	//	for ;length > 0; length--{
+	//		titlePrefix +=  "\t"
+	//	}
+	//	titlePrefix += "- "
+	//}
 
 	// 执行命令，并获取执行结果
 	cmd := exec.Command("kubectl","explain",paramPath)
@@ -161,8 +121,8 @@ func parseDocument(titlePrefix string, paramPath string,lastType string, doc *st
 	//	" " + QuoteMeta(lastType) + "\n"
 	preContent := fmt.Sprintf(
 		"%s %s %s\n**PATH:**  %s\n\n",
-		titlePrefix, getParamNameFromParamPath(paramPath),QuoteMeta(lastType),paramPath)
-	fmt.Println(titlePrefix + " " + paramPath)
+		makeTitlePrefix(titlePrefix), getParamNameFromParamPath(paramPath),QuoteMeta(lastType),paramPath)
+	fmt.Println(makeTitlePrefix(titlePrefix) + " " + paramPath)
 
 	preParamName := ""
 	preParamType := ""
@@ -170,20 +130,20 @@ func parseDocument(titlePrefix string, paramPath string,lastType string, doc *st
 		if strings.HasPrefix(lines[i],"FIELDS:"){
 			continue
 		}
-		if ok, s := isParamClaim(lines[i]); ok {
-			paramName := strings.TrimSuffix(lines[i], s)
-			paramName = strings.TrimSpace(paramName)
+		if ok, paramType := isParamClaim(lines[i]); ok {
+			paramName := getParamNameFromParamClaim(lines[i])
 			if preParamName != ""{
 				// 如果之前存在一个参数还没有处理，现在进行处理，这么做主要是保证先记录参数的简介，然后在加入更详细的说明信息
-				parseDocument(titlePrefix + "#", paramPath+"."+ preParamName, s,doc)
+				parseDocument(titlePrefix + "#", paramPath+"."+ preParamName, preParamType ,doc)
 			}
 			*doc += preContent
+			//fmt.Println(preContent)
 			preContent = fmt.Sprintf(
 				"%s %s\n**PATH:**  %s\n\n",
-				titlePrefix + "#", strings.TrimSpace(QuoteMeta(lines[i])),paramPath+"."+ paramName)
+				makeTitlePrefix(titlePrefix + "#"), strings.TrimSpace(QuoteMeta(lines[i])),paramPath+"."+ paramName)
 			//preContent = titlePrefix + " " + strings.TrimSpace(lines[i]) + "\n"
 			preParamName = paramName
-			preParamType = s
+			preParamType = paramType
 		}else {
 			preContent += lines[i] + "\n"
 		}
@@ -200,8 +160,8 @@ func saveDocument(doc string, filename string) {
 func main(){
 	allResources := []string{"pod","deployment","daemonset","statefulset","Service"}
 	for i :=0 ; i < len(allResources); i++{
-		document := ""
-		parseDocument("#",allResources[i],"Object",&document)
+		document := "# " + allResources[i] + "\n"
+		parseDocument("",allResources[i],"Object",&document)
 		saveDocument(document,"doc/"+allResources[i] + ".md")
 	}
 
