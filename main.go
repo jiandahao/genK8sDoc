@@ -117,7 +117,7 @@ func getAllParams(depth int, params string, lastType string) {
 	}
 }
 
-func parseDocument(depth int, paramPath string,lastType string, doc *string){
+func parseDocument(titlePrefix string, paramPath string,lastType string, doc *string){
 	if !strings.Contains(lastType,"Object"){
 		return
 	}
@@ -132,82 +132,40 @@ func parseDocument(depth int, paramPath string,lastType string, doc *string){
 	}
 	result := stdOut.String()
 	lines := strings.Split(result,"\n")
-	preContent := ""
+	preContent := titlePrefix + " " + paramPath + "\n"
+	fmt.Println(titlePrefix + " " + paramPath)
+	titlePrefix = titlePrefix + "#"
 	preParamName := ""
 	preParamType := ""
 	for i := 0; i< len(lines); i++{
 		if ok, s := isParamClaim(lines[i]); ok {
-			if preParamName != ""{
-				*doc += preContent
-				preContent = ""
-				parseDocument(depth+1, paramPath+"."+ preParamName, s,doc)
-			}
 			paramName := strings.TrimSuffix(lines[i], s)
 			paramName = strings.TrimSpace(paramName)
+			if preParamName != ""{
+				*doc += preContent
+				//preContent = titlePrefix + " " + paramName + "\n"
+				parseDocument(titlePrefix + "#", paramPath+"."+ preParamName, s,doc)
+			}
+			preContent = fmt.Sprintf(
+				"%s %s\n**Path:**  %s\n\n",
+				titlePrefix, strings.TrimSpace(lines[i]),paramPath+"."+ paramName)
+			//preContent = titlePrefix + " " + strings.TrimSpace(lines[i]) + "\n"
 			preParamName = paramName
 			preParamType = s
 		}else {
 			preContent += lines[i] + "\n"
 		}
 	}
-	parseDocument(depth+1, paramPath+"."+ preParamName, preParamType,doc)
+	parseDocument(titlePrefix + "#", paramPath+"."+ preParamName, preParamType,doc)
 }
 
 func saveDocument(doc string, filename string) {
-	//f, err := os.Create(filename)
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-	//defer f.Close()
-	////if n,err := f.WriteString(doc); err != nil{
-	////	log.Println("error")
-	////	log.Println(err)
-	////}else{
-	////	log.Println("success")
-	////	log.Println(n)
-	////}
-	//f.WriteString(doc)
-	//f.Sync()
 	if err := ioutil.WriteFile(filename,[]byte(doc),0644); err != nil {
 		log.Println(err)
 	}
 }
 func main(){
-	//fmt.Println(strings.Split("abc\ncdf\n","'\n'"))
 	document := ""
-	//getAllParams(1, "pod", "Object")
-	parseDocument(1,"pod","Object",&document)
-	//fmt.Println(document)
-	//saveDocument(&document,"temp.md")
+	parseDocument("#","pod","Object",&document)
 	saveDocument(document,"temp.md")
-	//cmd := exec.Command("kubectl","explain","deployment")
-	//stdout, err := cmd.StdoutPipe()
-	//
-	//if err != nil {
-	//	log.Println(err)
-	//	return
-	//}
-	//
-	//cmd.Start()
-	//reader := bufio.NewReader(stdout)
-	//for{
-	//	line, err := reader.ReadString('\n')
-	//	if err != nil || err == io.EOF{
-	//		break
-	//	}
-	//	if strings.HasPrefix(line, "KIND:"){
-	//		kind := strings.TrimPrefix(line, "KIND:")
-	//		fmt.Println("## "+strings.TrimSpace(kind))
-	//		continue
-	//	}
-	//
-	//	if ok, s := isParamClaim(line); ok{
-	//		paramName := strings.TrimSuffix(line, s)
-	//		paramName = strings.TrimSpace(paramName)
-	//
-	//	}
-	//}
-	//
-	//cmd.Wait()
-
 }
