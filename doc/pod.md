@@ -1,43 +1,62 @@
-## apiVersion	<string>
-**Path:**  pod.apiVersion
+# pod Object
+**PATH:**  pod
+
+KIND:     Pod
+VERSION:  v1
+
+DESCRIPTION:
+     Pod is a collection of containers that can run on a host. This resource is
+     created by clients and scheduled onto hosts.
+
+## apiVersion	\<string\>
+**PATH:**  pod.apiVersion
 
      APIVersion defines the versioned schema of this representation of an
      object. Servers should convert recognized schemas to the latest internal
      value, and may reject unrecognized values. More info:
      https://git.k8s.io/community/contributors/devel/api-conventions.md#resources
 
-## kind	<string>
-**Path:**  pod.kind
+## kind	\<string\>
+**PATH:**  pod.kind
 
      Kind is a string value representing the REST resource this object
      represents. Servers may infer this from the endpoint the client submits
      requests to. Cannot be updated. In CamelCase. More info:
      https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
 
-## metadata	<Object>
-**Path:**  pod.metadata
+## metadata \<Object\>
+**PATH:**  pod.metadata
 
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: metadata <Object>
+
+DESCRIPTION:
      Standard object's metadata. More info:
      https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
 
-#### annotations	<map[string]string>
-**Path:**  pod.metadata.annotations
+     ObjectMeta is metadata that all persisted resources must have, which
+     includes all objects users must create.
+
+### annotations	\<map[string]string\>
+**PATH:**  pod.metadata.annotations
 
      Annotations is an unstructured key value map stored with a resource that
      may be set by external tools to store and retrieve arbitrary metadata. They
      are not queryable and should be preserved when modifying objects. More
      info: http://kubernetes.io/docs/user-guide/annotations
 
-#### clusterName	<string>
-**Path:**  pod.metadata.clusterName
+### clusterName	\<string\>
+**PATH:**  pod.metadata.clusterName
 
      The name of the cluster which the object belongs to. This is used to
      distinguish resources with same name and namespace in different clusters.
      This field is not set anywhere right now and apiserver is going to ignore
      it if set in create or update request.
 
-#### creationTimestamp	<string>
-**Path:**  pod.metadata.creationTimestamp
+### creationTimestamp	\<string\>
+**PATH:**  pod.metadata.creationTimestamp
 
      CreationTimestamp is a timestamp representing the server time when this
      object was created. It is not guaranteed to be set in happens-before order
@@ -46,15 +65,15 @@
      Read-only. Null for lists. More info:
      https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
 
-#### deletionGracePeriodSeconds	<integer>
-**Path:**  pod.metadata.deletionGracePeriodSeconds
+### deletionGracePeriodSeconds	\<integer\>
+**PATH:**  pod.metadata.deletionGracePeriodSeconds
 
      Number of seconds allowed for this object to gracefully terminate before it
      will be removed from the system. Only set when deletionTimestamp is also
      set. May only be shortened. Read-only.
 
-#### deletionTimestamp	<string>
-**Path:**  pod.metadata.deletionTimestamp
+### deletionTimestamp	\<string\>
+**PATH:**  pod.metadata.deletionTimestamp
 
      DeletionTimestamp is RFC 3339 date and time at which this resource will be
      deleted. This field is set by the server when a graceful deletion is
@@ -76,16 +95,16 @@
      requested. Read-only. More info:
      https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
 
-#### finalizers	<[]string>
-**Path:**  pod.metadata.finalizers
+### finalizers	\<[]string\>
+**PATH:**  pod.metadata.finalizers
 
      Must be empty before the object is deleted from the registry. Each entry is
      an identifier for the responsible component that will remove the entry from
      the list. If the deletionTimestamp of the object is non-nil, entries in
      this list can only be removed.
 
-#### generateName	<string>
-**Path:**  pod.metadata.generateName
+### generateName	\<string\>
+**PATH:**  pod.metadata.generateName
 
      GenerateName is an optional prefix, used by the server, to generate a
      unique name ONLY IF the Name field has not been provided. If this field is
@@ -101,14 +120,14 @@
      specified. More info:
      https://git.k8s.io/community/contributors/devel/api-conventions.md#idempotency
 
-#### generation	<integer>
-**Path:**  pod.metadata.generation
+### generation	\<integer\>
+**PATH:**  pod.metadata.generation
 
      A sequence number representing a specific generation of the desired state.
      Populated by the system. Read-only.
 
-#### initializers	<Object>
-**Path:**  pod.metadata.initializers
+### initializers	\<Object\>
+**PATH:**  pod.metadata.initializers
 
      An initializer is a controller which enforces some system invariant at
      object creation time. This field is a list of initializers that have not
@@ -121,15 +140,15 @@
      be modified further by any user. DEPRECATED - initializers are an alpha
      field and will be removed in v1.15.
 
-#### labels	<map[string]string>
-**Path:**  pod.metadata.labels
+### labels	\<map[string]string\>
+**PATH:**  pod.metadata.labels
 
      Map of string keys and values that can be used to organize and categorize
      (scope and select) objects. May match selectors of replication controllers
      and services. More info: http://kubernetes.io/docs/user-guide/labels
 
-#### managedFields	<[]Object>
-**Path:**  pod.metadata.managedFields
+### managedFields	\<[]Object\>
+**PATH:**  pod.metadata.managedFields
 
      ManagedFields maps workflow-id and version to the set of fields that are
      managed by that workflow. This is mostly for internal housekeeping, and
@@ -139,8 +158,8 @@
      the workflow used when modifying the object. This field is alpha and can be
      changed or removed without notice.
 
-#### name	<string>
-**Path:**  pod.metadata.name
+### name	\<string\>
+**PATH:**  pod.metadata.name
 
      Name must be unique within a namespace. Is required when creating
      resources, although some resources may allow a client to request the
@@ -148,8 +167,8 @@
      for creation idempotence and configuration definition. Cannot be updated.
      More info: http://kubernetes.io/docs/user-guide/identifiers#names
 
-#### namespace	<string>
-**Path:**  pod.metadata.namespace
+### namespace	\<string\>
+**PATH:**  pod.metadata.namespace
 
      Namespace defines the space within each name must be unique. An empty
      namespace is equivalent to the "default" namespace, but "default" is the
@@ -158,8 +177,8 @@
      be a DNS_LABEL. Cannot be updated. More info:
      http://kubernetes.io/docs/user-guide/namespaces
 
-#### ownerReferences	<[]Object>
-**Path:**  pod.metadata.ownerReferences
+### ownerReferences	\<[]Object\>
+**PATH:**  pod.metadata.ownerReferences
 
      List of objects depended by this object. If ALL objects in the list have
      been deleted, this object will be garbage collected. If this object is
@@ -167,8 +186,8 @@
      controller, with the controller field set to true. There cannot be more
      than one managing controller.
 
-#### resourceVersion	<string>
-**Path:**  pod.metadata.resourceVersion
+### resourceVersion	\<string\>
+**PATH:**  pod.metadata.resourceVersion
 
      An opaque value that represents the internal version of this object that
      can be used by clients to determine when objects have changed. May be used
@@ -179,32 +198,46 @@
      Read-only. Value must be treated as opaque by clients and . More info:
      https://git.k8s.io/community/contributors/devel/api-conventions.md#concurrency-control-and-consistency
 
-#### selfLink	<string>
-**Path:**  pod.metadata.selfLink
+### selfLink	\<string\>
+**PATH:**  pod.metadata.selfLink
 
      SelfLink is a URL representing this object. Populated by the system.
      Read-only.
 
-## spec	<Object>
-**Path:**  pod.spec
+## metadata	\<Object\>
+**PATH:**  pod.metadata
 
+     Standard object's metadata. More info:
+     https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
+
+## spec \<Object\>
+**PATH:**  pod.spec
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: spec <Object>
+
+DESCRIPTION:
      Specification of the desired behavior of the pod. More info:
      https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status
 
-#### activeDeadlineSeconds	<integer>
-**Path:**  pod.spec.activeDeadlineSeconds
+     PodSpec is a description of a pod.
+
+### activeDeadlineSeconds	\<integer\>
+**PATH:**  pod.spec.activeDeadlineSeconds
 
      Optional duration in seconds the pod may be active on the node relative to
      StartTime before the system will actively try to mark it failed and kill
      associated containers. Value must be a positive integer.
 
-#### affinity	<Object>
-**Path:**  pod.spec.affinity
+### affinity	\<Object\>
+**PATH:**  pod.spec.affinity
 
      If specified, the pod's scheduling constraints
 
-#### automountServiceAccountToken	<boolean>
-**Path:**  pod.spec.automountServiceAccountToken
+### automountServiceAccountToken	\<boolean\>
+**PATH:**  pod.spec.automountServiceAccountToken
 
      AutomountServiceAccountToken indicates whether a service account token
      should be automatically mounted.
@@ -214,14 +247,14 @@
      added or removed. There must be at least one container in a Pod. Cannot be
      updated.
 
-#### dnsConfig	<Object>
-**Path:**  pod.spec.dnsConfig
+### dnsConfig	\<Object\>
+**PATH:**  pod.spec.dnsConfig
 
      Specifies the DNS parameters of a pod. Parameters specified here will be
      merged to the generated DNS configuration based on DNSPolicy.
 
-#### dnsPolicy	<string>
-**Path:**  pod.spec.dnsPolicy
+### dnsPolicy	\<string\>
+**PATH:**  pod.spec.dnsPolicy
 
      Set DNS policy for the pod. Defaults to "ClusterFirst". Valid values are
      'ClusterFirstWithHostNet', 'ClusterFirst', 'Default' or 'None'. DNS
@@ -229,45 +262,64 @@
      DNSPolicy. To have DNS options set along with hostNetwork, you have to
      specify DNS policy explicitly to 'ClusterFirstWithHostNet'.
 
-#### enableServiceLinks	<boolean>
-**Path:**  pod.spec.enableServiceLinks
+### enableServiceLinks	\<boolean\>
+**PATH:**  pod.spec.enableServiceLinks
 
      EnableServiceLinks indicates whether information about services should be
      injected into pod's environment variables, matching the syntax of Docker
      links. Optional: Defaults to true.
 
-#### hostAliases	<[]Object>
-**Path:**  pod.spec.hostAliases
+### hostAliases	\<[]Object\>
+**PATH:**  pod.spec.hostAliases
 
      HostAliases is an optional list of hosts and IPs that will be injected into
      the pod's hosts file if specified. This is only valid for non-hostNetwork
      pods.
 
-#### hostIPC	<boolean>
-**Path:**  pod.spec.hostIPC
+### hostIPC	\<boolean\>
+**PATH:**  pod.spec.hostIPC
 
      Use the host's ipc namespace. Optional: Default to false.
 
-#### hostNetwork	<boolean>
-**Path:**  pod.spec.hostNetwork
+### hostNetwork	\<boolean\>
+**PATH:**  pod.spec.hostNetwork
 
      Host networking requested for this pod. Use the host's network namespace.
      If this option is set, the ports that will be used must be specified.
      Default to false.
 
-#### hostPID	<boolean>
-**Path:**  pod.spec.hostPID
+### hostPID	\<boolean\>
+**PATH:**  pod.spec.hostPID
 
      Use the host's pid namespace. Optional: Default to false.
 
-#### hostname	<string>
-**Path:**  pod.spec.hostname
+### hostname	\<string\>
+**PATH:**  pod.spec.hostname
 
      Specifies the hostname of the Pod If not specified, the pod's hostname will
      be set to a system-defined value.
 
-#### imagePullSecrets	<[]Object>
-**Path:**  pod.spec.imagePullSecrets
+### imagePullSecrets \<[]Object\>
+**PATH:**  pod.spec.imagePullSecrets
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: imagePullSecrets <[]Object>
+
+DESCRIPTION:
+     ImagePullSecrets is an optional list of references to secrets in the same
+     namespace to use for pulling any of the images used by this PodSpec. If
+     specified, these secrets will be passed to individual puller
+     implementations for them to use. For example, in the case of docker, only
+     DockerConfig type secrets are honored. More info:
+     https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod
+
+     LocalObjectReference contains enough information to let you locate the
+     referenced object inside the same namespace.
+
+### imagePullSecrets	\<[]Object\>
+**PATH:**  pod.spec.imagePullSecrets
 
      ImagePullSecrets is an optional list of references to secrets in the same
      namespace to use for pulling any of the images used by this PodSpec. If
@@ -276,8 +328,8 @@
      DockerConfig type secrets are honored. More info:
      https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod
 
-#### initContainers	<[]Object>
-**Path:**  pod.spec.initContainers
+### initContainers	\<[]Object\>
+**PATH:**  pod.spec.initContainers
 
      List of initialization containers belonging to the pod. Init containers are
      executed in order prior to containers being started. If any init container
@@ -292,23 +344,23 @@
      or removed. Cannot be updated. More info:
      https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
 
-#### nodeName	<string>
-**Path:**  pod.spec.nodeName
+### nodeName	\<string\>
+**PATH:**  pod.spec.nodeName
 
      NodeName is a request to schedule this pod onto a specific node. If it is
      non-empty, the scheduler simply schedules this pod onto that node, assuming
      that it fits resource requirements.
 
-#### nodeSelector	<map[string]string>
-**Path:**  pod.spec.nodeSelector
+### nodeSelector	\<map[string]string\>
+**PATH:**  pod.spec.nodeSelector
 
      NodeSelector is a selector which must be true for the pod to fit on a node.
      Selector which must match a node's labels for the pod to be scheduled on
      that node. More info:
      https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
 
-#### priority	<integer>
-**Path:**  pod.spec.priority
+### priority	\<integer\>
+**PATH:**  pod.spec.priority
 
      The priority value. Various system components use this field to find the
      priority of the pod. When Priority Admission Controller is enabled, it
@@ -316,8 +368,8 @@
      this field from PriorityClassName. The higher the value, the higher the
      priority.
 
-#### priorityClassName	<string>
-**Path:**  pod.spec.priorityClassName
+### priorityClassName	\<string\>
+**PATH:**  pod.spec.priorityClassName
 
      If specified, indicates the pod's priority. "system-node-critical" and
      "system-cluster-critical" are two special keywords which indicate the
@@ -326,23 +378,23 @@
      not specified, the pod priority will be default or zero if there is no
      default.
 
-#### readinessGates	<[]Object>
-**Path:**  pod.spec.readinessGates
+### readinessGates	\<[]Object\>
+**PATH:**  pod.spec.readinessGates
 
      If specified, all readiness gates will be evaluated for pod readiness. A
      pod is ready when all its containers are ready AND all conditions specified
      in the readiness gates have status equal to "True" More info:
      https://git.k8s.io/enhancements/keps/sig-network/0007-pod-ready%2B%2B.md
 
-#### restartPolicy	<string>
-**Path:**  pod.spec.restartPolicy
+### restartPolicy	\<string\>
+**PATH:**  pod.spec.restartPolicy
 
      Restart policy for all containers within the pod. One of Always, OnFailure,
      Never. Default to Always. More info:
      https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
 
-#### runtimeClassName	<string>
-**Path:**  pod.spec.runtimeClassName
+### runtimeClassName	\<string\>
+**PATH:**  pod.spec.runtimeClassName
 
      RuntimeClassName refers to a RuntimeClass object in the node.k8s.io group,
      which should be used to run this pod. If no RuntimeClass resource matches
@@ -352,34 +404,34 @@
      https://git.k8s.io/enhancements/keps/sig-node/runtime-class.md This is an
      alpha feature and may change in the future.
 
-#### schedulerName	<string>
-**Path:**  pod.spec.schedulerName
+### schedulerName	\<string\>
+**PATH:**  pod.spec.schedulerName
 
      If specified, the pod will be dispatched by specified scheduler. If not
      specified, the pod will be dispatched by default scheduler.
 
-#### securityContext	<Object>
-**Path:**  pod.spec.securityContext
+### securityContext	\<Object\>
+**PATH:**  pod.spec.securityContext
 
      SecurityContext holds pod-level security attributes and common container
      settings. Optional: Defaults to empty. See type description for default
      values of each field.
 
-#### serviceAccount	<string>
-**Path:**  pod.spec.serviceAccount
+### serviceAccount	\<string\>
+**PATH:**  pod.spec.serviceAccount
 
      DeprecatedServiceAccount is a depreciated alias for ServiceAccountName.
      Deprecated: Use serviceAccountName instead.
 
-#### serviceAccountName	<string>
-**Path:**  pod.spec.serviceAccountName
+### serviceAccountName	\<string\>
+**PATH:**  pod.spec.serviceAccountName
 
      ServiceAccountName is the name of the ServiceAccount to use to run this
      pod. More info:
      https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
 
-#### shareProcessNamespace	<boolean>
-**Path:**  pod.spec.shareProcessNamespace
+### shareProcessNamespace	\<boolean\>
+**PATH:**  pod.spec.shareProcessNamespace
 
      Share a single process namespace between all of the containers in a pod.
      When this is set containers will be able to view and signal processes from
@@ -388,15 +440,15 @@
      be set. Optional: Default to false. This field is beta-level and may be
      disabled with the PodShareProcessNamespace feature.
 
-#### subdomain	<string>
-**Path:**  pod.spec.subdomain
+### subdomain	\<string\>
+**PATH:**  pod.spec.subdomain
 
      If specified, the fully qualified Pod hostname will be
      "<hostname>.<subdomain>.<pod namespace>.svc.<cluster domain>". If not
      specified, the pod will not have a domainname at all.
 
-#### terminationGracePeriodSeconds	<integer>
-**Path:**  pod.spec.terminationGracePeriodSeconds
+### terminationGracePeriodSeconds	\<integer\>
+**PATH:**  pod.spec.terminationGracePeriodSeconds
 
      Optional duration in seconds the pod needs to terminate gracefully. May be
      decreased in delete request. Value must be non-negative integer. The value
@@ -407,34 +459,43 @@
      this value longer than the expected cleanup time for your process. Defaults
      to 30 seconds.
 
-#### tolerations	<[]Object>
-**Path:**  pod.spec.tolerations
+### tolerations \<[]Object\>
+**PATH:**  pod.spec.tolerations
 
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: tolerations <[]Object>
+
+DESCRIPTION:
      If specified, the pod's tolerations.
 
-###### effect	<string>
-**Path:**  pod.spec.tolerations.effect
+     The pod this Toleration is attached to tolerates any taint that matches the
+     triple <key,value,effect> using the matching operator <operator>.
+
+#### effect	\<string\>
+**PATH:**  pod.spec.tolerations.effect
 
      Effect indicates the taint effect to match. Empty means match all taint
      effects. When specified, allowed values are NoSchedule, PreferNoSchedule
      and NoExecute.
 
-###### key	<string>
-**Path:**  pod.spec.tolerations.key
+#### key	\<string\>
+**PATH:**  pod.spec.tolerations.key
 
      Key is the taint key that the toleration applies to. Empty means match all
      taint keys. If the key is empty, operator must be Exists; this combination
      means to match all values and all keys.
 
-###### operator	<string>
-**Path:**  pod.spec.tolerations.operator
+#### operator	\<string\>
+**PATH:**  pod.spec.tolerations.operator
 
      Operator represents a key's relationship to the value. Valid operators are
      Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for
      value, so that a pod can tolerate all taints of a particular category.
 
-###### tolerationSeconds	<integer>
-**Path:**  pod.spec.tolerations.tolerationSeconds
+#### tolerationSeconds	\<integer\>
+**PATH:**  pod.spec.tolerations.tolerationSeconds
 
      TolerationSeconds represents the period of time the toleration (which must
      be of effect NoExecute, otherwise this field is ignored) tolerates the
@@ -442,15 +503,46 @@
      (do not evict). Zero and negative values will be treated as 0 (evict
      immediately) by the system.
 
-###### awsElasticBlockStore	<Object>
-**Path:**  pod.spec.volumes.awsElasticBlockStore
+### tolerations	\<[]Object\>
+**PATH:**  pod.spec.tolerations
 
+     If specified, the pod's tolerations.
+
+### volumes \<[]Object\>
+**PATH:**  pod.spec.volumes
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: volumes <[]Object>
+
+DESCRIPTION:
+     List of volumes that can be mounted by containers belonging to the pod.
+     More info: https://kubernetes.io/docs/concepts/storage/volumes
+
+     Volume represents a named volume in a pod that may be accessed by any
+     container in the pod.
+
+#### awsElasticBlockStore \<Object\>
+**PATH:**  pod.spec.volumes.awsElasticBlockStore
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: awsElasticBlockStore <Object>
+
+DESCRIPTION:
      AWSElasticBlockStore represents an AWS Disk resource that is attached to a
      kubelet's host machine and then exposed to the pod. More info:
      https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
 
-######## fsType	<string>
-**Path:**  pod.spec.volumes.awsElasticBlockStore.fsType
+     Represents a Persistent Disk resource in AWS. An AWS EBS disk must exist
+     before mounting to a container. The disk must also be in the same AWS zone
+     as the kubelet. An AWS EBS disk can only be mounted as read/write once. AWS
+     EBS volumes support ownership management and SELinux relabeling.
+
+##### fsType	\<string\>
+**PATH:**  pod.spec.volumes.awsElasticBlockStore.fsType
 
      Filesystem type of the volume that you want to mount. Tip: Ensure that the
      filesystem type is supported by the host operating system. Examples:
@@ -458,22 +550,38 @@
      More info:
      https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
 
-######## partition	<integer>
-**Path:**  pod.spec.volumes.awsElasticBlockStore.partition
+##### partition	\<integer\>
+**PATH:**  pod.spec.volumes.awsElasticBlockStore.partition
 
      The partition in the volume that you want to mount. If omitted, the default
      is to mount by volume name. Examples: For volume /dev/sda1, you specify the
      partition as "1". Similarly, the volume partition for /dev/sda is "0" (or
      you can leave the property empty).
 
-###### azureDisk	<Object>
-**Path:**  pod.spec.volumes.azureDisk
+#### awsElasticBlockStore	\<Object\>
+**PATH:**  pod.spec.volumes.awsElasticBlockStore
+
+     AWSElasticBlockStore represents an AWS Disk resource that is attached to a
+     kubelet's host machine and then exposed to the pod. More info:
+     https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
+
+#### azureDisk \<Object\>
+**PATH:**  pod.spec.volumes.azureDisk
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: azureDisk <Object>
+
+DESCRIPTION:
+     AzureDisk represents an Azure Data Disk mount on the host and bind mount to
+     the pod.
 
      AzureDisk represents an Azure Data Disk mount on the host and bind mount to
      the pod.
 
-######## cachingMode	<string>
-**Path:**  pod.spec.volumes.azureDisk.cachingMode
+##### cachingMode	\<string\>
+**PATH:**  pod.spec.volumes.azureDisk.cachingMode
 
      Host Caching mode: None, Read Only, Read Write.
 
@@ -483,87 +591,171 @@
    diskURI	<string> -required-
      The URI the data disk in the blob storage
 
-######## fsType	<string>
-**Path:**  pod.spec.volumes.azureDisk.fsType
+##### fsType	\<string\>
+**PATH:**  pod.spec.volumes.azureDisk.fsType
 
      Filesystem type to mount. Must be a filesystem type supported by the host
      operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be
      "ext4" if unspecified.
 
-######## kind	<string>
-**Path:**  pod.spec.volumes.azureDisk.kind
+##### kind	\<string\>
+**PATH:**  pod.spec.volumes.azureDisk.kind
 
      Expected values Shared: multiple blob disks per storage account Dedicated:
      single blob disk per storage account Managed: azure managed data disk (only
      in managed availability set). defaults to shared
 
-###### azureFile	<Object>
-**Path:**  pod.spec.volumes.azureFile
+#### azureDisk	\<Object\>
+**PATH:**  pod.spec.volumes.azureDisk
+
+     AzureDisk represents an Azure Data Disk mount on the host and bind mount to
+     the pod.
+
+#### azureFile \<Object\>
+**PATH:**  pod.spec.volumes.azureFile
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: azureFile <Object>
+
+DESCRIPTION:
+     AzureFile represents an Azure File Service mount on the host and bind mount
+     to the pod.
 
      AzureFile represents an Azure File Service mount on the host and bind mount
      to the pod.
 
-###### cephfs	<Object>
-**Path:**  pod.spec.volumes.cephfs
+#### azureFile	\<Object\>
+**PATH:**  pod.spec.volumes.azureFile
 
+     AzureFile represents an Azure File Service mount on the host and bind mount
+     to the pod.
+
+#### cephfs \<Object\>
+**PATH:**  pod.spec.volumes.cephfs
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: cephfs <Object>
+
+DESCRIPTION:
      CephFS represents a Ceph FS mount on the host that shares a pod's lifetime
 
-######## path	<string>
-**Path:**  pod.spec.volumes.cephfs.path
+     Represents a Ceph Filesystem mount that lasts the lifetime of a pod Cephfs
+     volumes do not support ownership management or SELinux relabeling.
+
+   monitors	<[]string> -required-
+     Required: Monitors is a collection of Ceph monitors More info:
+     https://releases.k8s.io/HEAD/examples/volumes/cephfs/README.md#how-to-use-it
+
+##### path	\<string\>
+**PATH:**  pod.spec.volumes.cephfs.path
 
      Optional: Used as the mounted root, rather than the full Ceph tree, default
      is /
 
-######## readOnly	<boolean>
-**Path:**  pod.spec.volumes.cephfs.readOnly
+##### readOnly	\<boolean\>
+**PATH:**  pod.spec.volumes.cephfs.readOnly
 
      Optional: Defaults to false (read/write). ReadOnly here will force the
      ReadOnly setting in VolumeMounts. More info:
      https://releases.k8s.io/HEAD/examples/volumes/cephfs/README.md#how-to-use-it
 
-######## secretFile	<string>
-**Path:**  pod.spec.volumes.cephfs.secretFile
+##### secretFile	\<string\>
+**PATH:**  pod.spec.volumes.cephfs.secretFile
 
      Optional: SecretFile is the path to key ring for User, default is
      /etc/ceph/user.secret More info:
      https://releases.k8s.io/HEAD/examples/volumes/cephfs/README.md#how-to-use-it
 
-######## secretRef	<Object>
-**Path:**  pod.spec.volumes.cephfs.secretRef
+##### secretRef	\<Object\>
+**PATH:**  pod.spec.volumes.cephfs.secretRef
 
      Optional: SecretRef is reference to the authentication secret for User,
      default is empty. More info:
      https://releases.k8s.io/HEAD/examples/volumes/cephfs/README.md#how-to-use-it
 
-###### cinder	<Object>
-**Path:**  pod.spec.volumes.cinder
+#### cephfs	\<Object\>
+**PATH:**  pod.spec.volumes.cephfs
 
+     CephFS represents a Ceph FS mount on the host that shares a pod's lifetime
+
+#### cinder \<Object\>
+**PATH:**  pod.spec.volumes.cinder
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: cinder <Object>
+
+DESCRIPTION:
      Cinder represents a cinder volume attached and mounted on kubelets host
      machine More info:
      https://releases.k8s.io/HEAD/examples/mysql-cinder-pd/README.md
 
-######## fsType	<string>
-**Path:**  pod.spec.volumes.cinder.fsType
+     Represents a cinder volume resource in Openstack. A Cinder volume must
+     exist before mounting to a container. The volume must also be in the same
+     region as the kubelet. Cinder volumes support ownership management and
+     SELinux relabeling.
+
+##### fsType	\<string\>
+**PATH:**  pod.spec.volumes.cinder.fsType
 
      Filesystem type to mount. Must be a filesystem type supported by the host
      operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to
      be "ext4" if unspecified. More info:
      https://releases.k8s.io/HEAD/examples/mysql-cinder-pd/README.md
 
-######## readOnly	<boolean>
-**Path:**  pod.spec.volumes.cinder.readOnly
+##### readOnly	\<boolean\>
+**PATH:**  pod.spec.volumes.cinder.readOnly
 
      Optional: Defaults to false (read/write). ReadOnly here will force the
      ReadOnly setting in VolumeMounts. More info:
      https://releases.k8s.io/HEAD/examples/mysql-cinder-pd/README.md
 
-###### configMap	<Object>
-**Path:**  pod.spec.volumes.configMap
+##### secretRef \<Object\>
+**PATH:**  pod.spec.volumes.cinder.secretRef
 
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: secretRef <Object>
+
+DESCRIPTION:
+     Optional: points to a secret object containing parameters used to connect
+     to OpenStack.
+
+     LocalObjectReference contains enough information to let you locate the
+     referenced object inside the same namespace.
+
+#### cinder	\<Object\>
+**PATH:**  pod.spec.volumes.cinder
+
+     Cinder represents a cinder volume attached and mounted on kubelets host
+     machine More info:
+     https://releases.k8s.io/HEAD/examples/mysql-cinder-pd/README.md
+
+#### configMap \<Object\>
+**PATH:**  pod.spec.volumes.configMap
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: configMap <Object>
+
+DESCRIPTION:
      ConfigMap represents a configMap that should populate this volume
 
-######## defaultMode	<integer>
-**Path:**  pod.spec.volumes.configMap.defaultMode
+     Adapts a ConfigMap into a volume. The contents of the target ConfigMap's
+     Data field will be presented in a volume as files using the keys in the
+     Data field as the file names, unless the items element is populated with
+     specific mappings of keys to paths. ConfigMap volumes support ownership
+     management and SELinux relabeling.
+
+##### defaultMode	\<integer\>
+**PATH:**  pod.spec.volumes.configMap.defaultMode
 
      Optional: mode bits to use on created files by default. Must be a value
      between 0 and 0777. Defaults to 0644. Directories within the path are not
@@ -571,8 +763,8 @@
      affect the file mode, like fsGroup, and the result can be other mode bits
      set.
 
-######## items	<[]Object>
-**Path:**  pod.spec.volumes.configMap.items
+##### items	\<[]Object\>
+**PATH:**  pod.spec.volumes.configMap.items
 
      If unspecified, each key-value pair in the Data field of the referenced
      ConfigMap will be projected into the volume as a file whose name is the key
@@ -582,27 +774,45 @@
      error unless it is marked optional. Paths must be relative and may not
      contain the '..' path or start with '..'.
 
-######## name	<string>
-**Path:**  pod.spec.volumes.configMap.name
+##### name	\<string\>
+**PATH:**  pod.spec.volumes.configMap.name
 
      Name of the referent. More info:
      https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
 
-###### csi	<Object>
-**Path:**  pod.spec.volumes.csi
+#### configMap	\<Object\>
+**PATH:**  pod.spec.volumes.configMap
 
+     ConfigMap represents a configMap that should populate this volume
+
+#### csi \<Object\>
+**PATH:**  pod.spec.volumes.csi
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: csi <Object>
+
+DESCRIPTION:
      CSI (Container Storage Interface) represents storage that is handled by an
      external CSI driver (Alpha feature).
 
-######## fsType	<string>
-**Path:**  pod.spec.volumes.csi.fsType
+     Represents a source location of a volume to mount, managed by an external
+     CSI driver
+
+   driver	<string> -required-
+     Driver is the name of the CSI driver that handles this volume. Consult with
+     your admin for the correct name as registered in the cluster.
+
+##### fsType	\<string\>
+**PATH:**  pod.spec.volumes.csi.fsType
 
      Filesystem type to mount. Ex. "ext4", "xfs", "ntfs". If not provided, the
      empty value is passed to the associated CSI driver which will determine the
      default filesystem to apply.
 
-######## nodePublishSecretRef	<Object>
-**Path:**  pod.spec.volumes.csi.nodePublishSecretRef
+##### nodePublishSecretRef	\<Object\>
+**PATH:**  pod.spec.volumes.csi.nodePublishSecretRef
 
      NodePublishSecretRef is a reference to the secret object containing
      sensitive information to pass to the CSI driver to complete the CSI
@@ -610,20 +820,35 @@
      and may be empty if no secret is required. If the secret object contains
      more than one secret, all secret references are passed.
 
-######## readOnly	<boolean>
-**Path:**  pod.spec.volumes.csi.readOnly
+##### readOnly	\<boolean\>
+**PATH:**  pod.spec.volumes.csi.readOnly
 
      Specifies a read-only configuration for the volume. Defaults to false
      (read/write).
 
-###### downwardAPI	<Object>
-**Path:**  pod.spec.volumes.downwardAPI
+#### csi	\<Object\>
+**PATH:**  pod.spec.volumes.csi
 
+     CSI (Container Storage Interface) represents storage that is handled by an
+     external CSI driver (Alpha feature).
+
+#### downwardAPI \<Object\>
+**PATH:**  pod.spec.volumes.downwardAPI
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: downwardAPI <Object>
+
+DESCRIPTION:
      DownwardAPI represents downward API about the pod that should populate this
      volume
 
-######## defaultMode	<integer>
-**Path:**  pod.spec.volumes.downwardAPI.defaultMode
+     DownwardAPIVolumeSource represents a volume containing downward API info.
+     Downward API volumes support ownership management and SELinux relabeling.
+
+##### defaultMode	\<integer\>
+**PATH:**  pod.spec.volumes.downwardAPI.defaultMode
 
      Optional: mode bits to use on created files by default. Must be a value
      between 0 and 0777. Defaults to 0644. Directories within the path are not
@@ -631,14 +856,28 @@
      affect the file mode, like fsGroup, and the result can be other mode bits
      set.
 
-########## fieldRef	<Object>
-**Path:**  pod.spec.volumes.downwardAPI.items.fieldRef
+##### items \<[]Object\>
+**PATH:**  pod.spec.volumes.downwardAPI.items
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: items <[]Object>
+
+DESCRIPTION:
+     Items is a list of downward API volume file
+
+     DownwardAPIVolumeFile represents information to create the file containing
+     the pod field
+
+###### fieldRef	\<Object\>
+**PATH:**  pod.spec.volumes.downwardAPI.items.fieldRef
 
      Required: Selects a field of the pod: only annotations, labels, name and
      namespace are supported.
 
-########## mode	<integer>
-**Path:**  pod.spec.volumes.downwardAPI.items.mode
+###### mode	\<integer\>
+**PATH:**  pod.spec.volumes.downwardAPI.items.mode
 
      Optional: mode bits to use on this file, must be a value between 0 and
      0777. If not specified, the volume defaultMode will be used. This might be
@@ -650,99 +889,215 @@
      not be absolute or contain the '..' path. Must be utf-8 encoded. The first
      item of the relative path must not start with '..'
 
-############ containerName	<string>
-**Path:**  pod.spec.volumes.downwardAPI.items.resourceFieldRef.containerName
+###### resourceFieldRef \<Object\>
+**PATH:**  pod.spec.volumes.downwardAPI.items.resourceFieldRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: resourceFieldRef <Object>
+
+DESCRIPTION:
+     Selects a resource of the container: only resources limits and requests
+     (limits.cpu, limits.memory, requests.cpu and requests.memory) are currently
+     supported.
+
+     ResourceFieldSelector represents container resources (cpu, memory) and
+     their output format
+
+####### containerName	\<string\>
+**PATH:**  pod.spec.volumes.downwardAPI.items.resourceFieldRef.containerName
 
      Container name: required for volumes, optional for env vars
 
-###### emptyDir	<Object>
-**Path:**  pod.spec.volumes.emptyDir
+#### downwardAPI	\<Object\>
+**PATH:**  pod.spec.volumes.downwardAPI
 
+     DownwardAPI represents downward API about the pod that should populate this
+     volume
+
+#### emptyDir \<Object\>
+**PATH:**  pod.spec.volumes.emptyDir
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: emptyDir <Object>
+
+DESCRIPTION:
      EmptyDir represents a temporary directory that shares a pod's lifetime.
      More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
 
-######## medium	<string>
-**Path:**  pod.spec.volumes.emptyDir.medium
+     Represents an empty directory for a pod. Empty directory volumes support
+     ownership management and SELinux relabeling.
+
+##### medium	\<string\>
+**PATH:**  pod.spec.volumes.emptyDir.medium
 
      What type of storage medium should back this directory. The default is ""
      which means to use the node's default medium. Must be an empty string
      (default) or Memory. More info:
      https://kubernetes.io/docs/concepts/storage/volumes#emptydir
 
-###### fc	<Object>
-**Path:**  pod.spec.volumes.fc
+#### emptyDir	\<Object\>
+**PATH:**  pod.spec.volumes.emptyDir
 
+     EmptyDir represents a temporary directory that shares a pod's lifetime.
+     More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
+
+#### fc \<Object\>
+**PATH:**  pod.spec.volumes.fc
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: fc <Object>
+
+DESCRIPTION:
      FC represents a Fibre Channel resource that is attached to a kubelet's host
      machine and then exposed to the pod.
 
-######## fsType	<string>
-**Path:**  pod.spec.volumes.fc.fsType
+     Represents a Fibre Channel volume. Fibre Channel volumes can only be
+     mounted as read/write once. Fibre Channel volumes support ownership
+     management and SELinux relabeling.
+
+##### fsType	\<string\>
+**PATH:**  pod.spec.volumes.fc.fsType
 
      Filesystem type to mount. Must be a filesystem type supported by the host
      operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be
      "ext4" if unspecified.
 
-######## lun	<integer>
-**Path:**  pod.spec.volumes.fc.lun
+##### lun	\<integer\>
+**PATH:**  pod.spec.volumes.fc.lun
 
      Optional: FC target lun number
 
-######## readOnly	<boolean>
-**Path:**  pod.spec.volumes.fc.readOnly
+##### readOnly	\<boolean\>
+**PATH:**  pod.spec.volumes.fc.readOnly
 
      Optional: Defaults to false (read/write). ReadOnly here will force the
      ReadOnly setting in VolumeMounts.
 
-######## targetWWNs	<[]string>
-**Path:**  pod.spec.volumes.fc.targetWWNs
+##### targetWWNs	\<[]string\>
+**PATH:**  pod.spec.volumes.fc.targetWWNs
 
      Optional: FC target worldwide names (WWNs)
 
-###### flexVolume	<Object>
-**Path:**  pod.spec.volumes.flexVolume
+#### fc	\<Object\>
+**PATH:**  pod.spec.volumes.fc
+
+     FC represents a Fibre Channel resource that is attached to a kubelet's host
+     machine and then exposed to the pod.
+
+#### flexVolume \<Object\>
+**PATH:**  pod.spec.volumes.flexVolume
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: flexVolume <Object>
+
+DESCRIPTION:
+     FlexVolume represents a generic volume resource that is
+     provisioned/attached using an exec based plugin.
 
      FlexVolume represents a generic volume resource that is
      provisioned/attached using an exec based plugin.
 
-######## fsType	<string>
-**Path:**  pod.spec.volumes.flexVolume.fsType
+   driver	<string> -required-
+     Driver is the name of the driver to use for this volume.
+
+##### fsType	\<string\>
+**PATH:**  pod.spec.volumes.flexVolume.fsType
 
      Filesystem type to mount. Must be a filesystem type supported by the host
      operating system. Ex. "ext4", "xfs", "ntfs". The default filesystem depends
      on FlexVolume script.
 
-######## options	<map[string]string>
-**Path:**  pod.spec.volumes.flexVolume.options
+##### options	\<map[string]string\>
+**PATH:**  pod.spec.volumes.flexVolume.options
 
      Optional: Extra command options if any.
 
-######## readOnly	<boolean>
-**Path:**  pod.spec.volumes.flexVolume.readOnly
+##### readOnly	\<boolean\>
+**PATH:**  pod.spec.volumes.flexVolume.readOnly
 
      Optional: Defaults to false (read/write). ReadOnly here will force the
      ReadOnly setting in VolumeMounts.
 
-###### flocker	<Object>
-**Path:**  pod.spec.volumes.flocker
+##### secretRef \<Object\>
+**PATH:**  pod.spec.volumes.flexVolume.secretRef
 
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: secretRef <Object>
+
+DESCRIPTION:
+     Optional: SecretRef is reference to the secret object containing sensitive
+     information to pass to the plugin scripts. This may be empty if no secret
+     object is specified. If the secret object contains more than one secret,
+     all secrets are passed to the plugin scripts.
+
+     LocalObjectReference contains enough information to let you locate the
+     referenced object inside the same namespace.
+
+#### flexVolume	\<Object\>
+**PATH:**  pod.spec.volumes.flexVolume
+
+     FlexVolume represents a generic volume resource that is
+     provisioned/attached using an exec based plugin.
+
+#### flocker \<Object\>
+**PATH:**  pod.spec.volumes.flocker
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: flocker <Object>
+
+DESCRIPTION:
      Flocker represents a Flocker volume attached to a kubelet's host machine.
      This depends on the Flocker control service being running
 
-######## datasetName	<string>
-**Path:**  pod.spec.volumes.flocker.datasetName
+     Represents a Flocker volume mounted by the Flocker agent. One and only one
+     of datasetName and datasetUUID should be set. Flocker volumes do not
+     support ownership management or SELinux relabeling.
+
+##### datasetName	\<string\>
+**PATH:**  pod.spec.volumes.flocker.datasetName
 
      Name of the dataset stored as metadata -> name on the dataset for Flocker
      should be considered as deprecated
 
-###### gcePersistentDisk	<Object>
-**Path:**  pod.spec.volumes.gcePersistentDisk
+#### flocker	\<Object\>
+**PATH:**  pod.spec.volumes.flocker
 
+     Flocker represents a Flocker volume attached to a kubelet's host machine.
+     This depends on the Flocker control service being running
+
+#### gcePersistentDisk \<Object\>
+**PATH:**  pod.spec.volumes.gcePersistentDisk
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: gcePersistentDisk <Object>
+
+DESCRIPTION:
      GCEPersistentDisk represents a GCE Disk resource that is attached to a
      kubelet's host machine and then exposed to the pod. More info:
      https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
 
-######## fsType	<string>
-**Path:**  pod.spec.volumes.gcePersistentDisk.fsType
+     Represents a Persistent Disk resource in Google Compute Engine. A GCE PD
+     must exist before mounting to a container. The disk must also be in the
+     same GCE project and zone as the kubelet. A GCE PD can only be mounted as
+     read/write once or read-only many times. GCE PDs support ownership
+     management and SELinux relabeling.
+
+##### fsType	\<string\>
+**PATH:**  pod.spec.volumes.gcePersistentDisk.fsType
 
      Filesystem type of the volume that you want to mount. Tip: Ensure that the
      filesystem type is supported by the host operating system. Examples:
@@ -750,8 +1105,8 @@
      More info:
      https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
 
-######## partition	<integer>
-**Path:**  pod.spec.volumes.gcePersistentDisk.partition
+##### partition	\<integer\>
+**PATH:**  pod.spec.volumes.gcePersistentDisk.partition
 
      The partition in the volume that you want to mount. If omitted, the default
      is to mount by volume name. Examples: For volume /dev/sda1, you specify the
@@ -764,16 +1119,36 @@
      More info:
      https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
 
-###### gitRepo	<Object>
-**Path:**  pod.spec.volumes.gitRepo
+#### gcePersistentDisk	\<Object\>
+**PATH:**  pod.spec.volumes.gcePersistentDisk
 
+     GCEPersistentDisk represents a GCE Disk resource that is attached to a
+     kubelet's host machine and then exposed to the pod. More info:
+     https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
+
+#### gitRepo \<Object\>
+**PATH:**  pod.spec.volumes.gitRepo
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: gitRepo <Object>
+
+DESCRIPTION:
      GitRepo represents a git repository at a particular revision. DEPRECATED:
      GitRepo is deprecated. To provision a container with a git repo, mount an
      EmptyDir into an InitContainer that clones the repo using git, then mount
      the EmptyDir into the Pod's container.
 
-######## directory	<string>
-**Path:**  pod.spec.volumes.gitRepo.directory
+     Represents a volume that is populated with the contents of a git
+     repository. Git repo volumes do not support ownership management. Git repo
+     volumes support SELinux relabeling. DEPRECATED: GitRepo is deprecated. To
+     provision a container with a git repo, mount an EmptyDir into an
+     InitContainer that clones the repo using git, then mount the EmptyDir into
+     the Pod's container.
+
+##### directory	\<string\>
+**PATH:**  pod.spec.volumes.gitRepo.directory
 
      Target directory name. Must not contain or start with '..'. If '.' is
      supplied, the volume directory will be the git repository. Otherwise, if
@@ -783,15 +1158,71 @@
    repository	<string> -required-
      Repository URL
 
-###### glusterfs	<Object>
-**Path:**  pod.spec.volumes.glusterfs
+#### gitRepo	\<Object\>
+**PATH:**  pod.spec.volumes.gitRepo
+
+     GitRepo represents a git repository at a particular revision. DEPRECATED:
+     GitRepo is deprecated. To provision a container with a git repo, mount an
+     EmptyDir into an InitContainer that clones the repo using git, then mount
+     the EmptyDir into the Pod's container.
+
+#### glusterfs \<Object\>
+**PATH:**  pod.spec.volumes.glusterfs
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: glusterfs <Object>
+
+DESCRIPTION:
+     Glusterfs represents a Glusterfs mount on the host that shares a pod's
+     lifetime. More info:
+     https://releases.k8s.io/HEAD/examples/volumes/glusterfs/README.md
+
+     Represents a Glusterfs mount that lasts the lifetime of a pod. Glusterfs
+     volumes do not support ownership management or SELinux relabeling.
+
+   endpoints	<string> -required-
+     EndpointsName is the endpoint name that details Glusterfs topology. More
+     info:
+     https://releases.k8s.io/HEAD/examples/volumes/glusterfs/README.md#create-a-pod
+
+   path	<string> -required-
+     Path is the Glusterfs volume path. More info:
+     https://releases.k8s.io/HEAD/examples/volumes/glusterfs/README.md#create-a-pod
+
+#### glusterfs	\<Object\>
+**PATH:**  pod.spec.volumes.glusterfs
 
      Glusterfs represents a Glusterfs mount on the host that shares a pod's
      lifetime. More info:
      https://releases.k8s.io/HEAD/examples/volumes/glusterfs/README.md
 
-###### hostPath	<Object>
-**Path:**  pod.spec.volumes.hostPath
+#### hostPath \<Object\>
+**PATH:**  pod.spec.volumes.hostPath
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: hostPath <Object>
+
+DESCRIPTION:
+     HostPath represents a pre-existing file or directory on the host machine
+     that is directly exposed to the container. This is generally used for
+     system agents or other privileged things that are allowed to see the host
+     machine. Most containers will NOT need this. More info:
+     https://kubernetes.io/docs/concepts/storage/volumes#hostpath
+
+     Represents a host path mapped into a pod. Host path volumes do not support
+     ownership management or SELinux relabeling.
+
+   path	<string> -required-
+     Path of the directory on the host. If the path is a symlink, it will follow
+     the link to the real path. More info:
+     https://kubernetes.io/docs/concepts/storage/volumes#hostpath
+
+#### hostPath	\<Object\>
+**PATH:**  pod.spec.volumes.hostPath
 
      HostPath represents a pre-existing file or directory on the host machine
      that is directly exposed to the container. This is generally used for
@@ -799,8 +1230,87 @@
      machine. Most containers will NOT need this. More info:
      https://kubernetes.io/docs/concepts/storage/volumes#hostpath
 
-###### iscsi	<Object>
-**Path:**  pod.spec.volumes.iscsi
+#### iscsi \<Object\>
+**PATH:**  pod.spec.volumes.iscsi
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: iscsi <Object>
+
+DESCRIPTION:
+     ISCSI represents an ISCSI Disk resource that is attached to a kubelet's
+     host machine and then exposed to the pod. More info:
+     https://releases.k8s.io/HEAD/examples/volumes/iscsi/README.md
+
+     Represents an ISCSI disk. ISCSI volumes can only be mounted as read/write
+     once. ISCSI volumes support ownership management and SELinux relabeling.
+
+##### chapAuthDiscovery	\<boolean\>
+**PATH:**  pod.spec.volumes.iscsi.chapAuthDiscovery
+
+     whether support iSCSI Discovery CHAP authentication
+
+##### chapAuthSession	\<boolean\>
+**PATH:**  pod.spec.volumes.iscsi.chapAuthSession
+
+     whether support iSCSI Session CHAP authentication
+
+##### fsType	\<string\>
+**PATH:**  pod.spec.volumes.iscsi.fsType
+
+     Filesystem type of the volume that you want to mount. Tip: Ensure that the
+     filesystem type is supported by the host operating system. Examples:
+     "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
+     More info: https://kubernetes.io/docs/concepts/storage/volumes#iscsi
+
+##### initiatorName	\<string\>
+**PATH:**  pod.spec.volumes.iscsi.initiatorName
+
+     Custom iSCSI Initiator Name. If initiatorName is specified with
+     iscsiInterface simultaneously, new iSCSI interface <target portal>:<volume
+     name> will be created for the connection.
+
+   iqn	<string> -required-
+     Target iSCSI Qualified Name.
+
+##### iscsiInterface	\<string\>
+**PATH:**  pod.spec.volumes.iscsi.iscsiInterface
+
+     iSCSI Interface Name that uses an iSCSI transport. Defaults to 'default'
+     (tcp).
+
+   lun	<integer> -required-
+     iSCSI Target Lun number.
+
+##### portals	\<[]string\>
+**PATH:**  pod.spec.volumes.iscsi.portals
+
+     iSCSI Target Portal List. The portal is either an IP or ip_addr:port if the
+     port is other than default (typically TCP ports 860 and 3260).
+
+##### readOnly	\<boolean\>
+**PATH:**  pod.spec.volumes.iscsi.readOnly
+
+     ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to
+     false.
+
+##### secretRef \<Object\>
+**PATH:**  pod.spec.volumes.iscsi.secretRef
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: secretRef <Object>
+
+DESCRIPTION:
+     CHAP Secret for iSCSI target and initiator authentication
+
+     LocalObjectReference contains enough information to let you locate the
+     referenced object inside the same namespace.
+
+#### iscsi	\<Object\>
+**PATH:**  pod.spec.volumes.iscsi
 
      ISCSI represents an ISCSI Disk resource that is attached to a kubelet's
      host machine and then exposed to the pod. More info:
@@ -810,104 +1320,147 @@
      Volume's name. Must be a DNS_LABEL and unique within the pod. More info:
      https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
 
-######## chapAuthDiscovery	<boolean>
-**Path:**  pod.spec.volumes.iscsi.chapAuthDiscovery
+#### nfs \<Object\>
+**PATH:**  pod.spec.volumes.nfs
 
-     whether support iSCSI Discovery CHAP authentication
+KIND:     Pod
+VERSION:  v1
 
-######## chapAuthSession	<boolean>
-**Path:**  pod.spec.volumes.iscsi.chapAuthSession
+RESOURCE: nfs <Object>
 
-     whether support iSCSI Session CHAP authentication
+DESCRIPTION:
+     NFS represents an NFS mount on the host that shares a pod's lifetime More
+     info: https://kubernetes.io/docs/concepts/storage/volumes#nfs
 
-######## fsType	<string>
-**Path:**  pod.spec.volumes.iscsi.fsType
+     Represents an NFS mount that lasts the lifetime of a pod. NFS volumes do
+     not support ownership management or SELinux relabeling.
 
-     Filesystem type of the volume that you want to mount. Tip: Ensure that the
-     filesystem type is supported by the host operating system. Examples:
-     "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
-     More info: https://kubernetes.io/docs/concepts/storage/volumes#iscsi
+   path	<string> -required-
+     Path that is exported by the NFS server. More info:
+     https://kubernetes.io/docs/concepts/storage/volumes#nfs
 
-######## initiatorName	<string>
-**Path:**  pod.spec.volumes.iscsi.initiatorName
-
-     Custom iSCSI Initiator Name. If initiatorName is specified with
-     iscsiInterface simultaneously, new iSCSI interface <target portal>:<volume
-     name> will be created for the connection.
-
-   iqn	<string> -required-
-     Target iSCSI Qualified Name.
-
-######## iscsiInterface	<string>
-**Path:**  pod.spec.volumes.iscsi.iscsiInterface
-
-     iSCSI Interface Name that uses an iSCSI transport. Defaults to 'default'
-     (tcp).
-
-   lun	<integer> -required-
-     iSCSI Target Lun number.
-
-######## portals	<[]string>
-**Path:**  pod.spec.volumes.iscsi.portals
-
-     iSCSI Target Portal List. The portal is either an IP or ip_addr:port if the
-     port is other than default (typically TCP ports 860 and 3260).
-
-######## readOnly	<boolean>
-**Path:**  pod.spec.volumes.iscsi.readOnly
-
-     ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to
-     false.
-
-###### nfs	<Object>
-**Path:**  pod.spec.volumes.nfs
+#### nfs	\<Object\>
+**PATH:**  pod.spec.volumes.nfs
 
      NFS represents an NFS mount on the host that shares a pod's lifetime More
      info: https://kubernetes.io/docs/concepts/storage/volumes#nfs
 
-###### persistentVolumeClaim	<Object>
-**Path:**  pod.spec.volumes.persistentVolumeClaim
+#### persistentVolumeClaim \<Object\>
+**PATH:**  pod.spec.volumes.persistentVolumeClaim
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: persistentVolumeClaim <Object>
+
+DESCRIPTION:
+     PersistentVolumeClaimVolumeSource represents a reference to a
+     PersistentVolumeClaim in the same namespace. More info:
+     https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
+
+     PersistentVolumeClaimVolumeSource references the user's PVC in the same
+     namespace. This volume finds the bound PV and mounts that volume for the
+     pod. A PersistentVolumeClaimVolumeSource is, essentially, a wrapper around
+     another type of volume that is owned by someone else (the system).
+
+   claimName	<string> -required-
+     ClaimName is the name of a PersistentVolumeClaim in the same namespace as
+     the pod using this volume. More info:
+     https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
+
+#### persistentVolumeClaim	\<Object\>
+**PATH:**  pod.spec.volumes.persistentVolumeClaim
 
      PersistentVolumeClaimVolumeSource represents a reference to a
      PersistentVolumeClaim in the same namespace. More info:
      https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
 
-###### photonPersistentDisk	<Object>
-**Path:**  pod.spec.volumes.photonPersistentDisk
+#### photonPersistentDisk \<Object\>
+**PATH:**  pod.spec.volumes.photonPersistentDisk
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: photonPersistentDisk <Object>
+
+DESCRIPTION:
+     PhotonPersistentDisk represents a PhotonController persistent disk attached
+     and mounted on kubelets host machine
+
+     Represents a Photon Controller persistent disk resource.
+
+#### photonPersistentDisk	\<Object\>
+**PATH:**  pod.spec.volumes.photonPersistentDisk
 
      PhotonPersistentDisk represents a PhotonController persistent disk attached
      and mounted on kubelets host machine
 
-###### portworxVolume	<Object>
-**Path:**  pod.spec.volumes.portworxVolume
+#### portworxVolume \<Object\>
+**PATH:**  pod.spec.volumes.portworxVolume
 
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: portworxVolume <Object>
+
+DESCRIPTION:
      PortworxVolume represents a portworx volume attached and mounted on
      kubelets host machine
 
-######## fsType	<string>
-**Path:**  pod.spec.volumes.portworxVolume.fsType
+     PortworxVolumeSource represents a Portworx volume resource.
+
+##### fsType	\<string\>
+**PATH:**  pod.spec.volumes.portworxVolume.fsType
 
      FSType represents the filesystem type to mount Must be a filesystem type
      supported by the host operating system. Ex. "ext4", "xfs". Implicitly
      inferred to be "ext4" if unspecified.
 
-###### projected	<Object>
-**Path:**  pod.spec.volumes.projected
+#### portworxVolume	\<Object\>
+**PATH:**  pod.spec.volumes.portworxVolume
+
+     PortworxVolume represents a portworx volume attached and mounted on
+     kubelets host machine
+
+#### projected \<Object\>
+**PATH:**  pod.spec.volumes.projected
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: projected <Object>
+
+DESCRIPTION:
+     Items for all in one resources secrets, configmaps, and downward API
+
+     Represents a projected volume source
+
+#### projected	\<Object\>
+**PATH:**  pod.spec.volumes.projected
 
      Items for all in one resources secrets, configmaps, and downward API
 
-###### quobyte	<Object>
-**Path:**  pod.spec.volumes.quobyte
+#### quobyte \<Object\>
+**PATH:**  pod.spec.volumes.quobyte
 
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: quobyte <Object>
+
+DESCRIPTION:
      Quobyte represents a Quobyte mount on the host that shares a pod's lifetime
 
-######## group	<string>
-**Path:**  pod.spec.volumes.quobyte.group
+     Represents a Quobyte mount that lasts the lifetime of a pod. Quobyte
+     volumes do not support ownership management or SELinux relabeling.
+
+##### group	\<string\>
+**PATH:**  pod.spec.volumes.quobyte.group
 
      Group to map volume access to Default is no group
 
-######## readOnly	<boolean>
-**Path:**  pod.spec.volumes.quobyte.readOnly
+##### readOnly	\<boolean\>
+**PATH:**  pod.spec.volumes.quobyte.readOnly
 
      ReadOnly here will force the Quobyte volume to be mounted with read-only
      permissions. Defaults to false.
@@ -917,21 +1470,35 @@
      specified as a string as host:port pair (multiple entries are separated
      with commas) which acts as the central registry for volumes
 
-######## tenant	<string>
-**Path:**  pod.spec.volumes.quobyte.tenant
+##### tenant	\<string\>
+**PATH:**  pod.spec.volumes.quobyte.tenant
 
      Tenant owning the given Quobyte volume in the Backend Used with dynamically
      provisioned Quobyte volumes, value is set by the plugin
 
-###### rbd	<Object>
-**Path:**  pod.spec.volumes.rbd
+#### quobyte	\<Object\>
+**PATH:**  pod.spec.volumes.quobyte
 
+     Quobyte represents a Quobyte mount on the host that shares a pod's lifetime
+
+#### rbd \<Object\>
+**PATH:**  pod.spec.volumes.rbd
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: rbd <Object>
+
+DESCRIPTION:
      RBD represents a Rados Block Device mount on the host that shares a pod's
      lifetime. More info:
      https://releases.k8s.io/HEAD/examples/volumes/rbd/README.md
 
-######## fsType	<string>
-**Path:**  pod.spec.volumes.rbd.fsType
+     Represents a Rados Block Device mount that lasts the lifetime of a pod. RBD
+     volumes support ownership management and SELinux relabeling.
+
+##### fsType	\<string\>
+**PATH:**  pod.spec.volumes.rbd.fsType
 
      Filesystem type of the volume that you want to mount. Tip: Ensure that the
      filesystem type is supported by the host operating system. Examples:
@@ -942,8 +1509,8 @@
      The rados image name. More info:
      https://releases.k8s.io/HEAD/examples/volumes/rbd/README.md#how-to-use-it
 
-######## keyring	<string>
-**Path:**  pod.spec.volumes.rbd.keyring
+##### keyring	\<string\>
+**PATH:**  pod.spec.volumes.rbd.keyring
 
      Keyring is the path to key ring for RBDUser. Default is /etc/ceph/keyring.
      More info:
@@ -953,34 +1520,49 @@
      A collection of Ceph monitors. More info:
      https://releases.k8s.io/HEAD/examples/volumes/rbd/README.md#how-to-use-it
 
-######## pool	<string>
-**Path:**  pod.spec.volumes.rbd.pool
+##### pool	\<string\>
+**PATH:**  pod.spec.volumes.rbd.pool
 
      The rados pool name. Default is rbd. More info:
      https://releases.k8s.io/HEAD/examples/volumes/rbd/README.md#how-to-use-it
 
-######## readOnly	<boolean>
-**Path:**  pod.spec.volumes.rbd.readOnly
+##### readOnly	\<boolean\>
+**PATH:**  pod.spec.volumes.rbd.readOnly
 
      ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to
      false. More info:
      https://releases.k8s.io/HEAD/examples/volumes/rbd/README.md#how-to-use-it
 
-######## secretRef	<Object>
-**Path:**  pod.spec.volumes.rbd.secretRef
+##### secretRef	\<Object\>
+**PATH:**  pod.spec.volumes.rbd.secretRef
 
      SecretRef is name of the authentication secret for RBDUser. If provided
      overrides keyring. Default is nil. More info:
      https://releases.k8s.io/HEAD/examples/volumes/rbd/README.md#how-to-use-it
 
-###### scaleIO	<Object>
-**Path:**  pod.spec.volumes.scaleIO
+#### rbd	\<Object\>
+**PATH:**  pod.spec.volumes.rbd
 
+     RBD represents a Rados Block Device mount on the host that shares a pod's
+     lifetime. More info:
+     https://releases.k8s.io/HEAD/examples/volumes/rbd/README.md
+
+#### scaleIO \<Object\>
+**PATH:**  pod.spec.volumes.scaleIO
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: scaleIO <Object>
+
+DESCRIPTION:
      ScaleIO represents a ScaleIO persistent volume attached and mounted on
      Kubernetes nodes.
 
-######## fsType	<string>
-**Path:**  pod.spec.volumes.scaleIO.fsType
+     ScaleIOVolumeSource represents a persistent ScaleIO volume
+
+##### fsType	\<string\>
+**PATH:**  pod.spec.volumes.scaleIO.fsType
 
      Filesystem type to mount. Must be a filesystem type supported by the host
      operating system. Ex. "ext4", "xfs", "ntfs". Default is "xfs".
@@ -988,13 +1570,13 @@
    gateway	<string> -required-
      The host address of the ScaleIO API Gateway.
 
-######## protectionDomain	<string>
-**Path:**  pod.spec.volumes.scaleIO.protectionDomain
+##### protectionDomain	\<string\>
+**PATH:**  pod.spec.volumes.scaleIO.protectionDomain
 
      The name of the ScaleIO Protection Domain for the configured storage.
 
-######## readOnly	<boolean>
-**Path:**  pod.spec.volumes.scaleIO.readOnly
+##### readOnly	\<boolean\>
+**PATH:**  pod.spec.volumes.scaleIO.readOnly
 
      Defaults to false (read/write). ReadOnly here will force the ReadOnly
      setting in VolumeMounts.
@@ -1003,33 +1585,50 @@
      SecretRef references to the secret for ScaleIO user and other sensitive
      information. If this is not provided, Login operation will fail.
 
-######## sslEnabled	<boolean>
-**Path:**  pod.spec.volumes.scaleIO.sslEnabled
+##### sslEnabled	\<boolean\>
+**PATH:**  pod.spec.volumes.scaleIO.sslEnabled
 
      Flag to enable/disable SSL communication with Gateway, default false
 
-######## storageMode	<string>
-**Path:**  pod.spec.volumes.scaleIO.storageMode
+##### storageMode	\<string\>
+**PATH:**  pod.spec.volumes.scaleIO.storageMode
 
      Indicates whether the storage for a volume should be ThickProvisioned or
      ThinProvisioned. Default is ThinProvisioned.
 
-######## storagePool	<string>
-**Path:**  pod.spec.volumes.scaleIO.storagePool
+##### storagePool	\<string\>
+**PATH:**  pod.spec.volumes.scaleIO.storagePool
 
      The ScaleIO Storage Pool associated with the protection domain.
 
    system	<string> -required-
      The name of the storage system as configured in ScaleIO.
 
-###### secret	<Object>
-**Path:**  pod.spec.volumes.secret
+#### scaleIO	\<Object\>
+**PATH:**  pod.spec.volumes.scaleIO
 
+     ScaleIO represents a ScaleIO persistent volume attached and mounted on
+     Kubernetes nodes.
+
+#### secret \<Object\>
+**PATH:**  pod.spec.volumes.secret
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: secret <Object>
+
+DESCRIPTION:
      Secret represents a secret that should populate this volume. More info:
      https://kubernetes.io/docs/concepts/storage/volumes#secret
 
-######## defaultMode	<integer>
-**Path:**  pod.spec.volumes.secret.defaultMode
+     Adapts a Secret into a volume. The contents of the target Secret's Data
+     field will be presented in a volume as files using the keys in the Data
+     field as the file names. Secret volumes support ownership management and
+     SELinux relabeling.
+
+##### defaultMode	\<integer\>
+**PATH:**  pod.spec.volumes.secret.defaultMode
 
      Optional: mode bits to use on created files by default. Must be a value
      between 0 and 0777. Defaults to 0644. Directories within the path are not
@@ -1037,8 +1636,8 @@
      affect the file mode, like fsGroup, and the result can be other mode bits
      set.
 
-######## items	<[]Object>
-**Path:**  pod.spec.volumes.secret.items
+##### items	\<[]Object\>
+**PATH:**  pod.spec.volumes.secret.items
 
      If unspecified, each key-value pair in the Data field of the referenced
      Secret will be projected into the volume as a file whose name is the key
@@ -1048,105 +1647,176 @@
      error unless it is marked optional. Paths must be relative and may not
      contain the '..' path or start with '..'.
 
-######## optional	<boolean>
-**Path:**  pod.spec.volumes.secret.optional
+##### optional	\<boolean\>
+**PATH:**  pod.spec.volumes.secret.optional
 
      Specify whether the Secret or it's keys must be defined
 
-###### storageos	<Object>
-**Path:**  pod.spec.volumes.storageos
+#### secret	\<Object\>
+**PATH:**  pod.spec.volumes.secret
 
+     Secret represents a secret that should populate this volume. More info:
+     https://kubernetes.io/docs/concepts/storage/volumes#secret
+
+#### storageos \<Object\>
+**PATH:**  pod.spec.volumes.storageos
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: storageos <Object>
+
+DESCRIPTION:
      StorageOS represents a StorageOS volume attached and mounted on Kubernetes
      nodes.
 
-######## fsType	<string>
-**Path:**  pod.spec.volumes.storageos.fsType
+     Represents a StorageOS persistent volume resource.
+
+##### fsType	\<string\>
+**PATH:**  pod.spec.volumes.storageos.fsType
 
      Filesystem type to mount. Must be a filesystem type supported by the host
      operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be
      "ext4" if unspecified.
 
-######## readOnly	<boolean>
-**Path:**  pod.spec.volumes.storageos.readOnly
+##### readOnly	\<boolean\>
+**PATH:**  pod.spec.volumes.storageos.readOnly
 
      Defaults to false (read/write). ReadOnly here will force the ReadOnly
      setting in VolumeMounts.
 
-######## secretRef	<Object>
-**Path:**  pod.spec.volumes.storageos.secretRef
+##### secretRef	\<Object\>
+**PATH:**  pod.spec.volumes.storageos.secretRef
 
      SecretRef specifies the secret to use for obtaining the StorageOS API
      credentials. If not specified, default values will be attempted.
 
-######## volumeName	<string>
-**Path:**  pod.spec.volumes.storageos.volumeName
+##### volumeName	\<string\>
+**PATH:**  pod.spec.volumes.storageos.volumeName
 
      VolumeName is the human-readable name of the StorageOS volume. Volume names
      are only unique within a namespace.
 
-######## fsType	<string>
-**Path:**  pod.spec.volumes.vsphereVolume.fsType
+#### storageos	\<Object\>
+**PATH:**  pod.spec.volumes.storageos
+
+     StorageOS represents a StorageOS volume attached and mounted on Kubernetes
+     nodes.
+
+#### vsphereVolume \<Object\>
+**PATH:**  pod.spec.volumes.vsphereVolume
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: vsphereVolume <Object>
+
+DESCRIPTION:
+     VsphereVolume represents a vSphere volume attached and mounted on kubelets
+     host machine
+
+     Represents a vSphere volume resource.
+
+##### fsType	\<string\>
+**PATH:**  pod.spec.volumes.vsphereVolume.fsType
 
      Filesystem type to mount. Must be a filesystem type supported by the host
      operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be
      "ext4" if unspecified.
 
-######## storagePolicyID	<string>
-**Path:**  pod.spec.volumes.vsphereVolume.storagePolicyID
+##### storagePolicyID	\<string\>
+**PATH:**  pod.spec.volumes.vsphereVolume.storagePolicyID
 
      Storage Policy Based Management (SPBM) profile ID associated with the
      StoragePolicyName.
 
-#### conditions	<[]Object>
-**Path:**  pod.status.conditions
+## spec	\<Object\>
+**PATH:**  pod.spec
+
+     Specification of the desired behavior of the pod. More info:
+     https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status
+
+## status \<Object\>
+**PATH:**  pod.status
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: status <Object>
+
+DESCRIPTION:
+     Most recently observed status of the pod. This data may not be up to date.
+     Populated by the system. Read-only. More info:
+     https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status
+
+     PodStatus represents information about the status of a pod. Status may
+     trail the actual state of a system, especially if the node that hosts the
+     pod cannot contact the control plane.
+
+### conditions \<[]Object\>
+**PATH:**  pod.status.conditions
+
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: conditions <[]Object>
+
+DESCRIPTION:
+     Current service state of pod. More info:
+     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions
+
+     PodCondition contains details for the current condition of this pod.
+
+#### lastProbeTime	\<string\>
+**PATH:**  pod.status.conditions.lastProbeTime
+
+     Last time we probed the condition.
+
+#### lastTransitionTime	\<string\>
+**PATH:**  pod.status.conditions.lastTransitionTime
+
+     Last time the condition transitioned from one status to another.
+
+#### message	\<string\>
+**PATH:**  pod.status.conditions.message
+
+     Human-readable message indicating details about last transition.
+
+### conditions	\<[]Object\>
+**PATH:**  pod.status.conditions
 
      Current service state of pod. More info:
      https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions
 
-###### lastProbeTime	<string>
-**Path:**  pod.status.conditions.lastProbeTime
-
-     Last time we probed the condition.
-
-###### lastTransitionTime	<string>
-**Path:**  pod.status.conditions.lastTransitionTime
-
-     Last time the condition transitioned from one status to another.
-
-###### message	<string>
-**Path:**  pod.status.conditions.message
-
-     Human-readable message indicating details about last transition.
-
-#### containerStatuses	<[]Object>
-**Path:**  pod.status.containerStatuses
+### containerStatuses	\<[]Object\>
+**PATH:**  pod.status.containerStatuses
 
      The list has one entry per container in the manifest. Each entry is
      currently the output of `docker inspect`. More info:
      https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status
 
-#### hostIP	<string>
-**Path:**  pod.status.hostIP
+### hostIP	\<string\>
+**PATH:**  pod.status.hostIP
 
      IP address of the host to which the pod is assigned. Empty if not yet
      scheduled.
 
-#### initContainerStatuses	<[]Object>
-**Path:**  pod.status.initContainerStatuses
+### initContainerStatuses	\<[]Object\>
+**PATH:**  pod.status.initContainerStatuses
 
      The list has one entry per init container in the manifest. The most recent
      successful init container will have ready = true, the most recently started
      container will have startTime set. More info:
      https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status
 
-#### message	<string>
-**Path:**  pod.status.message
+### message	\<string\>
+**PATH:**  pod.status.message
 
      A human readable message indicating details about why the pod is in this
      condition.
 
-#### nominatedNodeName	<string>
-**Path:**  pod.status.nominatedNodeName
+### nominatedNodeName	\<string\>
+**PATH:**  pod.status.nominatedNodeName
 
      nominatedNodeName is set only when this pod preempts other pods on the
      node, but it cannot be scheduled right away as preemption victims receive
@@ -1157,8 +1827,8 @@
      after preemption. As a result, this field may be different than
      PodSpec.nodeName when the pod is scheduled.
 
-#### phase	<string>
-**Path:**  pod.status.phase
+### phase	\<string\>
+**PATH:**  pod.status.phase
 
      The phase of a Pod is a simple, high-level summary of where the Pod is in
      its lifecycle. The conditions array, the reason and message fields, and the
@@ -1178,22 +1848,22 @@
      pod. More info:
      https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-phase
 
-#### podIP	<string>
-**Path:**  pod.status.podIP
+### podIP	\<string\>
+**PATH:**  pod.status.podIP
 
      IP address allocated to the pod. Routable at least within the cluster.
      Empty if not yet allocated.
 
-#### qosClass	<string>
-**Path:**  pod.status.qosClass
+### qosClass	\<string\>
+**PATH:**  pod.status.qosClass
 
      The Quality of Service (QOS) classification assigned to the pod based on
      resource requirements See PodQOSClass type for available QOS classes More
      info:
      https://git.k8s.io/community/contributors/design-proposals/node/resource-qos.md
 
-#### reason	<string>
-**Path:**  pod.status.reason
+### reason	\<string\>
+**PATH:**  pod.status.reason
 
      A brief CamelCase message indicating details about why the pod is in this
      state. e.g. 'Evicted'

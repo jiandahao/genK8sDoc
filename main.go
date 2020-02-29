@@ -53,6 +53,13 @@ func isParamClaim(s string) (bool,string){
 	return false,""
 }
 
+// 转义符号< >,以便markdown标题中能正常显示变量类型
+func QuoteMeta(s string) string{
+	p := strings.ReplaceAll(s,"<",fmt.Sprintf("\\<"))
+	p = strings.ReplaceAll(p, ">",fmt.Sprintf("\\>"))
+	return p
+}
+
 func getDocument(prefix string, param string) (string,error){
 	cmd := exec.Command("kubectl","explain",param)
 	stdout, err := cmd.StdoutPipe()
@@ -117,10 +124,25 @@ func getAllParams(depth int, params string, lastType string) {
 	}
 }
 
+
+func getParamNameFromParamPath(paramsPath string) string{
+	pathList := strings.Split(paramsPath,".")
+	if len(pathList) == 0 {
+		log.Fatal("invalid path: " + paramsPath)
+	}
+	return pathList[len(pathList)-1]
+}
+
+// 深度遍历所有的参数，并获取其说明文档
 func parseDocument(titlePrefix string, paramPath string,lastType string, doc *string){
 	if !strings.Contains(lastType,"Object"){
 		return
 	}
+	if len(titlePrefix) > 6{
+		titlePrefix = "- "
+	}
+
+	// 执行命令，并获取执行结果
 	cmd := exec.Command("kubectl","explain",paramPath)
 	var stdOut bytes.Buffer
 	var stdErr bytes.Buffer
@@ -131,24 +153,34 @@ func parseDocument(titlePrefix string, paramPath string,lastType string, doc *st
 		return
 	}
 	result := stdOut.String()
+	// 将结果按行分割，方便后续解析出参数
 	lines := strings.Split(result,"\n")
-	preContent := titlePrefix + " " + paramPath + "\n"
+
+	//preContent := titlePrefix + " " +
+	//	getParamNameFromParamPath(paramPath) +
+	//	" " + QuoteMeta(lastType) + "\n"
+	preContent := fmt.Sprintf(
+		"%s %s %s\n**PATH:**  %s\n\n",
+		titlePrefix, getParamNameFromParamPath(paramPath),QuoteMeta(lastType),paramPath)
 	fmt.Println(titlePrefix + " " + paramPath)
-	titlePrefix = titlePrefix + "#"
+
 	preParamName := ""
 	preParamType := ""
 	for i := 0; i< len(lines); i++{
+		if strings.HasPrefix(lines[i],"FIELDS:"){
+			continue
+		}
 		if ok, s := isParamClaim(lines[i]); ok {
 			paramName := strings.TrimSuffix(lines[i], s)
 			paramName = strings.TrimSpace(paramName)
 			if preParamName != ""{
-				*doc += preContent
-				//preContent = titlePrefix + " " + paramName + "\n"
+				// 如果之前存在一个参数还没有处理，现在进行处理，这么做主要是保证先记录参数的简介，然后在加入更详细的说明信息
 				parseDocument(titlePrefix + "#", paramPath+"."+ preParamName, s,doc)
 			}
+			*doc += preContent
 			preContent = fmt.Sprintf(
-				"%s %s\n**Path:**  %s\n\n",
-				titlePrefix, strings.TrimSpace(lines[i]),paramPath+"."+ paramName)
+				"%s %s\n**PATH:**  %s\n\n",
+				titlePrefix + "#", strings.TrimSpace(QuoteMeta(lines[i])),paramPath+"."+ paramName)
 			//preContent = titlePrefix + " " + strings.TrimSpace(lines[i]) + "\n"
 			preParamName = paramName
 			preParamType = s
@@ -164,8 +196,13 @@ func saveDocument(doc string, filename string) {
 		log.Println(err)
 	}
 }
+
 func main(){
-	document := ""
-	parseDocument("#","pod","Object",&document)
-	saveDocument(document,"temp.md")
+	allResources := []string{"pod","deployment","daemonset","statefulset","Service"}
+	for i :=0 ; i < len(allResources); i++{
+		document := ""
+		parseDocument("#",allResources[i],"Object",&document)
+		saveDocument(document,"doc/"+allResources[i] + ".md")
+	}
+
 }
