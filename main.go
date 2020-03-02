@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"flag"
 	"fmt"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
@@ -89,9 +90,9 @@ func makeTitlePrefix( prefix string) string{
 	return prefix
 }
 // 深度遍历所有的参数，并获取其说明文档
-func parseDocument(titlePrefix string, paramPath string,lastType string, doc *string){
+func parseDocument(titlePrefix string, paramPath string,lastType string, doc *string) error {
 	if !strings.Contains(lastType,"Object"){
-		return
+		return nil
 	}
 	//if len(titlePrefix) > 6{
 	//	titlePrefix = ""
@@ -109,8 +110,8 @@ func parseDocument(titlePrefix string, paramPath string,lastType string, doc *st
 	cmd.Stdout = &stdOut
 	cmd.Stderr = &stdErr
 	if err := cmd.Run(); err != nil{
-		log.Println(stdErr.String())
-		return
+		//log.Println(stdErr.String())
+		return errors.New(stdErr.String())
 	}
 	result := stdOut.String()
 	// 将结果按行分割，方便后续解析出参数
@@ -134,7 +135,9 @@ func parseDocument(titlePrefix string, paramPath string,lastType string, doc *st
 			paramName := getParamNameFromParamClaim(lines[i])
 			if preParamName != ""{
 				// 如果之前存在一个参数还没有处理，现在进行处理，这么做主要是保证先记录参数的简介，然后在加入更详细的说明信息
-				parseDocument(titlePrefix + "#", paramPath+"."+ preParamName, preParamType ,doc)
+				if err := parseDocument(titlePrefix + "#", paramPath+"."+ preParamName, preParamType ,doc); err != nil{
+					return err
+				}
 			}
 			*doc += preContent
 			//fmt.Println(preContent)
@@ -148,7 +151,10 @@ func parseDocument(titlePrefix string, paramPath string,lastType string, doc *st
 			preContent += lines[i] + "\n"
 		}
 	}
-	parseDocument(titlePrefix + "#", paramPath+"."+ preParamName, preParamType,doc)
+	if err := parseDocument(titlePrefix + "#", paramPath+"."+ preParamName, preParamType,doc); err != nil{
+		return err
+	}
+	return nil
 }
 
 func saveDocument(doc string, filename string) {
@@ -157,12 +163,22 @@ func saveDocument(doc string, filename string) {
 	}
 }
 
+var s = flag.String("s", "","resource name")
+
 func main(){
-	allResources := []string{"pod","deployment","daemonset","statefulset","Service"}
+	flag.Parse()
+	allResources := []string{}
+	if *s != ""{
+		allResources = append(allResources, *s)
+	}else{
+		allResources = []string{"pod","deployment","daemonset","statefulset","Service","ClusterRoleBinding","ServiceAccount"}
+	}
 	for i :=0 ; i < len(allResources); i++{
 		document := "# " + allResources[i] + "\n"
-		parseDocument("",allResources[i],"Object",&document)
+		if err := parseDocument("",allResources[i],"Object",&document); err != nil{
+			log.Println(err)
+			return
+		}
 		saveDocument(document,"doc/"+allResources[i] + ".md")
 	}
-
 }
