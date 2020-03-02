@@ -169,7 +169,10 @@ func main(){
 	flag.Parse()
 	allResources := []string{}
 	if *s != ""{
-		allResources = append(allResources, *s)
+		resources :=  strings.Split(*s, " ")
+		for i:=0 ; i< len(resources) ; i++{
+			allResources = append(allResources, strings.TrimSpace(resources[i]))
+		}
 	}else{
 		allResources = []string{"pod","deployment","daemonset","statefulset","Service","ClusterRoleBinding","ServiceAccount"}
 	}
