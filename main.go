@@ -174,7 +174,17 @@ func main(){
 			allResources = append(allResources, strings.TrimSpace(resources[i]))
 		}
 	}else{
-		allResources = []string{"pod","deployment","daemonset","statefulset","Service","ClusterRoleBinding","ServiceAccount"}
+		allResources = []string{
+			"pod",
+			"deployment",
+			"daemonset",
+			"statefulset",
+			"Service",
+			"ClusterRoleBinding",
+			"ServiceAccount",
+			"RoleBinding",
+			"role",
+		}
 	}
 	for i :=0 ; i < len(allResources); i++{
 		document := "# " + allResources[i] + "\n"
